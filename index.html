@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بن الحشم | عالم القهوة المختصة</title>
+
+    <meta name="description" content="متجر بن الحشم لبيع القهوة المختصة بأفضل الأسعار">
+    <meta name="keywords" content="قهوة, بن, قهوة مختصة, شراء قهوة">
+
+    <style>
+        :root {
+            --main-color: #6f4e37;
+            --secondary-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+        }
+
+        header {
+            background-color: var(--main-color);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-wrap img {
+            width: 250px;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            background: #fff;
+            color: var(--main-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px 5%;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 670px;
+            object-fit: fill;
+        }
+
+        .price {
+            color: var(--main-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn-add {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #cart-sidebar {
+            position: fixed;
+            left: -350px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        #cart-sidebar.active {
+            left: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+        }
+
+        #story-popup, #spec-popup, #checkout-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .popup-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .bar {
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .fill {
+            height: 10px;
+            background: var(--main-color);
+        }
+        #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: none;
+    z-index: 9999;
+}
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-wrap">
+        <img src="logo.png">
+        <h2>☕ بن الحشم</h2>
+    </div>
+
+    <div class="cart-icon" onclick="toggleCart()">السلة (<span id="cart-count">0</span>)</div>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>أجود أنواع الحبوب المحمصة بحب</h1>
+        <p>اطلب قهوتك الآن وتصلك حتى باب المنزل</p>
+    </div>
+</section>
+
+<div class="products-grid" id="products"></div>
+
+<div id="cart-sidebar">
+    <h3>سلة المشتريات</h3>
+    <div id="cart-items"></div>
+    <hr>
+    <h4>الإجمالي: <span id="total-price">0</span> ج.م</h4>
+
+    <button class="btn-add" style="width: 100%;" onclick="openCheckout()">
+        إتمام الشراء
+    </button>
+
+    <br><br>
+    <button onclick="toggleCart()" style="background:none;border:none;color:red;">إغلاق</button>
+</div>
+
+<!-- STORY -->
+<div id="story-popup">
+    <div class="popup-box">
+        <h3 id="story-title"></h3>
+        <p id="story-text"></p>
+        <button onclick="closeStory()">إغلاق</button>
+    </div>
+</div>
+
+<!-- SPEC -->
+<div id="spec-popup">
+    <div class="popup-box">
+        <h3 id="spec-title"></h3>
+
+        <p>نسبة الكافيين</p>
+        <div class="bar"><div id="caffeine-fill" class="fill"></div></div>
+
+        <p id="spec-beans"></p>
+        <p id="spec-roast"></p>
+        <p id="spec-weight"></p>
+
+        <button onclick="closeSpec()">إغلاق</button>
+    </div>
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkout-popup">
+    <div class="popup-box">
+        <h3>إتمام الطلب</h3>
+
+        <input id="customer-name" placeholder="الاسم" style="width:90%;padding:10px;margin:10px 0;">
+        <input id="customer-address" placeholder="العنوان" style="width:90%;padding:10px;margin:10px 0;">
+
+        <button class="btn-add" onclick="sendOrder()">تأكيد الطلب</button>
+        <br><br>
+        <button onclick="closeCheckout()" style="background:none;border:none;color:red;">إلغاء</button>
+    </div>
+</div>
+
+<footer>
+  <p> ملحوظة: احنا بنستخدم أجود أنواع البن الموجودة في العالم لكن كل توليفة بنسب مختلفه</p>
+
+<p>شركة (بن الحشم) التابعه لشركة (سميركو للاستيراد و التصدير) هي شركه اردنية الاصل تأسست عام 1983</p>
+
+<p>العنوان :الاردن_السلط_شارع اليرموك </p>
+<p>الهاتف :00962799198420</p>
+<p>كل الحقوق محفوظه</p>
+</footer>
+
+<script>
+
+const products = [
+    { id: 1, name: "توليفة الحشم", price: 150, img: "hashm.png",
+      story: "قهوة برازيلية ناعمة بطعم شوكولاتة ولمسة مكسرات.",
+      caffeine: 90, beans: "برازيلي", roast: "وسط", weight: "250 جم" },
+
+    { id: 2, name: "توليفة أيوب", price: 120, img: "ayoub.png",
+      story: "اسبريسو قوي وكريمي.",
+      caffeine: 65, beans: "خليط", roast: "وسط", weight: "250 جم" },
+
+    { id: 3, name: "توليفة الجدع", price: 200, img: "gad3.png",
+      story: "نكهات فواكه وزهور.",
+      caffeine: 50, beans: "إثيوبي", roast: "وسط", weight: "250 جم" },
+
+    { id: 4, name: "توليفة ع السكة", price: 180, img: "sikka.png",
+      story: "نكهة كراميل متوازنة.",
+      caffeine: 80, beans: "كولومبي", roast: "وسط", weight: "250 جم" }
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const productsContainer = document.getElementById('products');
+
+products.forEach(product => {
+    productsContainer.innerHTML += `
+        <div class="product-card">
+            <img src="${product.img}">
+            <h3>${product.name}</h3>
+            <p class="price">${product.price} ج.م</p>
+
+            <button class="btn-add" onclick="addToCart(${product.id})">أضف للسلة</button>
+            <br><br>
+            <button onclick="showStory(${product.id})">📖 القصة</button>
+            <br><br>
+            <button onclick="showSpec(${product.id})">⚙️ المواصفات</button>
+        </div>
+    `;
+});
+
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+
+    let item = cart.find(p => p.id === productId);
+
+    if (item) {
+        item.qty += 1;
+    } else {
+        cart.push({ ...product, qty: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showToast();
+    updateCart();
+}
+
+function removeFromCart(i) {
+    cart.splice(i, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart() {
+    const cartCount = document.getElementById('cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
+
+    cartCount.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.qty;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+
+                <button onclick="minus(${item.id})">➖</button>
+                ${item.qty}
+                <button onclick="plus(${item.id})">➕</button>
+
+                <span>${item.price * item.qty} ج.م</span>
+
+                <button onclick="removeFromCart(${index})">❌</button>
+            </div>
+        `;
+    });
+
+    totalPrice.innerText = total;
+}
+
+function toggleCart() {
+    document.getElementById('cart-sidebar').classList.toggle('active');
+}
+
+function showStory(id) {
+    const p = products.find(x => x.id === id);
+    document.getElementById("story-title").innerText = p.name;
+    document.getElementById("story-text").innerText = p.story;
+    document.getElementById("story-popup").style.display = "flex";
+}
+
+function closeStory() {
+    document.getElementById("story-popup").style.display = "none";
+}
+
+function showSpec(id) {
+    const p = products.find(x => x.id === id);
+    document.getElementById("spec-title").innerText = p.name;
+    document.getElementById("caffeine-fill").style.width = p.caffeine + "%";
+    document.getElementById("spec-beans").innerText = "أنواع البن: " + p.beans;
+    document.getElementById("spec-roast").innerText = "درجة التحميص: " + p.roast;
+    document.getElementById("spec-weight").innerText = "الوزن: " + p.weight;
+    document.getElementById("spec-popup").style.display = "flex";
+}
+
+function closeSpec() {
+    document.getElementById("spec-popup").style.display = "none";
+}
+
+/* CHECKOUT */
+function openCheckout() {
+    document.getElementById("checkout-popup").style.display = "flex";
+}
+
+function closeCheckout() {
+    document.getElementById("checkout-popup").style.display = "none";
+}
+
+function sendOrder() {
+    const name = document.getElementById("customer-name").value;
+    const address = document.getElementById("customer-address").value;
+
+    if (!name || !address) {
+        alert("اكتب البيانات");
+        return;
+    }
+
+    let msg = "طلب جديد:%0Aاسم: " + name + "%0Aعنوان: " + address + "%0A%0A";
+
+   cart.forEach(p => {
+    msg += "- " + p.name + " (" + p.price + ") × " + p.qty + " = " + (p.price * p.qty) + "%0A";
+});
+   msg += "%0Aالإجمالي: " + cart.reduce((a,b)=>a+(b.price*b.qty),0);
+
+    window.location.href = "https://wa.me/201223136302?text=" + msg;
+}
+function showToast() {
+    const t = document.getElementById("toast");
+    t.style.display = "block";
+    setTimeout(() => {
+        t.style.display = "none";
+    }, 1500);
+}
+updateCart();
+function plus(id){
+    let item = cart.find(p => p.id === id);
+    item.qty++;
+    save();
+}
+
+function minus(id){
+    let item = cart.find(p => p.id === id);
+
+    item.qty--;
+
+    if(item.qty <= 0){
+        cart = cart.filter(p => p.id !== id);
+    }
+
+    save();
+}
+
+function save(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+</script>
+<div id="toast">تمت إضافة المنتج للسلة ✅</div>
+</body>
+</html>
