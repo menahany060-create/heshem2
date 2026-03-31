@@ -88,9 +88,10 @@
         }
 
         .product-card img {
-            width: 100%;
-            height: 670px;
-            object-fit: fill;
+    height: auto !important;
+    max-height: 260px;
+    object-fit: contain;
+    background: white;
         }
 
         .price {
@@ -193,79 +194,6 @@
     border-radius: 20px;
     display: none;
     z-index: 9999;
-}
-        /* ========== MOBILE FIX ========== */
-@media (max-width: 768px) {
-
-    header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .logo-wrap img {
-        width: 140px !important;
-    }
-
-    .logo-wrap h2 {
-        font-size: 18px;
-    }
-
-    .hero {
-        height: 200px;
-        padding: 10px;
-    }
-
-    .hero h1 {
-        font-size: 18px;
-    }
-
-    .hero p {
-        font-size: 14px;
-    }
-
-    .products-grid {
-        grid-template-columns: 1fr;
-        padding: 20px 10px;
-        gap: 15px;
-    }
-
-    .product-card img {
-        height: 220px !important;
-        object-fit: cover;
-    }
-
-    .product-card {
-        padding: 10px;
-    }
-
-    .btn-add {
-        width: 100%;
-        font-size: 14px;
-    }
-
-    #cart-sidebar {
-        width: 100%;
-        left: -100%;
-    }
-
-    #cart-sidebar.active {
-        left: 0;
-    }
-
-    .popup-box {
-        width: 95%;
-    }
-
-    input {
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    footer {
-        font-size: 12px;
-        padding: 10px;
-    }
 }
     </style>
 </head>
