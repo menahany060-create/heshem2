@@ -1,196 +1,14 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+٠<!DOCTYPE html>
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بن الحشم | عالم القهوة العربية</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بن الحشم</title>
 
-    <meta name="description" content="متجر بن الحشم لبيع القهوة العربية بأفضل الأسعار">
-    <meta name="keywords" content="قهوة, بن, قهوة عربية, شراء قهوة">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --main-color: #6f4e37;
-            --secondary-color: #ecf0f1;
-            --dark-color: #2c3e50;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            margin: 0;
-            background: url("coff.webp") no-repeat;
-            background-size:cover;
-            background-position: center; 
-        }
-
-        header {
-            background: url("cof.webp") no-repeat;
-            background-size:cover; 
-            color: white;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: center;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(224, 0, 0, 0.2);
-        }
-
-        .logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 100px;
-        }
-
-        .logo-wrap img {
-            align-items: center;
-            width: 15%;
-            height: 10%;
-        }
-
-        .cart-icon {
-            cursor: pointer;
-            background: #fff;
-            color: var(--main-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-
-
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            padding: 40px 5%;
-        }
-
-        .product-card {
-            background: url("cof.webp") no-repeat;
-            background-size:400%;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            text-align: center;
-            color: #ffffff;
-            padding-bottom: 20px;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card img {
-            width: auto;
-            height: auto;
-            object-fit: fill;
-        }
-
-        .price {
-            color: var(--secondary-color)
-             1.3rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .btn-add {
-            background-color: var(--main-color);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        #cart-sidebar {
-            position: fixed;
-            left: -350px;
-            top: 0;
-            width: 300px;
-            height: 100%;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        #cart-sidebar.active {
-            left: 0;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .remove-btn {
-            background: none;
-            border: none;
-            color: red;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #2c3e50;
-            color: white;
-        }
-
-        #story-popup, #spec-popup, #checkout-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-        }
-
-        .popup-box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .bar {
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .fill {
-            height: 10px;
-            background: var(--main-color);
-        }
-        #toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2c3e50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    display: none;
-    z-index: 9999;
-}
-body::before {
+<style>
+    body::before {
   content: "";
   position: fixed;
   top:0; left:0;
@@ -203,274 +21,559 @@ body::before {
   opacity:0.7;
 }
 
-@keyframes gradientMove {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+body{
+  margin:0;
+  font-family:'Tajawal',sans-serif;
+  background:url("coff.webp") center/cover no-repeat;
+  color:#fff;
 }
-    </style>
+
+/* HEADER */
+.header{
+  text-align:center;
+  padding:15px;
+  background:rgba(0,0,0,.6);
+}
+
+.logo{height:120px}
+.logoText{font-size:28px;font-weight:bold}
+
+/* PRODUCTS */
+.products{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  padding:20px;
+}
+
+.card{
+  width:240px;
+  background:rgba(0,0,0,.75);
+  border-radius:15px;
+  padding:10px;
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+/* CAF BAR */
+.bar{
+  width:100%;
+  height:10px;
+  background:rgba(255,255,255,.2);
+  border-radius:10px;
+  overflow:hidden;
+  margin:8px 0;
+}
+
+.fill{
+  height:100%;
+  background:linear-gradient(90deg,#00f0ff,#00ff8c,#ffea00,#ff4d00);
+}
+
+/* NEON BUTTON */
+.neonBtn{
+  margin:5px 0;
+  padding:10px;
+  border-radius:12px;
+  cursor:pointer;
+  border:2px solid #00f0ff;
+  background:transparent;
+  color:#00f0ff;
+  font-weight:bold;
+  width:100%;
+  box-shadow:0 0 10px #00f0ff;
+  transition:0.3s;
+}
+
+.neonBtn:hover{
+  background:#00f0ff;
+  color:#000;
+  transform:scale(1.05);
+}
+
+/* CART */
+.cart{
+  background:rgba(0,0,0,.85);
+  padding:15px;
+  width:90%;
+  max-width:420px;
+  margin:20px auto;
+  border-radius:15px;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:5px 0;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.6);
+}
+
+.popup.active{display:flex;}
+
+.popup-content{
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+  width:85%;
+  max-width:400px;
+  text-align:center;
+}
+
+/* BUTTON */
+.checkoutBtn{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:#00f0ff;
+  font-weight:bold;
+  border:none;
+  border-radius:10px;
+}
+
+input{
+  width:95%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:10px;
+  border:none;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .products{flex-direction:column;align-items:center}
+  .card{width:90%}
+}
+
+/* ===== ANIMATION PACK ===== */
+
+/* دخول الكروت */
+.card{
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:0.3s;
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* تأخير ظهور */
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.2s;}
+.card:nth-child(3){animation-delay:0.3s;}
+.card:nth-child(4){animation-delay:0.4s;}
+.card:nth-child(5){animation-delay:0.5s;}
+.card:nth-child(6){animation-delay:0.6s;}
+.card:nth-child(7){animation-delay:0.7s;}
+.card:nth-child(8){animation-delay:0.8s;}
+.card:nth-child(9){animation-delay:0.9s;}
+.card:nth-child(10){animation-delay:1s;}
+.card:nth-child(11){animation-delay:1.1s;}
+.card:nth-child(12){animation-delay:1.2s;}
+.card:nth-child(13){animation-delay:1.3s;}
+.card:nth-child(14){animation-delay:1.4s;}
+/* Hover للكروت */
+.card:hover{
+  transform: scale(1.04);
+  box-shadow: 0 0 20px #00f0ff;
+}
+
+/* السلة */
+.cart{
+  animation: cartIn 0.7s ease;
+}
+
+@keyframes cartIn{
+  from{
+    opacity:0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+/* زرار الضغط */
+.neonBtn:active{
+  transform: scale(0.95);
+}
+
+/* لمسة ناعمة عامة */
+*{
+  transition: 0.2s ease;
+}
+.footer{
+  margin-top:40px;
+  background:rgba(0,0,0,.85);
+  padding:20px;
+  text-align:center;
+  border-top:1px solid #00f0ff;
+  box-shadow:0 -5px 20px rgba(0,240,255,.2);
+}
+
+.footer-content h3{
+  margin:5px 0;
+  color:#00f0ff;
+  text-shadow:0 0 10px #00f0ff;
+}
+
+.footer-content p{
+  margin:5px 0;
+  font-size:14px;
+  opacity:0.8;
+}
+
+.footer-links{
+  margin:10px 0;
+}
+
+.footer-links a{
+  display:inline-block;
+  margin:5px 10px;
+  color:#00f0ff;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.footer-links a:hover{
+  color:#fff;
+  text-shadow:0 0 10px #00f0ff;
+  transform:scale(1.1);
+}
+
+.copy{
+  margin-top:10px;
+  font-size:12px;
+  opacity:0.6;
+}
+.card.top{
+  order: -1;
+}
+
+.card.bottom{
+  order: 10;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo-wrap">
-        <img src="logo.png">
-      <h1>أجود أنواع البن العربي <br><p>اطلب قهوتك دلوقتي و هتوصلك لحد باب بيتك</p></h1>
-    
-    </div>
-
-    <div class="cart-icon" onclick="toggleCart()">السلة (<span id="cart-count">0</span>)</div>
-</header>
-
-
-
-<div class="products-grid" id="products"></div>
-
-<div id="cart-sidebar">
-    <h3>سلة المشتريات</h3>
-    <div id="cart-items"></div>
-    <hr>
-    <h4>الإجمالي: <span id="total-price">0</span> ج.م</h4>
-
-    <button class="btn-add" style="width: 100%;" onclick="openCheckout()">
-        إتمام الشراء
-    </button>
-
-    <br><br>
-    <button onclick="toggleCart()" style="background:none;border:none;color:red;">إغلاق</button>
+<div class="header">
+  <img class="logo" src="logo.png">
+  <div class="logoText">بن الحشم ☕</div>
 </div>
 
-<!-- STORY -->
-<div id="story-popup">
-    <div class="popup-box">
-        <h3 id="story-title"></h3>
-        <p id="story-text"></p>
-        <button onclick="closeStory()">إغلاق</button>
-    </div>
+<!-- PRODUCTS -->
+<div class="products">
+
+  <!-- الحشم -->
+  <div class="card top">
+    <img src="hashm.png">
+    <h3>توليفة الحشم</h3>
+    <p>150 جنيه</p>
+    <small>125 جرام</small>
+
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+      <small>كافيين 90%</small>
+
+    <button class="neonBtn" onclick="openStory('الحشم','قوة وكافيين عالي 🔥')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('الحشم','برازيلي + كولومبي')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة الحشم',150)">إضافة للسلة</button>
+  </div>
+
+  <!-- أيوب -->
+  <div class="card top">
+    <img src="ayoub.png">
+    <h3>توليفة أيوب</h3>
+    <p>140 جنيه</p>
+  <small>125 جرام</small>
+    <div class="bar"><div class="fill" style="width:65%"></div></div>
+      <small>كافيين 65%</small>
+
+    <button class="neonBtn" onclick="openStory('أيوب','الصبر مفتاح الفرج 💪')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('أيوب','متوازن وخفيف')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة أيوب',140)">إضافة للسلة</button>
+  </div>
+
+  <!-- السكة -->
+  <div class="card top">
+    <img src="sikka.png">
+    <h3>توليفة ع السكة</h3>
+    <p>160 جنيه</p>
+  <small>125 جرام</small>
+    <div class="bar"><div class="fill" style="width:80%"></div></div>
+      <small>كافيين 80%</small>
+
+    <button class="neonBtn" onclick="openStory('السكة','تركيز طويل في السفر 🚀')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('السكة','مناسبة للسفر')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة ع السكة',160)">إضافة للسلة</button>
+  </div>
+
+  <!-- الجدع -->
+  <div class="card top">
+    <img src="gad3.png">
+    <h3>توليفة الجدع</h3>
+    <p>130 جنيه</p>
+  <small>125 جرام</small>
+    <div class="bar"><div class="fill" style="width:50%"></div></div>
+      <small>كافيين 50%</small>
+
+    <button class="neonBtn" onclick="openStory('الجدع','للجدعان بس 😄')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('الجدع','خفيف وناعم')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة الجدع',130)">إضافة للسلة</button>
+  </div>
+<!-- ESPRESSO -->
+<div class="card top">
+  <img src="espresso.jpeg">
+  <h3> ESPRESSO</h3>
+  <p>170 جنيه</p>
+  <small>125 جرام</small>
+  <div class="bar"><div class="fill" style="width:95%"></div></div>
+  <small>كافيين 95%</small>
+
+  <button class="neonBtn" onclick="openStory('ESPRESSO','جرعة كافيين مركزة 🔥 تعيشك فايق على الآخر')">القصة</button>
+
+  <button class="neonBtn" onclick="openSpecs('ESPRESSO','تحميص داكن + نكهة قوية مركزة')">المواصفات</button>
+
+  <button class="neonBtn" onclick="add('توليفة ESPRESSO',170)">إضافة للسلة</button>
 </div>
 
-<!-- SPEC -->
-<div id="spec-popup">
-    <div class="popup-box">
-        <h3 id="spec-title"></h3>
+<!-- الحشم -->
+  <div class="card bottom">
+    <img src="hashm.png">
+    <h3>توليفة الحشم</h3>
+    <p>350 جنيه</p>
+    <small>500 جرام</small>
 
-        <p>نسبة الكافيين</p>
-        <div class="bar"><div id="caffeine-fill" class="fill"></div></div>
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+      <small>كافيين 90%</small>
 
-        <p id="spec-beans"></p>
-        <p id="spec-roast"></p>
-        <p id="spec-weight"></p>
+    <button class="neonBtn" onclick="openStory('الحشم','قوة وكافيين عالي 🔥')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('الحشم','برازيلي + كولومبي')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة الحشم',350)">إضافة للسلة</button>
+  </div>
 
-        <button onclick="closeSpec()">إغلاق</button>
-    </div>
+  <!-- أيوب -->
+  <div class="card bottom">
+    <img src="ayoub.png">
+    <h3>توليفة أيوب</h3>
+    <p>350 جنيه</p>
+  <small>500 جرام</small>
+    <div class="bar"><div class="fill" style="width:65%"></div></div>
+      <small>كافيين 65%</small>
+
+    <button class="neonBtn" onclick="openStory('أيوب','الصبر مفتاح الفرج 💪')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('أيوب','متوازن وخفيف')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة أيوب',350)">إضافة للسلة</button>
+  </div>
+
+  <!-- السكة -->
+  <div class="card bottom">
+    <img src="sikka.png">
+    <h3>توليفة ع السكة</h3>
+    <p>350 جنيه</p>
+  <small>500 جرام</small>
+    <div class="bar"><div class="fill" style="width:80%"></div></div>
+      <small>كافيين 80%</small>
+
+    <button class="neonBtn" onclick="openStory('السكة','تركيز طويل في السفر 🚀')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('السكة','مناسبة للسفر')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة ع السكة',350)">إضافة للسلة</button>
+  </div>
+
+  <!-- الجدع -->
+  <div class="card bottom">
+    <img src="gad3.png">
+    <h3>توليفة الجدع</h3>
+    <p>350 جنيه</p>
+  <small>500 جرام</small>
+    <div class="bar"><div class="fill" style="width:50%"></div></div>
+      <small>كافيين 50%</small>
+
+    <button class="neonBtn" onclick="openStory('الجدع','للجدعان بس 😄')">القصة</button>
+    <button class="neonBtn" onclick="openSpecs('الجدع','خفيف وناعم')">المواصفات</button>
+    <button class="neonBtn" onclick="add('توليفة الجدع',350)">إضافة للسلة</button>
+  </div>
+<!-- ESPRESSO -->
+<div class="card bottom">
+  <img src="espresso.jpeg">
+  <h3> ESPRESSO</h3>
+  <p>350 جنيه</p>
+  <small>500 جرام</small>
+  <div class="bar"><div class="fill" style="width:95%"></div></div>
+  <small>كافيين 95%</small>
+
+  <button class="neonBtn" onclick="openStory('ESPRESSO','جرعة كافيين مركزة 🔥 تعيشك فايق على الآخر')">القصة</button>
+
+  <button class="neonBtn" onclick="openSpecs('ESPRESSO','تحميص داكن + نكهة قوية مركزة')">المواصفات</button>
+
+  <button class="neonBtn" onclick="add('توليفة ESPRESSO',350)">إضافة للسلة</button>
+</div>
+</div>
+
+</div>
+
+
+
+<!-- CART -->
+<div class="cart">
+  <h3>🛒 السلة</h3>
+  <div id="box"></div>
+
+  <h4>الإجمالي: <span id="total">0</span></h4>
+
+  <button class="checkoutBtn" onclick="openCheckout()">تأكيد الطلب</button>
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkout-popup">
-    <div class="popup-box">
-        <h3>إتمام الطلب</h3>
+<div id="checkout" class="popup" onclick="closePopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
 
-        <input id="customer-name" placeholder="الاسم" style="width:90%;padding:10px;margin:10px 0;">
-        <input id="customer-address" placeholder="العنوان" style="width:90%;padding:10px;margin:10px 0;">
+    <h3>تأكيد الطلب</h3>
 
-        <button class="btn-add" onclick="sendOrder()">تأكيد الطلب</button>
-        <br><br>
-        <button onclick="closeCheckout()" style="background:none;border:none;color:red;">إلغاء</button>
-    </div>
+    <input id="name" placeholder="الاسم">
+    <input id="address" placeholder="العنوان">
+
+    <button class="checkoutBtn" onclick="send()">إرسال واتساب</button>
+  </div>
 </div>
 
-<footer>
-  <p> ملحوظة: احنا بنستخدم أجود أنواع البن الموجودة في العالم لكن كل توليفة بنسب مختلفه</p>
-
-<p>شركة (بن الحشم) التابعه لشركة (سميركو للاستيراد و التصدير) هي شركه اردنية الاصل تأسست عام 1983</p>
-
-<p>العنوان :الاردن_السلط_شارع اليرموك </p>
-<p>الهاتف :00962799198420</p>
-<p>كل الحقوق محفوظه</p>
-</footer>
+<!-- POPUP -->
+<div id="popup" class="popup" onclick="closePopup()">
+  <div class="popup-content">
+    <h3 id="title"></h3>
+    <p id="text"></p>
+  </div>
+</div>
 
 <script>
 
-const products = [
-    { id: 1, name: "توليفة الحشم ", price: 0, img: "hashm.png",
-      story: "مفيش حاجه هتجيلك لحد عندك ، اسعى و اجتهد و ربنا هيديك على قد تعبك ، و اوعي تيأس لأن مفيش حلاوه من غير نار ، عايزك تتأكد دايما ان ربنا هيديك على قد تعبك_ و احنا عملنالك التوليفه الى هتخليك تكمل مشوارك ب اقصى طاقه ممكنه 💪🏻واعلى كافيين ممكن🔥.",
-      caffeine: 90, beans: "برازيلي", roast: "وسط", weight: "500 جم" },
+let cart=[];
 
-    { id: 2, name: "توليفة أيوب", price: 0, img: "ayoub.png",
-      story: "سيدنا ايوب كان غني و عندو اولاد و صحه و فلوس مبتخلصش ، و ربنا ابتلاه بخسارة فلوسه و موت اولاده و مرض استمر معاه ١٨ سنه بحالهم! ، بس سيدنا ايوب صبر كل دا و قال الحمدلله لحد ما ربنا فرجها عليه و عوضه اضعاف _ و احنا عملنالك توليفة ايوب عشان تساعدك على الصبر ف حياتك ، و افتكر دايما ان الصبر هو مفتاح الفرج ❤️.",
-      caffeine: 65, beans: "خليط", roast: "وسط", weight: "500 جم" },
+function add(name,price){
+  let item=cart.find(i=>i.name===name);
+  if(item) item.qty++;
+  else cart.push({name,price,qty:1});
+  render();
+}
 
-    { id: 3, name: "توليفة الجدع", price: 0, img: "gad3.png",
-      story: "مفيش راجل جدع مش بيشرب قهوه ، و قهوته مش بتبقى اى قهوه _ و احنا عملنالك التوليفه بتاعة الجدعان ، اشرب و افتكر ان توليفة الجدع مش لأي حد 😉.",
-      caffeine: 50, beans: "إثيوبي", roast: "وسط", weight: "500 جم" },
+function changeQty(i,v){
+  cart[i].qty+=v;
+  if(cart[i].qty<=0) cart.splice(i,1);
+  render();
+}
 
-    { id: 4, name: "توليفة ع السكة", price: 0, img: "sikka.png",
-      story: "مسافر و سكتك طويله ؟ مفيش حاجه هتفوقك غير كباية القهوه الزياده _ و اخنا عملنالك توليفة ع السكه عشان تساعدك تركز لوقت اطول ف رحلتك ، اشرب و صحصح لطريقك ، توصل بالسلامه يا صديقي ❤️.",
-      caffeine: 80, beans: "كولومبي", roast: "وسط", weight: "500 جم" }
-];
+function render(){
+  let box=document.getElementById("box");
+  let total=document.getElementById("total");
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  box.innerHTML="";
+  let sum=0;
 
-const productsContainer = document.getElementById('products');
+  cart.forEach((c,i)=>{
+    sum+=c.price*c.qty;
 
-products.forEach(product => {
-    productsContainer.innerHTML += `
-        <div class="product-card">
-            <img src="${product.img}">
-            <h3>${product.name}</h3>
-            <p class="price">${product.price} ج.م</p>
-
-            <button class="btn-add" onclick="addToCart(${product.id})">أضف للسلة</button>
-            <br><br>
-            <button onclick="showStory(${product.id})">ليه تشرب التوليفه دي ؟ </button>
-            <br><br>
-            <button onclick="showSpec(${product.id})">⚙️ مواصفات التوليفة</button>
+    box.innerHTML+=`
+      <div class="item">
+        <span>${c.name}</span>
+        <div>
+          <button onclick="changeQty(${i},1)">+</button>
+          ${c.qty}
+          <button onclick="changeQty(${i},-1)">-</button>
         </div>
+      </div>
     `;
-});
+  });
 
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-
-    let item = cart.find(p => p.id === productId);
-
-    if (item) {
-        item.qty += 1;
-    } else {
-        cart.push({ ...product, qty: 1 });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showToast();
-    updateCart();
+  total.innerText=sum;
 }
 
-function removeFromCart(i) {
-    cart.splice(i, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
+/* POPUP */
+function openStory(t,x){
+  document.getElementById("title").innerText=t;
+  document.getElementById("text").innerText=x;
+  document.getElementById("popup").classList.add("active");
 }
 
-function updateCart() {
-    const cartCount = document.getElementById('cart-count');
-    const cartItems = document.getElementById('cart-items');
-    const totalPrice = document.getElementById('total-price');
-
-    cartCount.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
-
-    cartItems.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        total += item.price * item.qty;
-
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name}</span>
-
-                <button onclick="minus(${item.id})">➖</button>
-                ${item.qty}
-                <button onclick="plus(${item.id})">➕</button>
-
-                <span>${item.price * item.qty} ج.م</span>
-
-                <button onclick="removeFromCart(${index})">❌</button>
-            </div>
-        `;
-    });
-
-    totalPrice.innerText = total;
+function openSpecs(t,x){
+  document.getElementById("title").innerText="المواصفات: "+t;
+  document.getElementById("text").innerText=x;
+  document.getElementById("popup").classList.add("active");
 }
 
-function toggleCart() {
-    document.getElementById('cart-sidebar').classList.toggle('active');
+function openCheckout(){
+  document.getElementById("checkout").classList.add("active");
 }
 
-function showStory(id) {
-    const p = products.find(x => x.id === id);
-    document.getElementById("story-title").innerText = p.name;
-    document.getElementById("story-text").innerText = p.story;
-    document.getElementById("story-popup").style.display = "flex";
+function closePopup(){
+  document.querySelectorAll(".popup").forEach(p=>p.classList.remove("active"));
 }
 
-function closeStory() {
-    document.getElementById("story-popup").style.display = "none";
+/* WHATSAPP */
+function send(){
+
+  let name=document.getElementById("name").value;
+  let address=document.getElementById("address").value;
+
+  if(!name||!address){
+    alert("امل البيانات");
+    return;
+  }
+
+  let msg="🛒 طلب جديد\n\n";
+  msg+="الاسم: "+name+"\nالعنوان: "+address+"\n\n";
+
+  let total=0;
+
+  cart.forEach(c=>{
+    let t=c.price*c.qty;
+    total+=t;
+    msg+=`${c.name} x${c.qty} = ${t} جنيه\n`;
+  });
+
+  msg+="\n💰 الإجمالي: "+total;
+
+  window.open("https://wa.me/201223136302?text="+encodeURIComponent(msg));
 }
 
-function showSpec(id) {
-    const p = products.find(x => x.id === id);
-    document.getElementById("spec-title").innerText = p.name;
-    document.getElementById("caffeine-fill").style.width = p.caffeine + "%";
-    document.getElementById("spec-beans").innerText = "أنواع البن: " + p.beans;
-    document.getElementById("spec-roast").innerText = "درجة التحميص: " + p.roast;
-    document.getElementById("spec-weight").innerText = "الوزن: " + p.weight;
-    document.getElementById("spec-popup").style.display = "flex";
-}
-
-function closeSpec() {
-    document.getElementById("spec-popup").style.display = "none";
-}
-
-/* CHECKOUT */
-function openCheckout() {
-    document.getElementById("checkout-popup").style.display = "flex";
-}
-
-function closeCheckout() {
-    document.getElementById("checkout-popup").style.display = "none";
-}
-
-function sendOrder() {
-    const name = document.getElementById("customer-name").value;
-    const address = document.getElementById("customer-address").value;
-
-    if (!name || !address) {
-        alert("اكتب البيانات");
-        return;
-    }
-
-    let msg = "طلب جديد:%0Aاسم: " + name + "%0Aعنوان: " + address + "%0A%0A";
-
-   cart.forEach(p => {
-    msg += "- " + p.name + " (" + p.price + ") × " + p.qty + " = " + (p.price * p.qty) + "%0A";
-});
-   msg += "%0Aالإجمالي: " + cart.reduce((a,b)=>a+(b.price*b.qty),0);
-
-    window.location.href = "https://wa.me/201223136302?text=" + msg;
-}
-function showToast() {
-    const t = document.getElementById("toast");
-    t.style.display = "block";
-    setTimeout(() => {
-        t.style.display = "none";
-    }, 1500);
-}
-updateCart();
-function plus(id){
-    let item = cart.find(p => p.id === id);
-    item.qty++;
-    save();
-}
-
-function minus(id){
-    let item = cart.find(p => p.id === id);
-
-    item.qty--;
-
-    if(item.qty <= 0){
-        cart = cart.filter(p => p.id !== id);
-    }
-
-    save();
-}
-
-function save(){
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
-}
 </script>
-<div id="toast">تمت إضافة المنتج للسلة ✅</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <h3>☕ بن الحشم</h3>
+     <p>ملحوظة: احنا بنستخدم أجود أنواع البن الموجودة في العالم لكن كل توليفة بنسب مختلفه</p>
+ <p> شركة (بن الحشم)التابعه لشركة (سميركو للاستيراد و التصدير) هي شركه اردنية الاصل تأسست عام 1983</p> 
+العنوان :الاردن_السلط_شارع اليرموك
+الهاتف :00962799198420
+   
+    <div class="footer-links">
+      <a href="#">الرئيسية</a>
+      <a href="#">المنتجات</a>
+      <a href="#" onclick="openCheckout()">اطلب الآن</a>
+    </div>
+
+    <p class="copy">© 2026 جميع الحقوق محفوظة - بن الحشم</p>
+  </div>
+</footer>
 </body>
 </html>
