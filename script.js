@@ -134,10 +134,11 @@ function openCart() {
 // ===== SLIDER =====
 let slider;
 
-function moveSlider(dir) {
-  if (!slider) return;
-  slider.scrollBy({ left: dir * 150, behavior: "smooth" });
-}
+function moveSlider(dir){
+  slider.scrollBy({
+    left: dir * 150,
+    behavior: "smooth"
+  });
 
 // ===== MENU =====
 function toggleMenu() {
