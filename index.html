@@ -15,7 +15,6 @@
 <meta name="twitter:image" content="https://your-site.com/coffee.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -24,14 +23,12 @@
   <img class="logo" src="logo.png">
   <div class="logoText">بن الحشم ☕</div>
 
-  <!-- ✅ زرار المنيو -->
   <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="القائمة">
     <span></span>
     <span></span>
     <span></span>
   </button>
 
-  <!-- ✅ المنيو -->
   <div class="nav-menu" id="navMenu">
     <a href="#">🏠 الرئيسية</a>
     <a href="#">☕ المنتجات</a>
@@ -50,24 +47,6 @@
     <p>الحشم</p>
   </div>
 
-  <div class="bs-card" onclick="scrollToProduct('ESPRESSO')">
-    <span class="badge">🔥</span>
-    <img src="espresso.png">
-    <p>ESPRESSO</p>
-  </div>
-
-  <div class="bs-card" onclick="scrollToProduct('السكة')">
-    <span class="badge">🔥</span>
-    <img src="sikka.png">
-    <p>ع السكة</p>
-  </div>
-
-  <div class="bs-card" onclick="scrollToProduct('الجدع')">
-    <span class="badge">🔥</span>
-    <img src="gad3.png">
-    <p>الجدع</p>
-  </div>
-
   <div class="bs-card" onclick="scrollToProduct('أيوب')">
     <span class="badge">🔥</span>
     <img src="ayoub.png">
@@ -76,147 +55,122 @@
 
 </div>
 
+<!-- OFFERS SECTION -->
+<h3 class="section-title">🔥 العروض والخصومات</h3>
+
+<div class="offers">
+
+  <div class="offer-card">
+    <span class="offer-badge">-20%</span>
+    <img src="sikka.png">
+    <h3> ع السكة (500 جرام)</h3>
+    <p class="old-price">350 جنيه</p>
+    <p class="new-price">280 جنيه</p>
+    <button class="neonBtn" onclick="addOffer(this, 'الحشم 250g عرض', 280)">إضافة للسلة</button>
+  </div>
+
+  <div class="offer-card">
+    <span class="offer-badge">-50%</span>
+    <img src="gad3.png">
+    <h3>الجدع (جرام 500)</h3>
+    <p class="old-price">350 جنيه</p>
+    <p class="new-price">175جنيه</p>
+    <button class="neonBtn" onclick="addOffer(this, ' 500g عرض الجدع', 175)">إضافة للسلة</button>
+  </div>
+
+  <!-- منتج جديد - غير الصورة والبيانات -->
+  <div class="offer-card">
+    <span class="offer-badge">-23%</span>
+    <img src="offer1.png">
+    <h3>الحشم(500 جرام)+ مج حراري (500 مل) مع 3 كوب</h3>
+    <p class="old-price">850 جنيه</p>
+    <p class="new-price">625 جنيه</p>
+    <button class="neonBtn" onclick="addOffer(this, 'عرض الحشم+ مج حراري ', 625)">إضافة للسلة</button>
+  </div>
+
+</div>
+
 <!-- PRODUCTS -->
 <div class="products">
 
-  <!-- الحشم -->
-  <div class="flip-container top" id="product-الحشم">
-    <div class="flipper">
-      <div class="front card">
-        <img src="hashm.png">
-        <h3>توليفة الحشم</h3>
-        <div class="bar"><div class="fill" data-caffeine="90"><span class="percent">90%</span></div></div>
-        <small>كافيين 90%</small>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">المواصفات ↩</button>
-        <select onchange="updatePrice(this)">
-          <option value="125-150">جرام(125) - 150 جنيه</option>
-          <option value="250-250">جرام(250) - 250 جنيه</option>
-          <option value="500-350">جرام(500) - 350 جنيه</option>
-        </select>
-        <button class="neonBtn" onclick="addProduct(this,'الحشم')">إضافة للسلة</button>
-      </div>
-      <div class="back card">
-        <h3>توليفة الحشم</h3>
-        <table class="specs-table">
-          <tr><td>نوع البن</td><td>برازيلي</td></tr>
-          <tr><td>نسبة التحميص</td><td>وسط</td></tr>
-          <tr><td>الكافيين</td><td>90%</td></tr>
-        </table>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">رجوع ↩</button>
-      </div>
-    </div>
+  <div class="card top" id="product-الحشم" data-status="available">
+    <img src="hashm.png">
+    <h3>توليفة الحشم</h3>
+    <div class="bar"><div class="fill" data-caffeine="90"><span class="percent">90%</span></div></div>
+    <small>كافيين 90%</small>
+    <button class="neonBtn" onclick="openStory('No Pain...No Gain','مفيش حاجه هتجيلك لحد عندك ، اسعى و اجتهد و ربنا هيديك على قد تعبك ، و اوعي تيأس لأن مفيش حلاوه من غير نار ، عايزك تتأكد دايما ان ربنا هيديك على قد تعبك_ و احنا عملنالك التوليفه الى هتخليك تكمل مشوارك ب اقصى طاقه ممكنه 💪🏻واعلى كافيين ممكن🔥 ')">ليه تشرب توليفة الحشم؟</button>
+    <button class="neonBtn" onclick="openSpecs('وسط','انواع البن : برازيلي + كولومبي')">المواصفات</button>
+    <select onchange="updatePrice(this)">
+      <option value="125-150"> جرام(125) - 150 جنيه</option>
+      <option value="250-270"> جرام (250)- 270 جنيه</option>
+      <option value="500-550"> جرام(500) - 550 جنيه</option>
+    </select>
+    <button class="neonBtn" onclick="addProduct(this,'الحشم')">إضافة للسلة</button>
   </div>
 
-  <!-- أيوب -->
-  <div class="flip-container top" id="product-أيوب">
-    <div class="flipper">
-      <div class="front card">
-        <img src="ayoub.png">
-        <h3>توليفة أيوب</h3>
-        <div class="bar"><div class="fill" data-caffeine="65"><span class="percent">65%</span></div></div>
-        <small>كافيين 65%</small>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">المواصفات ↩</button>
-        <select onchange="updatePrice(this)">
-          <option value="125-150">جرام(125) - 150 جنيه</option>
-          <option value="250-250">جرام(250) - 250 جنيه</option>
-          <option value="500-350">جرام(500) - 350 جنيه</option>
-        </select>
-        <button class="neonBtn" onclick="addProduct(this,'أيوب')">إضافة للسلة</button>
-      </div>
-      <div class="back card">
-        <h3>توليفة أيوب</h3>
-        <table class="specs-table">
-          <tr><td>نوع البن</td><td>كولومبي</td></tr>
-          <tr><td>نسبة التحميص</td><td>وسط</td></tr>
-          <tr><td>الكافيين</td><td>65%</td></tr>
-        </table>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">رجوع ↩</button>
-      </div>
-    </div>
+  <div class="card top" id="product-أيوب" data-status="available">
+    <img src="ayoub.png">
+    <h3>توليفة أيوب</h3>
+    <div class="bar"><div class="fill" data-caffeine="65"><span class="percent">65%</span></div></div>
+    <small>كافيين 65%</small>
+    <button class="neonBtn" onclick="openStory('اشرب الصبر و استمتع بالفرج ',
+'سيدنا ايوب كان غني و عندو اولاد و صحه و فلوس مبتخلصش ، و ربنا ابتلاه بخسارة فلوسه و موت اولاده و مرض استمر معاه ١٨ سنه بحالهم! ، بس سيدنا ايوب صبر كل دا و قال الحمدلله لحد ما ربنا فرجها عليه و عوضه اضعاف _ و احنا عملنالك توليفة ايوب عشان تساعدك على الصبر ف حياتك ، و افتكر دايما ان الصبر هو مفتاح الفرج ❤️')">ليه تشرب توليفة ايوب؟</button>
+<button class="neonBtn" onclick="openSpecs(' وسط','انواع البن : برازيلي + كولومبي')">المواصفات</button>
+    <select onchange="updatePrice(this)">
+      <option value="125-110"> جرام(125) - 110 جنيه</option>
+      <option value="250-200"> جرام (250)- 200 جنيه</option>
+      <option value="500-350"> جرام(500) - 350 جنيه</option>
+    </select>
+    <button class="neonBtn" onclick="addProduct(this,'أيوب')">إضافة للسلة</button>
   </div>
 
-  <!-- السكة -->
-  <div class="flip-container top" id="product-السكة">
-    <div class="flipper">
-      <div class="front card">
-        <img src="sikka.png">
-        <h3>توليفة ع السكة</h3>
-        <div class="bar"><div class="fill" data-caffeine="80"><span class="percent">80%</span></div></div>
-        <small>كافيين 80%</small>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">المواصفات ↩</button>
-        <select onchange="updatePrice(this)">
-          <option value="125-150">جرام(125) - 150 جنيه</option>
-          <option value="250-250">جرام(250) - 250 جنيه</option>
-          <option value="500-350">جرام(500) - 350 جنيه</option>
-        </select>
-        <button class="neonBtn" onclick="addProduct(this,'السكة')">إضافة للسلة</button>
-      </div>
-      <div class="back card">
-        <h3>توليفة ع السكة</h3>
-        <table class="specs-table">
-          <tr><td>نوع البن</td><td>روبوستا</td></tr>
-          <tr><td>نسبة التحميص</td><td>وسط</td></tr>
-          <tr><td>الكافيين</td><td>80%</td></tr>
-        </table>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">رجوع ↩</button>
-      </div>
-    </div>
+  <div class="card top" id="product-السكة" data-status="available">
+    <img src="sikka.png">
+    <h3>توليفة ع السكة</h3>
+    <div class="bar"><div class="fill" data-caffeine="80"><span class="percent">80%</span></div></div>
+    <small>كافيين 80%</small>
+    <button class="neonBtn" onclick="openStory(' استمتع بالرحله...السكه طويله',
+'مسافر و سكتك طويله ؟ مفيش حاجه هتفوقك غير كباية القهوه الزياده _ و اخنا عملنالك توليفة ع السكه عشان تساعدك تركز لوقت اطول ف رحلتك ، اشرب و صحصح لطريقك ، توصل بالسلامه يا صديقي ❤️'
+)">ليه تشرب توليفة ع السكة؟</button>
+    <button class="neonBtn" onclick="openSpecs(' وسط','انواع البن : برازيلي + كولومبي')">المواصفات</button>
+    <select onchange="updatePrice(this)">
+      <option value="125-90"> جرام(125) - 90 جنيه</option>
+      <option value="250-200"> جرام (250)- 200 جنيه</option>
+      <option value="500-350"> جرام(500) - 350 جنيه</option>
+    </select>
+    <button class="neonBtn" onclick="addProduct(this,'السكة')">إضافة للسلة</button>
   </div>
 
-  <!-- الجدع -->
-  <div class="flip-container top" id="product-الجدع">
-    <div class="flipper">
-      <div class="front card">
-        <img src="gad3.png">
-        <h3>توليفة الجدع</h3>
-        <div class="bar"><div class="fill" data-caffeine="50"><span class="percent">50%</span></div></div>
-        <small>كافيين 50%</small>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">المواصفات ↩</button>
-        <select onchange="updatePrice(this)">
-          <option value="125-150">جرام(125) - 150 جنيه</option>
-          <option value="250-250">جرام(250) - 250 جنيه</option>
-          <option value="500-350">جرام(500) - 350 جنيه</option>
-        </select>
-        <button class="neonBtn" onclick="addProduct(this,'الجدع')">إضافة للسلة</button>
-      </div>
-      <div class="back card">
-        <h3>توليفة الجدع</h3>
-        <table class="specs-table">
-          <tr><td>نوع البن</td><td>تركي</td></tr>
-          <tr><td>نسبة التحميص</td><td>وسط</td></tr>
-          <tr><td>الكافيين</td><td>50%</td></tr>
-        </table>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">رجوع ↩</button>
-      </div>
-    </div>
+  <div class="card top" id="product-الجدع" data-status="available">
+    <img src="gad3.png">
+    <h3>توليفة الجدع</h3>
+    <div class="bar"><div class="fill" data-caffeine="50"><span class="percent">50%</span></div></div>
+    <small>كافيين 50%</small>
+    <button class="neonBtn" onclick="openStory(' توليفة الجدع ...لكل راجل جدع',
+'مفيش راجل جدع مش بيشرب قهوه ، و قهوته مش بتبقى اى قهوه _ و احنا عملنالك التوليفه بتاعة الجدعان ، اشرب و افتكر ان توليفة الجدع مش لأي حد 😉'
+)">ليه تشرب توليفة الجدع؟</button>
+   <button class="neonBtn" onclick="openSpecs(' وسط','انواع البن : برازيلي + كولومبي')">المواصفات</button>
+    <select onchange="updatePrice(this)">
+      <option value="125-85"> جرام(125) - 85 جنيه</option>
+      <option value="250-180"> جرام (250)- 180 جنيه</option>
+      <option value="500-300"> جرام(500) - 300 جنيه</option>
+    </select>
+    <button class="neonBtn" onclick="addProduct(this,'الجدع')">إضافة للسلة</button>
   </div>
 
-  <!-- ESPRESSO -->
-  <div class="flip-container top" id="product-ESPRESSO">
-    <div class="flipper">
-      <div class="front card">
-        <img src="espresso.png">
-        <h3>ESPRESSO</h3>
-        <div class="bar"><div class="fill" data-caffeine="95"><span class="percent">95%</span></div></div>
-        <small>كافيين 95%</small>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">المواصفات ↩</button>
-        <select onchange="updatePrice(this)">
-          <option value="125-150">جرام(125) - 150 جنيه</option>
-          <option value="250-250">جرام(250) - 250 جنيه</option>
-          <option value="500-350">جرام(500) - 350 جنيه</option>
-        </select>
-        <button class="neonBtn" onclick="addProduct(this,'ESPRESSO')">إضافة للسلة</button>
-      </div>
-      <div class="back card">
-        <h3>ESPRESSO</h3>
-        <table class="specs-table">
-          <tr><td>نوع البن</td><td>حبشي</td></tr>
-          <tr><td>نسبة التحميص</td><td>وسط</td></tr>
-          <tr><td>الكافيين</td><td>95%</td></tr>
-        </table>
-        <button class="neonBtn flip-btn" onclick="flipCard(this)">رجوع ↩</button>
-      </div>
-    </div>
+  <div class="card top" id="product-ESPRESSO" data-status="sold-out">
+    <img src="espresso.png">
+    <h3>ESPRESSO</h3>
+    <div class="bar"><div class="fill" data-caffeine="95"><span class="percent">95%</span></div></div>
+    <small>كافيين 95%</small>
+    <button class="neonBtn" onclick="openStory('ESPRESSO','جرعة كافيين مركزة 🔥 تعيشك فايق على الآخر')">ليه تشرب ESPRESSO؟</button>
+    <button class="neonBtn" onclick="openSpecs('ESPRESSO','تحميص داكن + نكهة قوية مركزة')">المواصفات</button>
+    <select onchange="updatePrice(this)">
+      <option value="125-150"> جرام(125) - 150 جنيه</option>
+      <option value="250-250"> جرام (250)- 250 جنيه</option>
+      <option value="500-350"> جرام(500) - 350 جنيه</option>
+    </select>
+    <button class="neonBtn" onclick="addProduct(this,'ESPRESSO')">إضافة للسلة</button>
   </div>
 
 </div>
@@ -226,6 +180,13 @@
   <h3>🛒 السلة</h3>
   <div id="box"></div>
   <h4>الإجمالي: <span id="total">0</span></h4>
+  <div class="promo-row">
+  <input id="promoCode" placeholder="كود الخصم (اختياري)">
+  <button class="promoBtn" onclick="applyPromo()">تطبيق</button>
+</div>
+<p id="promoMsg"></p>
+<p id="discountLine" style="display:none; color:#00ff8c; font-weight:bold; text-align:center;"></p>
+<button class="checkoutBtn" onclick="openCheckout()">تأكيد الطلب</button>
   <button class="checkoutBtn" onclick="openCheckout()">تأكيد الطلب</button>
 </div>
 
