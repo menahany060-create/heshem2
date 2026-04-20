@@ -3,9 +3,21 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addProduct(btn, name) {
   let card = btn.parentElement;
+
+  // ✅ Sold Out Check
+  if (card.dataset.status === "sold-out") {
+    showToast("❌ المنتج ده نفذ من المخزن!");
+    return;
+  }
+
   let select = card.querySelector("select");
   let [weight, price] = select.value.split("-");
   add(name + " (" + weight + "g)", Number(price));
+}
+
+// ===== ADD OFFER TO CART =====
+function addOffer(btn, name, price) {
+  add(name, price);
 }
 
 function updatePrice(select) {
@@ -130,12 +142,6 @@ function showToast(msg) {
   setTimeout(() => { t.style.opacity = "0"; setTimeout(() => t.remove(), 300); }, 1800);
 }
 
-// ===== FLIP CARD =====
-function flipCard(btn) {
-  let container = btn.closest(".flip-container");
-  container.classList.toggle("flipped");
-}
-
 // ===== SCROLL TO PRODUCT =====
 function scrollToProduct(name) {
   let target = document.getElementById("product-" + name);
@@ -147,7 +153,10 @@ function scrollToProduct(name) {
   }
 }
 
+// ===== SLIDER =====
+let slider;
 
+function moveSlider(dir) {}
 
 // ===== INIT =====
 window.onload = function() {
@@ -155,7 +164,19 @@ window.onload = function() {
 
   slider = document.getElementById("slider");
 
-  // السلايدر اتشال
+  // Infinite slider
+  if (slider) {
+    let cards = Array.from(slider.children);
+    cards.forEach(function(card) { slider.appendChild(card.cloneNode(true)); });
+
+    setTimeout(function() {
+      var w = 0;
+      cards.forEach(function(card) { w += card.offsetWidth + 10; });
+      var styleEl = document.createElement("style");
+      styleEl.innerHTML = "@keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-" + w + "px); } } #slider { animation: infiniteScroll 18s linear infinite !important; }";
+      document.head.appendChild(styleEl);
+    }, 200);
+  }
 
   // Caffeine bars
   document.querySelectorAll(".fill").forEach(bar => {
@@ -172,5 +193,22 @@ window.onload = function() {
       count++;
       if (percentText) percentText.innerText = count + "%";
     }, 15);
+  });
+
+  // ✅ Sold Out Badges
+  document.querySelectorAll(".card[data-status='sold-out']").forEach(card => {
+    let badge = document.createElement("div");
+    badge.className = "sold-out-badge";
+    badge.innerText = "❌ نفذ من المخزن";
+    card.querySelector("img").after(badge);
+
+    // disable add to cart button
+    let addBtn = card.querySelectorAll(".neonBtn");
+    addBtn.forEach(btn => {
+      if (btn.innerText.includes("إضافة")) {
+        btn.style.opacity = "0.4";
+        btn.style.cursor = "not-allowed";
+      }
+    });
   });
 };
