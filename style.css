@@ -672,14 +672,38 @@ input::placeholder { color: #888; }
   display: block;
 }
 
+.front, .back {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
 .back {
   display: none;
+  opacity: 0;
   background: rgba(0,0,0,0.92);
   border: 1px solid #00f0ff33;
   border-radius: 15px;
   padding: 20px 16px;
   text-align: center;
-  animation: fadeIn 0.3s ease;
+  transform: scale(0.95);
+}
+
+.back.visible {
+  display: block;
+  animation: flipIn 0.4s ease forwards;
+}
+
+.front.hidden {
+  animation: flipOut 0.4s ease forwards;
+}
+
+@keyframes flipIn {
+  from { opacity: 0; transform: scale(0.95) rotateY(15deg); }
+  to   { opacity: 1; transform: scale(1) rotateY(0deg); }
+}
+
+@keyframes flipOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
 }
 
 .flip-container.flipped .front {
@@ -688,11 +712,7 @@ input::placeholder { color: #888; }
 
 .flip-container.flipped .back {
   display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.97); }
-  to   { opacity: 1; transform: scale(1); }
+  animation: flipIn 0.4s ease forwards;
 }
 
 .back h3 {
