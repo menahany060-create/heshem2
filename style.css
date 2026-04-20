@@ -687,6 +687,7 @@ input::placeholder { color: #888; }
   width: 100%;
   height: 100%;
   opacity: 0;
+  z-index: 5;
   pointer-events: none;
   background: rgba(0,0,0,0.95);
   border: 1px solid #00f0ff44;
@@ -703,13 +704,14 @@ input::placeholder { color: #888; }
 }
 
 .flip-container.flipped .front {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .flip-container.flipped .back {
-  opacity: 1;
-  pointer-events: all;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  z-index: 10;
 }
 
 .back h3 {
