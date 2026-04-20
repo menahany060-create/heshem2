@@ -664,55 +664,41 @@ input::placeholder { color: #888; }
 
 /* ===== CARD FLIP ===== */
 .flip-container {
-  perspective: 1000px;
   background: transparent !important;
   padding: 0 !important;
 }
 
-.flipper {
-  position: relative;
-  width: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease;
-}
-
-.flip-container.flipped .flipper {
-  transform: rotateY(180deg);
-}
-
-.front, .back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 15px;
-  width: 100%;
-}
-
 .front {
-  transform: rotateY(0deg);
-  position: relative;
-  z-index: 2;
+  display: block;
 }
 
 .back {
-  transform: rotateY(180deg);
+  display: none;
   background: rgba(0,0,0,0.92);
   border: 1px solid #00f0ff33;
+  border-radius: 15px;
   padding: 20px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.flip-container.flipped .front {
+  display: none;
+}
+
+.flip-container.flipped .back {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .back h3 {
   color: #00f0ff;
   text-shadow: 0 0 10px #00f0ff;
-  margin: 0;
+  margin: 0 0 16px;
 }
 
 /* ===== SPECS TABLE ===== */
