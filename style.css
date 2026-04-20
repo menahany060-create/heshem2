@@ -158,12 +158,6 @@ body::before {
   width: 100%;
 }
 
-.slider-wrapper {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
 .slider {
   display: flex;
   gap: 10px;
@@ -662,98 +656,128 @@ input::placeholder { color: #888; }
   .bs-card p { font-size: 10px; }
 }
 
-/* ===== CARD FLIP ===== */
-.flip-container {
-  background: transparent !important;
-  padding: 0 !important;
-}
-
-.front {
+/* ===== SOLD OUT BADGE ===== */
+.sold-out-badge {
   display: block;
-}
-
-.flip-container {
-  position: relative;
-}
-
-.front {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 5;
-  pointer-events: none;
-  background: rgba(0,0,0,0.95);
-  border: 1px solid #00f0ff44;
-  border-radius: 15px;
-  padding: 20px 16px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  transition: opacity 0.4s ease;
-  box-sizing: border-box;
-}
-
-.flip-container.flipped .front {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-.flip-container.flipped .back {
-  opacity: 1 !important;
-  pointer-events: all !important;
-  z-index: 10;
-}
-
-.back h3 {
-  color: #00f0ff;
-  text-shadow: 0 0 10px #00f0ff;
-  margin: 0 0 16px;
-}
-
-/* ===== SPECS TABLE ===== */
-.specs-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-
-.specs-table td {
-  padding: 10px 8px;
-  border-bottom: 1px solid #00f0ff22;
-}
-
-.specs-table tr:last-child td {
-  border-bottom: none;
-}
-
-.specs-table td:first-child {
-  color: #00f0ff;
-  font-weight: bold;
-  width: 50%;
-}
-
-.specs-table td:last-child {
+  background: #ff4444;
   color: #fff;
-  text-align: left;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  margin: 6px 0;
+  box-shadow: 0 0 10px #ff444488;
 }
 
-.flip-container {
-  min-height: 380px;
+.card[data-status="sold-out"] {
+  opacity: 0.7;
+  border-color: #ff444444;
 }
+
+.card[data-status="sold-out"]:hover {
+  box-shadow: 0 0 20px #ff444444;
+  border-color: #ff444466;
+}
+
+/* ===== OFFERS SECTION ===== */
+.offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 10px 12px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.offer-card {
+  position: relative;
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ff444455;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.offer-card:hover, .offer-card:active {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #ff444466;
+  border-color: #ff4444;
+}
+
+.offer-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(11,11,11,0.5);
+  padding: 6px;
+}
+
+.offer-card h3 {
+  font-size: 14px;
+  margin: 8px 0 4px;
+  color: #fff;
+}
+
+.offer-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4444;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ff444488;
+  z-index: 1;
+}
+
+.old-price {
+  font-size: 13px;
+  color: #888;
+  text-decoration: line-through;
+  margin: 2px 0;
+}
+
+.new-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff4444;
+  text-shadow: 0 0 8px #ff444488;
+  margin: 4px 0 8px;
+}
+
+.offer-card .neonBtn {
+  border-color: #ff4444;
+  color: #ff4444;
+  box-shadow: 0 0 8px #ff444444;
+}
+
+.offer-card .neonBtn:hover,
+.offer-card .neonBtn:active {
+  background: #ff4444;
+  color: #fff;
+}
+
+.offer-card:nth-child(1) { animation-delay: 0.1s; }
+.offer-card:nth-child(2) { animation-delay: 0.2s; }
+.offer-card:nth-child(3) { animation-delay: 0.3s; }
 
 @media (max-width: 600px) {
-  .flip-container {
-    min-height: 420px;
+  .offers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px;
   }
-  .specs-table { font-size: 12px; }
+  .offer-card img { height: 100px; }
+  .offer-card h3 { font-size: 12px; }
+  .old-price { font-size: 11px; }
+  .new-price { font-size: 14px; }
+  .offer-badge { font-size: 10px; padding: 3px 6px; }
 }
