@@ -1,5 +1,11 @@
 // ===== CART (localStorage) =====
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const promoCodes = {
+  "DRDS10":  10,
+  "HESHEM5": 5,
+  "DEVS7":   7
+};
+let appliedPromo = null;
 
 function addProduct(btn, name) {
   let card = btn.parentElement;
@@ -86,6 +92,7 @@ function send() {
   let phone   = document.getElementById("phone") ? document.getElementById("phone").value.trim() : "";
   let address = document.getElementById("address").value.trim();
   if (!name || !address) { showToast("⚠️ من فضلك املأ بياناتك"); return; }
+
   let total = 0;
   let msg = "🛒 *طلب جديد - بن الحشم*\n\n";
   msg += "👤 الاسم: " + name + "\n";
@@ -95,9 +102,21 @@ function send() {
     let t = c.price * c.qty; total += t;
     msg += `☕ ${c.name} × ${c.qty} = ${t} جنيه\n`;
   });
+
+  if (appliedPromo) {
+    let discountAmt = Math.round(total * appliedPromo.discount / 100);
+    msg += `🎟️ كود خصم (${appliedPromo.code}): -${discountAmt} جنيه\n`;
+    total -= discountAmt;
+  }
+
   msg += "─────────────\n💰 *الإجمالي: " + total + " جنيه*";
   window.open("https://wa.me/201223136302?text=" + encodeURIComponent(msg));
-  cart = []; localStorage.removeItem("cart"); render(); closePopup();
+  cart = []; localStorage.removeItem("cart");
+  appliedPromo = null;
+  document.getElementById("promoCode").value = "";
+  document.getElementById("promoMsg").innerText = "";
+  document.getElementById("discountLine").style.display = "none";
+  render(); closePopup();
   showToast("✅ تم إرسال طلبك!");
 }
 
@@ -119,6 +138,36 @@ document.addEventListener("click", function(e) {
   let btn  = document.getElementById("menuBtn");
   if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
 });
+function applyPromo() {
+  let code = document.getElementById("promoCode").value.trim().toUpperCase();
+  let msg  = document.getElementById("promoMsg");
+  let line = document.getElementById("discountLine");
+  let totalEl = document.getElementById("total");
+
+  if (!code) {
+    msg.style.color = "#ff4444";
+    msg.innerText = "⚠️ ادخل كود الخصم الأول";
+    return;
+  }
+
+  if (promoCodes[code]) {
+    appliedPromo = { code, discount: promoCodes[code] };
+    let currentTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    let discountAmt  = Math.round(currentTotal * appliedPromo.discount / 100);
+    let finalTotal   = currentTotal - discountAmt;
+
+    msg.style.color  = "#00ff8c";
+    msg.innerText    = "✅ تم تطبيق خصم " + appliedPromo.discount + "%!";
+    line.style.display = "block";
+    line.innerText   = "🎟️ خصم: -" + discountAmt + " جنيه | الإجمالي بعد الخصم: " + finalTotal + " جنيه";
+    totalEl.innerText = finalTotal;
+  } else {
+    appliedPromo = null;
+    msg.style.color  = "#ff4444";
+    msg.innerText    = "❌ كود غلط، حاول تاني";
+    line.style.display = "none";
+  }
+}
 
 function showToast(msg) {
   let existing = document.querySelector(".toast");
