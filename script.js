@@ -1,319 +1,427 @@
-// ===== STATE =====
-let cart = JSON.parse(localStorage.getItem("menuCart")) || [];
-const promoCodes = { "DRDS10": 10, "HESHEM5": 5, "DEVS7": 7 };
+// ===== CART (localStorage) =====
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const promoCodes = {
+  "DRDS10":  10,
+  "HESHEM5": 5,
+  "DEVS7":   7
+};
+
 let appliedPromo = null;
-let modalCard = null;
-let selectedSize = null;
 
-// ===== NAVIGATION =====
-function showSection(id, btn) {
-  clearSearch();
-  document.querySelectorAll(".menu-section").forEach(s => s.classList.remove("active"));
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-  const sec = document.getElementById("section-" + id);
-  if (sec) { sec.classList.add("active"); sec.scrollIntoView({ behavior: "smooth", block: "start" }); }
-  if (btn) { btn.classList.add("active"); btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }); }
-}
+// ===== ADD PRODUCT FROM CARD =====
+function addProduct(btn, name) {
+  let card = btn.closest(".card");
 
-function showAll(btn) {
-  clearSearch();
-  document.querySelectorAll(".menu-section").forEach(s => s.classList.add("active"));
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-  document.querySelector(".main-content").scrollIntoView({ behavior: "smooth" });
-}
-
-// ===== SEARCH =====
-function searchItems(q) {
-  const searchRes = document.getElementById("searchResults");
-  const searchGrid = document.getElementById("searchGrid");
-  const mainContent = document.getElementById("mainContent");
-  const hero = document.getElementById("heroSection");
-  const clearBtn = document.getElementById("searchClear");
-  if (!q.trim()) { clearSearch(); return; }
-  clearBtn.style.display = "block";
-  mainContent.style.display = "none";
-  hero.style.display = "none";
-  searchRes.style.display = "block";
-  const all = document.querySelectorAll(".item-card[data-name]");
-  const filtered = [];
-  all.forEach(card => {
-    const name = (card.dataset.name || "").toLowerCase();
-    const desc = (card.querySelector(".item-desc") ? card.querySelector(".item-desc").innerText : "").toLowerCase();
-    if (name.includes(q.toLowerCase()) || desc.includes(q.toLowerCase())) filtered.push(card);
-  });
-  if (filtered.length === 0) {
-    searchGrid.innerHTML = '<div style="text-align:center;padding:30px;color:#8a8070;">لا توجد نتائج</div>';
-  } else {
-    searchGrid.innerHTML = "";
-    filtered.forEach(card => {
-      const clone = card.cloneNode(true);
-      searchGrid.appendChild(clone);
-    });
-    updateCardStates();
-  }
-}
-
-function clearSearch() {
-  document.getElementById("searchInput").value = "";
-  document.getElementById("searchClear").style.display = "none";
-  document.getElementById("searchResults").style.display = "none";
-  document.getElementById("mainContent").style.display = "block";
-  document.getElementById("heroSection").style.display = "flex";
-}
-
-// ===== MODAL =====
-function openModal(btn) {
-  modalCard = btn.closest(".item-card");
-  const name = modalCard.dataset.name;
-  const sizesRaw = modalCard.dataset.sizes;
-  document.getElementById("modalItemName").innerText = name;
-  document.getElementById("itemNote").value = "";
-  selectedSize = null;
-
-  const sizeSection = document.getElementById("sizeSection");
-  const sizeBtns = document.getElementById("sizeBtns");
-
-  if (sizesRaw) {
-    const sizes = JSON.parse(sizesRaw);
-    sizeSection.style.display = "block";
-    sizeBtns.innerHTML = "";
-    sizes.forEach((s, i) => {
-      const b = document.createElement("button");
-      b.className = "size-option-btn";
-      b.innerHTML = `<span class="size-label">${s.label}</span><span class="size-price">${s.price} ج</span>`;
-      b.onclick = function() {
-        document.querySelectorAll(".size-option-btn").forEach(x => x.classList.remove("selected"));
-        b.classList.add("selected");
-        selectedSize = s;
-      };
-      if (i === 0) { b.classList.add("selected"); selectedSize = s; }
-      sizeBtns.appendChild(b);
-    });
-  } else {
-    sizeSection.style.display = "none";
-  }
-
-  document.getElementById("addModal").classList.add("active");
-}
-
-function closeAddModal() {
-  document.getElementById("addModal").classList.remove("active");
-  modalCard = null;
-  selectedSize = null;
-}
-
-function confirmAdd() {
-  if (!modalCard) return;
-  const name = modalCard.dataset.name;
-  const note = document.getElementById("itemNote").value.trim();
-  let price, label;
-
-  if (modalCard.dataset.sizes) {
-    if (!selectedSize) { showToast("⚠️ اختر الحجم"); return; }
-    price = selectedSize.price;
-    label = `${name} (${selectedSize.label})`;
-  } else {
-    price = parseInt(modalCard.dataset.price);
-    label = name;
-  }
-
-  if (note) label += ` [${note}]`;
-  addToCart(label, price, modalCard);
-  closeAddModal();
-}
-
-// ===== CART CORE =====
-function addToCart(name, price, card) {
-  const existing = cart.find(i => i.name === name);
-  if (existing) { existing.qty++; } else { cart.push({ name, price, qty: 1 }); }
-  saveCart();
-  renderCart();
-  updateCardStates();
-  showToast("✅ تمت الإضافة");
-}
-
-function cqChange(btn, delta) {
-  const card = btn.closest(".item-card");
-  const name = card.dataset.name;
-  const cqn = btn.parentElement.querySelector(".cqn");
-  let count = parseInt(cqn.innerText) + delta;
-  if (count < 0) count = 0;
-  cqn.innerText = count;
-
-  const existing = cart.find(i => i.name === name);
-  if (count === 0) {
-    if (existing) cart.splice(cart.indexOf(existing), 1);
-    card.classList.remove("in-cart");
-    btn.parentElement.style.display = "none";
-    card.querySelector(".add-btn").style.display = "flex";
-  } else if (existing) {
-    existing.qty = count;
-  } else {
-    cart.push({ name, price: parseInt(card.dataset.price), qty: count });
-  }
-  saveCart();
-  renderCart();
-}
-
-function saveCart() { localStorage.setItem("menuCart", JSON.stringify(cart)); }
-
-function updateCardStates() {
-  document.querySelectorAll(".item-card[data-price]:not([data-sizes])").forEach(card => {
-    const name = card.dataset.name;
-    const item = cart.find(i => i.name === name);
-    const cqc = card.querySelector(".cqc");
-    const addBtn = card.querySelector(".add-btn");
-    if (item && cqc) {
-      card.classList.add("in-cart");
-      cqc.style.display = "flex";
-      cqc.querySelector(".cqn").innerText = item.qty;
-      if (addBtn) addBtn.style.display = "none";
-    } else if (cqc) {
-      card.classList.remove("in-cart");
-      cqc.style.display = "none";
-      cqc.querySelector(".cqn").innerText = "0";
-      if (addBtn) addBtn.style.display = "flex";
-    }
-  });
-}
-
-function changeQty(i, v) {
-  cart[i].qty += v;
-  if (cart[i].qty <= 0) cart.splice(i, 1);
-  saveCart();
-  renderCart();
-  updateCardStates();
-  if (appliedPromo) recalcPromo();
-}
-
-function renderCart() {
-  const box = document.getElementById("cartItems");
-  const totalEl = document.getElementById("cartTotal");
-  const badge = document.getElementById("cartBadge");
-  if (!box) return;
-
-  if (cart.length === 0) {
-    box.innerHTML = '<div class="empty-cart">🛒 السلة فارغة</div>';
-    totalEl.innerText = "0 جنيه";
-    badge.innerText = "0";
+  if (card.dataset.status === "sold-out") {
+    showToast("❌ المنتج ده نفذ من المخزن!");
     return;
   }
 
-  let sum = 0, html = "";
-  cart.forEach((item, i) => {
-    const t = item.price * item.qty;
-    sum += t;
-    html += `<div class="cart-item">
-      <span class="cart-item-name">${item.name}</span>
-      <span class="cart-item-price">${t} ج</span>
-      <div class="qty-controls">
-        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-        <span class="qty-num">${item.qty}</span>
-        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-      </div>
-    </div>`;
+  let select = card.querySelector("select");
+  let parts  = select.value.split("-");
+  let weight = parts[0];
+  let price  = Number(parts[1]);
+  add(name + " (" + weight + "g)", price);
+}
+
+// ===== ADD OFFER =====
+function addOffer(btn, name, price) {
+  add(name, price);
+}
+
+// ===== UPDATE DISPLAYED PRICE =====
+function updatePrice(select) {
+  // Visual update only — real price comes from select.value on addProduct
+}
+
+// ===== CORE ADD =====
+function add(name, price) {
+  let item = cart.find(i => i.name === name);
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+  render();
+  showToast("✅ " + name + " اتضافت للسلة!");
+}
+
+// ===== CHANGE QUANTITY =====
+function changeQty(i, v) {
+  cart[i].qty += v;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  render();
+}
+
+// ===== RENDER CART =====
+function render() {
+  let box     = document.getElementById("box");
+  let totalEl = document.getElementById("total");
+  let emptyMsg = document.getElementById("empty-cart-msg");
+  if (!box || !totalEl) return;
+
+  box.innerHTML = "";
+  let rawTotal = 0;
+
+  cart.forEach((c, i) => {
+    rawTotal += c.price * c.qty;
+    box.innerHTML += `
+      <div class="item">
+        <div class="left">${c.name}</div>
+        <div class="right">${c.price * c.qty} جنيه</div>
+        <div class="qty">
+          <button onclick="changeQty(${i}, 1)">+</button>
+          <span>${c.qty}</span>
+          <button onclick="changeQty(${i}, -1)">−</button>
+        </div>
+      </div>`;
   });
 
-  box.innerHTML = html;
-  badge.innerText = cart.reduce((s, i) => s + i.qty, 0);
+  // Show/hide empty message
+  if (emptyMsg) emptyMsg.style.display = cart.length === 0 ? "block" : "none";
 
-  if (appliedPromo) {
-    const disc = Math.round(sum * appliedPromo.discount / 100);
-    totalEl.innerText = (sum - disc) + " جنيه";
+  // Re-apply promo if active (fixes recalculation after adding items)
+  let finalTotal = rawTotal;
+  let discountLine = document.getElementById("discountLine");
+
+  if (appliedPromo && rawTotal > 0) {
+    let discountAmt = Math.round(rawTotal * appliedPromo.discount / 100);
+    finalTotal = rawTotal - discountAmt;
+    if (discountLine) {
+      discountLine.style.display = "block";
+      discountLine.innerText = "🎟️ خصم " + appliedPromo.discount + "%: -" + discountAmt + " جنيه | الإجمالي: " + finalTotal + " جنيه";
+    }
   } else {
-    totalEl.innerText = sum + " جنيه";
+    if (discountLine) discountLine.style.display = "none";
   }
+
+  totalEl.innerText = finalTotal + " جنيه";
+  document.getElementById("cartCount").innerText = cart.reduce((s, i) => s + i.qty, 0);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ===== PROMO =====
-function applyPromo() {
-  const code = document.getElementById("promoInput").value.trim().toUpperCase();
-  const msgEl = document.getElementById("promoMsg");
-  const lineEl = document.getElementById("discountLine");
-  const totalEl = document.getElementById("cartTotal");
-  if (!code) { msgEl.style.color = "#c0392b"; msgEl.innerText = "⚠️ ادخل الكود الأول"; return; }
-  if (promoCodes[code]) {
-    appliedPromo = { code, discount: promoCodes[code] };
-    const raw = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const disc = Math.round(raw * appliedPromo.discount / 100);
-    msgEl.style.color = "#27ae60"; msgEl.innerText = "✅ خصم " + appliedPromo.discount + "% اتطبق!";
-    lineEl.style.display = "block"; lineEl.innerText = "🎟️ وفرت: " + disc + " ج | الإجمالي: " + (raw - disc) + " جنيه";
-    totalEl.innerText = (raw - disc) + " جنيه";
-  } else {
-    appliedPromo = null;
-    msgEl.style.color = "#c0392b"; msgEl.innerText = "❌ كود غلط";
-    lineEl.style.display = "none";
-    totalEl.innerText = cart.reduce((s, i) => s + i.price * i.qty, 0) + " جنيه";
-  }
+// ===== POPUPS =====
+function openStory(t, x) {
+  document.getElementById("title").innerText = t;
+  document.getElementById("text").innerText  = x;
+  document.getElementById("popup").classList.add("active");
 }
 
-function recalcPromo() {
-  if (!appliedPromo) return;
-  const raw = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const disc = Math.round(raw * appliedPromo.discount / 100);
-  document.getElementById("discountLine").innerText = "🎟️ وفرت: " + disc + " ج | الإجمالي: " + (raw - disc) + " جنيه";
-  document.getElementById("cartTotal").innerText = (raw - disc) + " جنيه";
+function openSpecs(roast, types) {
+  document.getElementById("title").innerText = "📋 المواصفات";
+  document.getElementById("text").innerText  = "درجة التحميص: " + roast + "\n" + types;
+  document.getElementById("popup").classList.add("active");
 }
 
-// ===== CHECKOUT =====
 function openCheckout() {
-  if (cart.length === 0) { showToast("🛒 السلة فارغة!"); return; }
-  document.getElementById("checkoutPopup").classList.add("active");
+  if (cart.length === 0) {
+    showToast("🛒 السلة فارغة! أضف منتجات الأول");
+    return;
+  }
+  document.getElementById("checkout").classList.add("active");
 }
 
-function closePopup() { document.querySelectorAll(".popup-overlay").forEach(p => p.classList.remove("active")); }
+function closePopup() {
+  document.querySelectorAll(".popup").forEach(p => p.classList.remove("active"));
+}
 
-function sendOrder() {
-  if (cart.length === 0) { showToast("🛒 السلة فارغة!"); return; }
-  const name = document.getElementById("custName").value.trim();
-  const phone = document.getElementById("custPhone").value.trim();
-  const address = document.getElementById("custAddress").value.trim();
-  if (!name || !address) { showToast("⚠️ من فضلك املأ بياناتك"); return; }
+// ESC key closes popups
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closePopup();
+});
 
-  let total = 0;
-  let msg = "🍽️ *طلب جديد*\n\n";
-  msg += "👤 " + name + "\n";
-  if (phone) msg += "📞 " + phone + "\n";
-  msg += "📍 " + address + "\n\n─────────────\n";
+// ===== SEND ORDER VIA WHATSAPP =====
+function send() {
+  let name    = document.getElementById("name").value.trim();
+  let phone   = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
 
-  // Group by section
-  const sections = {};
-  cart.forEach(item => { total += item.price * item.qty; });
-  cart.forEach(item => {
-    const t = item.price * item.qty;
-    msg += `• ${item.name} × ${item.qty}`;
-    if (item.price > 0) msg += ` = ${t} ج`;
-    msg += "\n";
+  // Validation
+  if (!name) {
+    showToast("⚠️ من فضلك ادخل اسمك");
+    document.getElementById("name").focus();
+    return;
+  }
+  if (!phone) {
+    showToast("⚠️ من فضلك ادخل رقم الهاتف");
+    document.getElementById("phone").focus();
+    return;
+  }
+  if (!/^[0-9+\s\-]{7,15}$/.test(phone)) {
+    showToast("⚠️ رقم الهاتف مش صح");
+    document.getElementById("phone").focus();
+    return;
+  }
+  if (!address) {
+    showToast("⚠️ من فضلك ادخل العنوان");
+    document.getElementById("address").focus();
+    return;
+  }
+  if (cart.length === 0) {
+    showToast("🛒 السلة فارغة!");
+    return;
+  }
+
+  let rawTotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  let finalTotal = rawTotal;
+
+  let msg = "🛒 *طلب جديد — بن الحشم* ☕\n\n";
+  msg += "👤 الاسم: " + name + "\n";
+  msg += "📞 الهاتف: " + phone + "\n";
+  msg += "📍 العنوان: " + address + "\n\n";
+  msg += "─────────────────\n";
+
+  cart.forEach(c => {
+    let t = c.price * c.qty;
+    msg += "☕ " + c.name + " × " + c.qty + " = " + t + " جنيه\n";
   });
 
-  msg += "─────────────\n";
+  msg += "─────────────────\n";
+
   if (appliedPromo) {
-    const disc = Math.round(total * appliedPromo.discount / 100);
-    msg += `🎟️ خصم (${appliedPromo.code}): -${disc} ج\n`;
-    total -= disc;
+    let discountAmt = Math.round(rawTotal * appliedPromo.discount / 100);
+    finalTotal = rawTotal - discountAmt;
+    msg += "🎟️ كود خصم (" + appliedPromo.code + "): -" + discountAmt + " جنيه\n";
   }
-  msg += "💰 *الإجمالي: " + total + " جنيه*";
+
+  msg += "💰 *الإجمالي: " + finalTotal + " جنيه*";
 
   window.open("https://wa.me/201223136302?text=" + encodeURIComponent(msg));
-  cart = []; appliedPromo = null;
-  localStorage.removeItem("menuCart");
-  document.getElementById("promoInput").value = "";
-  document.getElementById("promoMsg").innerText = "";
-  document.getElementById("discountLine").style.display = "none";
-  renderCart(); updateCardStates(); closePopup();
-  showToast("✅ تم إرسال طلبك!");
+
+  // Reset
+  cart = [];
+  localStorage.removeItem("cart");
+  appliedPromo = null;
+
+  let promoInput = document.getElementById("promoCode");
+  let promoMsg   = document.getElementById("promoMsg");
+  if (promoInput) promoInput.value = "";
+  if (promoMsg)   promoMsg.innerText = "";
+
+  document.getElementById("name").value    = "";
+  document.getElementById("phone").value   = "";
+  document.getElementById("address").value = "";
+
+  render();
+  closePopup();
+  showToast("✅ تم إرسال طلبك بنجاح!");
 }
 
-function scrollToCart() { document.querySelector(".cart-section").scrollIntoView({ behavior: "smooth", block: "center" }); }
+// ===== SCROLL TO CART =====
+function openCart() {
+  let cartEl = document.querySelector(".cart");
+  if (cartEl) cartEl.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// ===== MENU TOGGLE =====
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("open");
+  document.getElementById("menuBtn").classList.toggle("open");
+}
+
+function closeMenu() {
+  document.getElementById("navMenu").classList.remove("open");
+  document.getElementById("menuBtn").classList.remove("open");
+}
+
+document.addEventListener("click", function(e) {
+  let menu = document.getElementById("navMenu");
+  let btn  = document.getElementById("menuBtn");
+  if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+});
+
+// ===== PROMO CODE =====
+function applyPromo() {
+  let code    = document.getElementById("promoCode").value.trim().toUpperCase();
+  let msgEl   = document.getElementById("promoMsg");
+  let rawTotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+
+  if (!code) {
+    msgEl.style.color = "#E8855A";
+    msgEl.innerText   = "⚠️ ادخل كود الخصم الأول";
+    return;
+  }
+
+  if (promoCodes[code]) {
+    appliedPromo = { code, discount: promoCodes[code] };
+    msgEl.style.color = "#7BC67E";
+    msgEl.innerText   = "✅ تم تطبيق خصم " + appliedPromo.discount + "%!";
+    render(); // re-render to show updated total
+  } else {
+    appliedPromo = null;
+    msgEl.style.color = "#E8855A";
+    msgEl.innerText   = "❌ الكود غير صحيح، حاول تاني";
+    let discountLine = document.getElementById("discountLine");
+    if (discountLine) discountLine.style.display = "none";
+    render();
+  }
+}
+
+// ===== SHARE PRODUCT =====
+function shareProduct(name, price) {
+  let text = "☕ " + name + " — بن الحشم\nسعر: " + price + " جنيه فقط!\nاطلب دلوقتي: " + window.location.href;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "بن الحشم — " + name,
+      text:  text,
+      url:   window.location.href
+    }).catch(() => {});
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(text).then(() => {
+      showToast("📋 تم نسخ الرابط!");
+    }).catch(() => {
+      showToast("شارك الرابط: " + window.location.href);
+    });
+  }
+}
+
+// ===== SCROLL TO PRODUCT =====
+function scrollToProduct(name) {
+  let target = document.getElementById("product-" + name);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    target.style.transition  = "box-shadow 0.3s, border-color 0.3s";
+    target.style.boxShadow   = "0 0 40px rgba(201,150,42,0.45)";
+    target.style.borderColor = "#C9962A";
+    setTimeout(() => {
+      target.style.boxShadow   = "";
+      target.style.borderColor = "";
+    }, 1600);
+  }
+}
+
+// ===== OFFER COUNTDOWN TIMER =====
+function startOfferTimer() {
+  // Set timer end: next midnight from page load
+  let saved = localStorage.getItem("offerTimerEnd");
+  let end;
+  if (saved) {
+    end = Number(saved);
+    // If expired, reset to new 24h window
+    if (end < Date.now()) {
+      end = Date.now() + (24 * 60 * 60 * 1000);
+      localStorage.setItem("offerTimerEnd", end);
+    }
+  } else {
+    end = Date.now() + (24 * 60 * 60 * 1000);
+    localStorage.setItem("offerTimerEnd", end);
+  }
+
+  function tick() {
+    let diff = end - Date.now();
+    if (diff <= 0) {
+      // Reset timer
+      end = Date.now() + (24 * 60 * 60 * 1000);
+      localStorage.setItem("offerTimerEnd", end);
+      diff = end - Date.now();
+    }
+    let h = Math.floor(diff / 3600000);
+    let m = Math.floor((diff % 3600000) / 60000);
+    let s = Math.floor((diff % 60000) / 1000);
+
+    let hEl = document.getElementById("timer-h");
+    let mEl = document.getElementById("timer-m");
+    let sEl = document.getElementById("timer-s");
+
+    if (hEl) hEl.innerText = String(h).padStart(2, "0");
+    if (mEl) mEl.innerText = String(m).padStart(2, "0");
+    if (sEl) sEl.innerText = String(s).padStart(2, "0");
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
 
 // ===== TOAST =====
 function showToast(msg) {
-  const ex = document.querySelector(".toast"); if (ex) ex.remove();
-  const t = document.createElement("div"); t.className = "toast"; t.innerText = msg;
+  let existing = document.querySelector(".toast-msg");
+  if (existing) existing.remove();
+
+  let t = document.createElement("div");
+  t.className = "toast-msg";
+  t.innerText = msg;
+
+  Object.assign(t.style, {
+    position:   "fixed",
+    top:        "50%",
+    left:       "50%",
+    transform:  "translate(-50%, -50%) scale(0.9)",
+    background: "#C9962A",
+    color:      "#1C0A00",
+    padding:    "14px 24px",
+    borderRadius: "12px",
+    fontWeight: "800",
+    fontSize:   "15px",
+    boxShadow:  "0 8px 30px rgba(201,150,42,0.4)",
+    zIndex:     "999999",
+    opacity:    "0",
+    transition: "opacity 0.25s, transform 0.25s",
+    fontFamily: "'Tajawal', sans-serif",
+    textAlign:  "center",
+    maxWidth:   "300px",
+    lineHeight: "1.5",
+    pointerEvents: "none"
+  });
+
   document.body.appendChild(t);
-  setTimeout(() => t.style.opacity = "1", 50);
-  setTimeout(() => { t.style.opacity = "0"; setTimeout(() => t.remove(), 300); }, 1800);
+
+  requestAnimationFrame(() => {
+    t.style.opacity   = "1";
+    t.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+
+  setTimeout(() => {
+    t.style.opacity   = "0";
+    t.style.transform = "translate(-50%, -50%) scale(0.9)";
+    setTimeout(() => t.remove(), 300);
+  }, 2000);
 }
 
-window.onload = function() { renderCart(); updateCardStates(); };
+// ===== INIT =====
+window.onload = function() {
+  render();
+
+  // Caffeine bars animation
+  document.querySelectorAll(".fill").forEach(bar => {
+    let value       = Number(bar.getAttribute("data-caffeine"));
+    let percentText = bar.querySelector(".percent");
+
+    if      (value < 60) bar.classList.add("low");
+    else if (value < 80) bar.classList.add("medium");
+    else if (value < 95) bar.classList.add("high");
+    else                  bar.classList.add("extreme");
+
+    setTimeout(() => { bar.style.width = value + "%"; }, 400);
+
+    let count = 0;
+    let iv = setInterval(() => {
+      if (count >= value) { clearInterval(iv); return; }
+      count++;
+      if (percentText) percentText.innerText = count + "%";
+    }, 15);
+  });
+
+  // Sold Out badges + disable buttons
+  document.querySelectorAll(".card[data-status='sold-out']").forEach(card => {
+    let badge = document.createElement("div");
+    badge.className = "sold-out-badge";
+    badge.innerText = "❌ نفذ من المخزن";
+    let img = card.querySelector("img");
+    if (img) img.after(badge);
+
+    card.querySelectorAll(".neonBtn").forEach(btn => {
+      if (btn.innerText.includes("إضافة") || btn.innerText.includes("🛒")) {
+        btn.disabled        = true;
+        btn.style.opacity   = "0.35";
+        btn.style.cursor    = "not-allowed";
+        btn.style.pointerEvents = "none";
+      }
+    });
+  });
+
+  // Offer timer
+  startOfferTimer();
+};
