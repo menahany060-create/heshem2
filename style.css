@@ -116,7 +116,12 @@ body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;backg
 .flip-front-content{position:relative;z-index:1;width:100%;height:100%;padding:10px 10px 8px;display:flex;flex-direction:column;justify-content:space-between;}
 
 /* صورة */
-.flip-img-wrap{position:relative;width:100%;height:110px;flex-shrink:0;}
+.flip-img-wrap{position:relative;width:100%;height:110px;flex-shrink:0;cursor:pointer;}
+/* تلميح الضغط على الصورة - موبايل فقط */
+@media(hover:none){
+  .flip-img-wrap::after{content:"👆 اضغط للتفاصيل";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:rgba(245,230,200,.7);font-size:8px;padding:2px 8px;border-radius:10px;white-space:nowrap;pointer-events:none;font-family:'Tajawal',sans-serif;}
+  .flip-card.flipped .flip-img-wrap::after{display:none;}
+}
 .flip-img-wrap img{width:100%;height:100%;object-fit:contain;border-radius:8px;background:rgba(0,0,0,.3);padding:6px;display:block;}
 .flip-img-fallback{display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3rem;background:rgba(0,0,0,.3);border-radius:8px;}
 .watching-badge-flip{position:absolute;bottom:5px;right:5px;background:rgba(0,0,0,.75);border:1px solid rgba(201,150,42,.2);color:rgba(245,230,200,.6);font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;backdrop-filter:blur(4px);}
