@@ -108,8 +108,7 @@ function buildProductCard(p) {
      id="product-${p.id}"
      data-status="${p.status}"
      data-name="${p.id}"
-     data-price="${p.basePrice}"
-     onclick="toggleFlip(this)">
+     data-price="${p.basePrice}">
   <div class="flip-inner">
 
     <!-- FRONT -->
@@ -125,7 +124,7 @@ function buildProductCard(p) {
       <div class="flip-front-content">
         ${buildBadge(p, false)}
 
-        <div class="flip-img-wrap">
+        <div class="flip-img-wrap" onclick="flipOnImgClick(this)">
           <img src="${p.imgFront}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="flip-img-fallback">☕</div>
           ${watchHTML}
@@ -194,8 +193,7 @@ function buildOfferCard(o) {
   return `
 <div class="flip-card offer-flip ${dimClass}"
      id="${o.id}"
-     data-status="${o.status}"
-     onclick="toggleFlip(this)">
+     data-status="${o.status}">
   <div class="flip-inner">
 
     <!-- FRONT -->
@@ -211,7 +209,7 @@ function buildOfferCard(o) {
       <div class="flip-front-content">
         ${buildBadge(o, true)}
 
-        <div class="flip-img-wrap">
+        <div class="flip-img-wrap" onclick="flipOnImgClick(this)">
           <img src="${o.imgFront}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="flip-img-fallback">🎁</div>
           <div class="watching-badge-flip" id="watch-${o.id}">👁 <span>${o.watchBase}</span></div>
@@ -303,11 +301,17 @@ function animateCafBars() {
 // =====================================================
 //  FLIP TOGGLE (موبايل click، ديسكتوب CSS hover)
 // =====================================================
-function toggleFlip(card) {
-  if (!window.matchMedia("(hover: none)").matches) return;
+// الكارد بتتقلب بس لما تضغط على الصورة (موبايل)
+function flipOnImgClick(imgWrap) {
+  if (!window.matchMedia("(hover: none)").matches) return; // ديسكتوب: CSS hover بس
+  const card = imgWrap.closest(".flip-card");
+  if (!card) return;
   document.querySelectorAll(".flip-card.flipped").forEach(c => { if (c !== card) c.classList.remove("flipped"); });
   card.classList.toggle("flipped");
 }
+
+// للتوافق مع أي onclick قديم
+function toggleFlip(card) { flipOnImgClick(card.querySelector(".flip-img-wrap")); }
 
 document.addEventListener("click", e => {
   if (!e.target.closest(".flip-card"))
