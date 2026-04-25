@@ -124,7 +124,7 @@ function buildProductCard(p) {
       <div class="flip-front-content">
         ${buildBadge(p, false)}
 
-        <div class="flip-img-wrap" onclick="flipOnImgClick(this)">
+        <div class="flip-img-wrap">
           <img src="${p.imgFront}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="flip-img-fallback">☕</div>
           ${watchHTML}
@@ -209,7 +209,7 @@ function buildOfferCard(o) {
       <div class="flip-front-content">
         ${buildBadge(o, true)}
 
-        <div class="flip-img-wrap" onclick="flipOnImgClick(this)">
+          <div class="flip-img-wrap">
           <img src="${o.imgFront}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="flip-img-fallback">🎁</div>
           <div class="watching-badge-flip" id="watch-${o.id}">👁 <span>${o.watchBase}</span></div>
@@ -301,22 +301,7 @@ function animateCafBars() {
 // =====================================================
 //  FLIP TOGGLE (موبايل click، ديسكتوب CSS hover)
 // =====================================================
-// الكارد بتتقلب بس لما تضغط على الصورة (موبايل)
-function flipOnImgClick(imgWrap) {
-  if (!window.matchMedia("(hover: none)").matches) return; // ديسكتوب: CSS hover بس
-  const card = imgWrap.closest(".flip-card");
-  if (!card) return;
-  document.querySelectorAll(".flip-card.flipped").forEach(c => { if (c !== card) c.classList.remove("flipped"); });
-  card.classList.toggle("flipped");
-}
 
-// للتوافق مع أي onclick قديم
-function toggleFlip(card) { flipOnImgClick(card.querySelector(".flip-img-wrap")); }
-
-document.addEventListener("click", e => {
-  if (!e.target.closest(".flip-card"))
-    document.querySelectorAll(".flip-card.flipped").forEach(c => c.classList.remove("flipped"));
-});
 
 // =====================================================
 //  CART
@@ -635,6 +620,44 @@ function showToast(msg) {
   }, 2200);
 }
 
+
+function initFlipSystem() {
+  const isMobile = window.matchMedia("(hover: none)").matches;
+
+  document.querySelectorAll(".flip-card").forEach(card => {
+    const img = card.querySelector(".flip-img-wrap");
+
+    // ✅ الفليب على الصورة بس
+    if (img) {
+      img.addEventListener("click", (e) => {
+        if (!isMobile) return;
+
+        e.stopPropagation();
+
+        // يقفل أي كارد تاني
+        document.querySelectorAll(".flip-card.flipped").forEach(c => {
+          if (c !== card) c.classList.remove("flipped");
+        });
+
+        card.classList.toggle("flipped");
+      });
+    }
+
+    // ❌ أي click تاني جوه الكارد → مفيش flip
+    card.addEventListener("click", (e) => {
+      if (!e.target.closest(".flip-img-wrap")) {
+        e.stopPropagation();
+      }
+    });
+  });
+
+  // 👇 قفل الكارد لو دوست بره
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".flip-card.flipped").forEach(c => {
+      c.classList.remove("flipped");
+    });
+  });
+}
 // =====================================================
 //  INIT
 // =====================================================
@@ -644,4 +667,6 @@ window.onload = function () {
   startTimer();
   initStickyBar();
   checkUpsell();
+
+  initFlipSystem(); // 🔥 مهم
 };
