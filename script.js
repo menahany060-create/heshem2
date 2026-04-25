@@ -1,12 +1,12 @@
 // =====================================================
-//  بن الحشم — script.js  v5 (FIXED FLIP SYSTEM)
+//  بن الحشم — script.js  v5 (FULL FIXED)
 // =====================================================
 
 // ===== CART STATE =====
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart         = JSON.parse(localStorage.getItem("cart")) || [];
 const promoCodes = { "DRDS10": 10, "HESHEM5": 5, "DEVS7": 7 };
 let appliedPromo = null;
-let stickyData = { name: "الحشم", price: 150 };
+let stickyData   = { name: "الحشم", price: 150 };
 
 // =====================================================
 //  HELPERS
@@ -20,14 +20,14 @@ function esc(str) {
 }
 
 function buildStars(rating) {
-  const full = Math.floor(rating);
-  const half = rating % 1 >= 0.5 ? 1 : 0;
+  const full  = Math.floor(rating);
+  const half  = rating % 1 >= 0.5 ? 1 : 0;
   const empty = 5 - full - half;
   return "★".repeat(full) + (half ? "★" : "") + "☆".repeat(empty);
 }
 
 // =====================================================
-//  FLIP SYSTEM (NEW FIXED VERSION)
+//  FLIP SYSTEM (FIXED)
 // =====================================================
 function initFlipSystem() {
   const isMobile = window.matchMedia("(hover: none)").matches;
@@ -71,15 +71,15 @@ function initFlipSystem() {
 // =====================================================
 function buildBadge(item, isOffer) {
   const s = item.status;
-  if (s === "sold-out") return `<span class="flip-badge badge-soldout">❌ نفذ</span>`;
-  if (s === "coming-soon") return `<span class="flip-badge badge-coming">🔜 قريباً</span>`;
-  if (s === "low-stock") return `<span class="flip-badge badge-lowstock">⚠️ كميات محدودة</span>`;
+  if (s === "sold-out")   return `<span class="flip-badge badge-soldout">❌ نفذ</span>`;
+  if (s === "coming-soon")return `<span class="flip-badge badge-coming">🔜 قريباً</span>`;
+  if (s === "low-stock")  return `<span class="flip-badge badge-lowstock">⚠️ كميات محدودة</span>`;
 
   if (isOffer) return `<span class="flip-badge badge-offer">-${item.discount}%</span>`;
 
   if (item.badge === "bestseller") return `<span class="flip-badge badge-bestseller">🔥 الأكثر مبيعاً</span>`;
-  if (item.badge === "new") return `<span class="flip-badge badge-new">✨ جديد</span>`;
-  if (item.badge === "hot") return `<span class="flip-badge badge-hot">💥 الأقوى</span>`;
+  if (item.badge === "new")        return `<span class="flip-badge badge-new">✨ جديد</span>`;
+  if (item.badge === "hot")        return `<span class="flip-badge badge-hot">💥 الأقوى</span>`;
   return "";
 }
 
@@ -104,10 +104,23 @@ function buildLowStock(status) {
 }
 
 // =====================================================
+//  CAFFEINE BAR
+// =====================================================
+function buildCafBar(p) {
+  return `
+    <div class="caf-wrap">
+      <span class="caf-pct-label ${p.caffeineLevel}">0%</span>
+      <div class="caf-track">
+        <div class="caf-fill ${p.caffeineLevel}" data-target="${p.caffeine}"></div>
+      </div>
+    </div>`;
+}
+
+// =====================================================
 //  PRODUCT CARD
 // =====================================================
 function buildProductCard(p) {
-  const buyable = canBuy(p.status);
+  const buyable  = canBuy(p.status);
   const dimClass = (p.status === "sold-out" || p.status === "coming-soon") ? "dim-card" : "";
 
   const buyBtn = buyable
@@ -115,7 +128,7 @@ function buildProductCard(p) {
     : `<button disabled>❌ غير متاح</button>`;
 
   return `
-<div class="flip-card ${dimClass}" id="product-${p.id}" data-status="${p.status}" data-name="${p.id}">
+<div class="flip-card ${dimClass}" id="product-${p.id}" data-status="${p.status}" data-name="${p.id}" data-price="${p.basePrice}">
   <div class="flip-inner">
 
     <!-- FRONT -->
@@ -148,13 +161,17 @@ function buildProductCard(p) {
 // =====================================================
 function buildOfferCard(o) {
   return `
-<div class="flip-card" id="${o.id}" data-status="${o.status}">
+<div class="flip-card offer-flip" id="${o.id}" data-status="${o.status}">
   <div class="flip-inner">
 
     <div class="flip-front">
+      ${buildOverlay(o.status)}
+      ${buildLowStock(o.status)}
+
       <div class="flip-img-wrap">
         <img src="${o.imgFront}">
       </div>
+
       <div>${o.name}</div>
       <div>${o.newPrice} جنيه</div>
     </div>
@@ -177,7 +194,7 @@ function renderAll() {
   if (pw) pw.innerHTML = PRODUCTS.map(buildProductCard).join("");
   if (ow) ow.innerHTML = OFFERS.map(buildOfferCard).join("");
 
-  initFlipSystem(); // 🔥 مهم بعد بناء الكروت
+  initFlipSystem(); // مهم بعد render
 }
 
 // =====================================================
