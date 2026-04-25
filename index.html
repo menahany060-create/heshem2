@@ -10,7 +10,6 @@
   <meta property="og:description" content="⚡ طاقة يومك في كوباية — قهوة تقيلة، مزاج عالي">
   <meta property="og:image" content="https://your-site.com/logo.png">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -41,9 +40,8 @@
     <h1 class="hero-title">بن الحشم</h1>
     <p class="hero-tagline">صحصح بمزاج 🔥</p>
     <p class="hero-desc">قهوة تقيلة بطاقة عالية — اختار توليفتك وابدأ يومك صح</p>
-    <!-- [جديد] Value Proposition Strip -->
     <div class="hero-value-props">
-      <div class="vp-item"><span>🚀</span><span>توصيل خلال 24h</span></div>
+      <div class="vp-item"><span>🚀</span><span>توصيل 24h</span></div>
       <div class="vp-item"><span>✅</span><span>ضمان استرداد</span></div>
       <div class="vp-item"><span>🌿</span><span>محمّص طازج</span></div>
     </div>
@@ -63,24 +61,7 @@
 <!-- ===== BESTSELLERS ===== -->
 <section id="bestsellers-section">
   <h3 class="section-title">🏆 الأكثر مبيعاً</h3>
-  <div class="bestsellers">
-    <div class="bs-card" onclick="scrollToProduct('الحشم')">
-      <span class="badge">🔥</span>
-      <img src="hashm.png" onerror="this.style.display='none'"><p>الحشم</p>
-    </div>
-    <div class="bs-card" onclick="scrollToProduct('أيوب')">
-      <span class="badge">⭐</span>
-      <img src="ayoub.png" onerror="this.style.display='none'"><p>أيوب</p>
-    </div>
-    <div class="bs-card" onclick="scrollToProduct('السكة')">
-      <span class="badge">🚗</span>
-      <img src="sikka.png" onerror="this.style.display='none'"><p>ع السكة</p>
-    </div>
-    <div class="bs-card" onclick="scrollToProduct('الجدع')">
-      <span class="badge">💪</span>
-      <img src="gad3.png" onerror="this.style.display='none'"><p>الجدع</p>
-    </div>
-  </div>
+  <div class="bestsellers" id="bestsellers-wrap"></div>
 </section>
 
 <!-- ===== OFFERS ===== -->
@@ -96,324 +77,22 @@
       <div class="timer-block"><span id="timer-s">00</span><small>ثانية</small></div>
     </div>
   </div>
-  <div class="offers">
-    <div class="offer-card">
-      <span class="offer-badge">-20%</span>
-      <img src="sikka.png" onerror="this.style.display='none'">
-      <h3>ع السكة (500 جرام)</h3>
-      <p class="old-price">350 جنيه</p><p class="new-price">280 جنيه</p>
-      <button class="neonBtn" onclick="addOffer(this,'ع السكة 500g عرض',280)">إضافة للسلة 🛒</button>
-      <button class="share-btn" onclick="shareProduct('ع السكة',280)">مشاركة ↗</button>
-    </div>
-    <div class="offer-card">
-      <span class="offer-badge">-50%</span>
-      <img src="gad3.png" onerror="this.style.display='none'">
-      <h3>الجدع (500 جرام)</h3>
-      <p class="old-price">350 جنيه</p><p class="new-price">175 جنيه</p>
-      <button class="neonBtn" onclick="addOffer(this,'الجدع 500g عرض',175)">إضافة للسلة 🛒</button>
-      <button class="share-btn" onclick="shareProduct('الجدع',175)">مشاركة ↗</button>
-    </div>
-    <div class="offer-card">
-      <span class="offer-badge">-23%</span>
-      <img src="offer1.png" onerror="this.style.display='none'">
-      <h3>الحشم (500g) + مج حراري + 3 كوب</h3>
-      <p class="old-price">850 جنيه</p><p class="new-price">625 جنيه</p>
-      <button class="neonBtn" onclick="addOffer(this,'عرض الحشم + مج حراري',625)">إضافة للسلة 🛒</button>
-      <button class="share-btn" onclick="shareProduct('عرض الحشم',625)">مشاركة ↗</button>
-    </div>
-  </div>
+  <div class="offers" id="offers-wrap"></div>
 </section>
 
-<!-- ===== PRODUCTS — Expandable Cards ===== -->
+<!-- ===== PRODUCTS ===== -->
 <section id="products-section">
   <h3 class="section-title">☕ كل التوليفات</h3>
-  <div class="products">
-
-    <!-- ── الحشم ── -->
-    <div class="card top" id="product-الحشم" data-status="available" data-name="الحشم" data-base-price="150">
-      <!-- الجزء الظاهر دائماً -->
-      <div class="card-main">
-        <div class="card-img-wrap">
-          <img src="hashm.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="img-fallback">☕</div>
-          <!-- [جديد] Watching badge -->
-          <div class="watching-badge" id="watch-الحشم">👁 <span>0</span> بيتفرجوا</div>
-        </div>
-        <div class="card-info-top">
-          <h3>توليفة الحشم</h3>
-          <span class="caffeine-label high-label">🔥 كافيين عالي جداً</span>
-        </div>
-        <!-- [جديد] Mini rating - قابل للضغط لفتح الريفيوز -->
-        <button class="mini-rating" onclick="toggleReviews('الحشم', this)">
-          <span class="stars-mini">★★★★★</span>
-          <span class="rating-num">4.9</span>
-          <span class="rating-count">(138 تقييم) ↓</span>
-        </button>
-        <div class="price-row">
-          <span class="price-from">يبدأ من</span>
-          <span class="price-main" id="price-display-الحشم">150 جنيه</span>
-        </div>
-        <!-- زر الشراء الرئيسي — أوضح عنصر في الكارد -->
-        <button class="btn-order" onclick="quickOrder('الحشم', 150)">🛒 اطلب الآن</button>
-        <button class="btn-details" onclick="toggleDetails(this)">تفاصيل ↓</button>
-      </div>
-
-      <!-- الجزء المخفي -->
-      <div class="card-details">
-        <div class="bar"><div class="fill" data-caffeine="90"><span class="percent">0%</span></div></div>
-        <small class="caffeine-small">كافيين 90%</small>
-        <button class="neonBtn secondary-btn" onclick="openStory('No Pain... No Gain 💪','مفيش حاجه هتجيلك لحد عندك، اسعى واجتهد وربنا هيديك على قد تعبك، واوعي تيأس لأن مفيش حلاوه من غير نار. واحنا عملنالك التوليفه الى هتخليك تكمل مشوارك باقصى طاقه ممكنه 💪🏻 واعلى كافيين ممكن🔥')">💬 ليه تشرب توليفة الحشم؟</button>
-        <button class="neonBtn secondary-btn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
-        <select onchange="updateCardPrice(this,'الحشم')">
-          <option value="125-150">125 جرام — 150 جنيه</option>
-          <option value="250-270">250 جرام — 270 جنيه</option>
-          <option value="500-550">500 جرام — 550 جنيه</option>
-        </select>
-        <button class="neonBtn add-btn" onclick="addProduct(this,'الحشم')">🛒 إضافة للسلة</button>
-        <button class="share-btn" onclick="shareProduct('توليفة الحشم',150)">مشاركة ↗</button>
-      </div>
-
-      <!-- [جديد] Reviews -->
-      <div class="reviews-section" id="reviews-الحشم">
-        <div class="review-item">
-          <div class="review-header">
-            <span class="reviewer-name">محمد أشرف</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-          <p class="review-text">بصراحة أقوى قهوة جربتها الفترة دي 🔥 بتفوقني في ثلث ساعة</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header">
-            <span class="reviewer-name">كريم السيد</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-          <p class="review-text">الطعم مظبوط مش مر زيادة، وبتدي طاقة حلوة للشغل</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header">
-            <span class="reviewer-name">أحمد فوزي</span>
-            <span class="review-stars">★★★★☆</span>
-          </div>
-          <p class="review-text">كويسة بس الكمية 125 جرام بتخلص بسرعة، ياريت الـ 250 بسعر أرخص</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── أيوب ── -->
-    <div class="card top" id="product-أيوب" data-status="available" data-name="أيوب" data-base-price="110">
-      <div class="card-main">
-        <div class="card-img-wrap">
-          <img src="ayoub.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="img-fallback">☕</div>
-          <div class="watching-badge" id="watch-أيوب">👁 <span>0</span> بيتفرجوا</div>
-        </div>
-        <div class="card-info-top">
-          <h3>توليفة أيوب</h3>
-          <span class="caffeine-label medium-label">⚡ كافيين متوسط</span>
-        </div>
-        <button class="mini-rating" onclick="toggleReviews('أيوب', this)">
-          <span class="stars-mini">★★★★★</span>
-          <span class="rating-num">4.7</span>
-          <span class="rating-count">(94 تقييم) ↓</span>
-        </button>
-        <div class="price-row">
-          <span class="price-from">يبدأ من</span>
-          <span class="price-main" id="price-display-أيوب">110 جنيه</span>
-        </div>
-        <button class="btn-order" onclick="quickOrder('أيوب', 110)">🛒 اطلب الآن</button>
-        <button class="btn-details" onclick="toggleDetails(this)">تفاصيل ↓</button>
-      </div>
-      <div class="card-details">
-        <div class="bar"><div class="fill" data-caffeine="65"><span class="percent">0%</span></div></div>
-        <small class="caffeine-small">كافيين 65%</small>
-        <button class="neonBtn secondary-btn" onclick="openStory('اشرب الصبر واستمتع بالفرج ❤️','سيدنا ايوب صبر على الابتلاء 18 سنة وربنا عوضه اضعاف. توليفة ايوب هتساعدك على الصبر في حياتك ❤️')">💬 ليه تشرب توليفة أيوب؟</button>
-        <button class="neonBtn secondary-btn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
-        <select onchange="updateCardPrice(this,'أيوب')">
-          <option value="125-110">125 جرام — 110 جنيه</option>
-          <option value="250-200">250 جرام — 200 جنيه</option>
-          <option value="500-350">500 جرام — 350 جنيه</option>
-        </select>
-        <button class="neonBtn add-btn" onclick="addProduct(this,'أيوب')">🛒 إضافة للسلة</button>
-        <button class="share-btn" onclick="shareProduct('توليفة أيوب',110)">مشاركة ↗</button>
-      </div>
-      <div class="reviews-section" id="reviews-أيوب">
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">عمر خالد</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">ناعمة على المعدة وطعمها حلو جداً، بشربها الصبح قبل الشغل</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">سارة محمود</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">أنا مش بحب القهوة التقيلة وده اختياري المفضل، طعم خفيف وحلو</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">يوسف عادل</span><span class="review-stars">★★★★☆</span></div>
-          <p class="review-text">كويسة بس لو عايز تفوق بسرعة خد الحشم، دي أهدى شوية</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── السكة ── -->
-    <div class="card top" id="product-السكة" data-status="available" data-name="السكة" data-base-price="90">
-      <div class="card-main">
-        <div class="card-img-wrap">
-          <img src="sikka.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="img-fallback">☕</div>
-          <div class="watching-badge" id="watch-السكة">👁 <span>0</span> بيتفرجوا</div>
-        </div>
-        <div class="card-info-top">
-          <h3>توليفة ع السكة</h3>
-          <span class="caffeine-label high-label">⚡ كافيين عالي</span>
-        </div>
-        <button class="mini-rating" onclick="toggleReviews('السكة', this)">
-          <span class="stars-mini">★★★★★</span>
-          <span class="rating-num">4.8</span>
-          <span class="rating-count">(71 تقييم) ↓</span>
-        </button>
-        <div class="price-row">
-          <span class="price-from">يبدأ من</span>
-          <span class="price-main" id="price-display-السكة">90 جنيه</span>
-        </div>
-        <button class="btn-order" onclick="quickOrder('السكة', 90)">🛒 اطلب الآن</button>
-        <button class="btn-details" onclick="toggleDetails(this)">تفاصيل ↓</button>
-      </div>
-      <div class="card-details">
-        <div class="bar"><div class="fill" data-caffeine="80"><span class="percent">0%</span></div></div>
-        <small class="caffeine-small">كافيين 80%</small>
-        <button class="neonBtn secondary-btn" onclick="openStory('استمتع بالرحله 🚗','مسافر وسكتك طويله؟ توليفة ع السكه هتخليك صاحي ومركز طول الرحلة ❤️')">💬 ليه تشرب توليفة ع السكة؟</button>
-        <button class="neonBtn secondary-btn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
-        <select onchange="updateCardPrice(this,'السكة')">
-          <option value="125-90">125 جرام — 90 جنيه</option>
-          <option value="250-200">250 جرام — 200 جنيه</option>
-          <option value="500-350">500 جرام — 350 جنيه</option>
-        </select>
-        <button class="neonBtn add-btn" onclick="addProduct(this,'السكة')">🛒 إضافة للسلة</button>
-        <button class="share-btn" onclick="shareProduct('توليفة ع السكة',90)">مشاركة ↗</button>
-      </div>
-      <div class="reviews-section" id="reviews-السكة">
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">حسن مصطفى</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">رحلة من القاهرة للإسكندرية من غير تعب، القهوة دي شغالة 💯</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">تامر رضا</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">بشربها ليلاً وأنا بذاكر، مستوى التركيز بيعلى فعلاً</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">ياسمين علي</span><span class="review-stars">★★★★☆</span></div>
-          <p class="review-text">طعمها حلو بس ياريت يعملوا نكهة أخف للبنات 😅</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── الجدع ── -->
-    <div class="card top" id="product-الجدع" data-status="available" data-name="الجدع" data-base-price="85">
-      <div class="card-main">
-        <div class="card-img-wrap">
-          <img src="gad3.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="img-fallback">☕</div>
-          <div class="watching-badge" id="watch-الجدع">👁 <span>0</span> بيتفرجوا</div>
-        </div>
-        <div class="card-info-top">
-          <h3>توليفة الجدع</h3>
-          <span class="caffeine-label low-label">🌿 كافيين خفيف</span>
-        </div>
-        <button class="mini-rating" onclick="toggleReviews('الجدع', this)">
-          <span class="stars-mini">★★★★☆</span>
-          <span class="rating-num">4.5</span>
-          <span class="rating-count">(56 تقييم) ↓</span>
-        </button>
-        <div class="price-row">
-          <span class="price-from">يبدأ من</span>
-          <span class="price-main" id="price-display-الجدع">85 جنيه</span>
-        </div>
-        <button class="btn-order" onclick="quickOrder('الجدع', 85)">🛒 اطلب الآن</button>
-        <button class="btn-details" onclick="toggleDetails(this)">تفاصيل ↓</button>
-      </div>
-      <div class="card-details">
-        <div class="bar"><div class="fill" data-caffeine="50"><span class="percent">0%</span></div></div>
-        <small class="caffeine-small">كافيين 50%</small>
-        <button class="neonBtn secondary-btn" onclick="openStory('توليفة الجدع 😉','مفيش راجل جدع مش بيشرب قهوه، توليفة الجدع مش لأي حد 😉')">💬 ليه تشرب توليفة الجدع؟</button>
-        <button class="neonBtn secondary-btn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
-        <select onchange="updateCardPrice(this,'الجدع')">
-          <option value="125-85">125 جرام — 85 جنيه</option>
-          <option value="250-180">250 جرام — 180 جنيه</option>
-          <option value="500-300">500 جرام — 300 جنيه</option>
-        </select>
-        <button class="neonBtn add-btn" onclick="addProduct(this,'الجدع')">🛒 إضافة للسلة</button>
-        <button class="share-btn" onclick="shareProduct('توليفة الجدع',85)">مشاركة ↗</button>
-      </div>
-      <div class="reviews-section" id="reviews-الجدع">
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">مصطفى حمدي</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">الأسهل على المعدة، بشربها بعد الأكل من غير مشاكل</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">نورا سامي</span><span class="review-stars">★★★★☆</span></div>
-          <p class="review-text">بحبها مع اللبن، بتطلع تيرامسو في البيت 😂 طعم حلو فعلاً</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">إبراهيم نصر</span><span class="review-stars">★★★★☆</span></div>
-          <p class="review-text">مناسبة لمن بيبدأ يشرب قهوة، مش قوية وطعمها كويس</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── ESPRESSO (Sold Out) ── -->
-    <div class="card top" id="product-ESPRESSO" data-status="sold-out" data-name="ESPRESSO" data-base-price="150">
-      <div class="card-main">
-        <div class="card-img-wrap">
-          <img src="espresso.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="img-fallback">☕</div>
-        </div>
-        <div class="card-info-top">
-          <h3>ESPRESSO</h3>
-          <span class="caffeine-label extreme-label">💥 أقوى توليفة</span>
-        </div>
-        <div class="mini-rating">
-          <span class="stars-mini">★★★★★</span>
-          <span class="rating-num">4.9</span>
-          <span class="rating-count">(43 تقييم)</span>
-        </div>
-        <div class="price-row">
-          <span class="price-from">يبدأ من</span>
-          <span class="price-main">150 جنيه</span>
-        </div>
-        <button class="btn-order btn-soldout" disabled>❌ نفذ من المخزن</button>
-        <button class="btn-details" onclick="toggleDetails(this)">تفاصيل ↓</button>
-      </div>
-      <div class="card-details">
-        <div class="bar"><div class="fill" data-caffeine="95"><span class="percent">0%</span></div></div>
-        <small class="caffeine-small">كافيين 95%</small>
-        <button class="neonBtn secondary-btn" onclick="openStory('ESPRESSO 🔥','جرعة كافيين مركزة تعيشك فايق على الآخر!')">💬 ليه تشرب ESPRESSO؟</button>
-        <button class="neonBtn secondary-btn specs-btn" onclick="openSpecs('داكن','تحميص داكن + نكهة قوية مركزة')">📋 المواصفات</button>
-        <select>
-          <option value="125-150">125 جرام — 150 جنيه</option>
-          <option value="250-250">250 جرام — 250 جنيه</option>
-          <option value="500-350">500 جرام — 350 جنيه</option>
-        </select>
-      </div>
-      <div class="reviews-section" id="reviews-ESPRESSO">
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">عبدالله فاروق</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">ده مش قهوة ده صاروخ 🚀 بشربه بس لما يكون عندي شغل مهم جداً</p>
-        </div>
-        <div class="review-item">
-          <div class="review-header"><span class="reviewer-name">زياد ماهر</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">أقوى إسبريسو جربته، طعمه نضيف ومركز جداً</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <p class="section-hint">اقلب الكارد لتشوف التفاصيل 👆</p>
+  <div class="products" id="products-wrap"></div>
 </section>
 
 <!-- ===== CART ===== -->
 <section id="cart-section">
   <div class="cart">
     <h3>🛒 سلة التسوق</h3>
-    <div id="box"></div>
-    <div id="empty-cart-msg" class="empty-cart">سلتك فارغة — ابدأ بإضافة توليفتك ☕</div>
-    <!-- [جديد] Upsell bar -->
+    <div id="cart-items"></div>
+    <div id="empty-cart-msg" class="empty-cart">سلتك فارغة — اقلب كارد وابدأ ☕</div>
     <div class="upsell-bar" id="upsell-bar"></div>
     <div class="promo-row">
       <input id="promoCode" placeholder="كود الخصم (اختياري)" autocomplete="off">
@@ -435,9 +114,9 @@
     <button class="popup-close" onclick="closePopup()">✕</button>
     <h3>📦 تأكيد الطلب</h3>
     <p class="popup-subtitle">هنبعتلك ملخص طلبك على واتساب</p>
-    <input id="name"    placeholder="الاسم الكامل *"  autocomplete="name">
-    <input id="phone"   placeholder="رقم الهاتف *"    type="tel" inputmode="numeric" autocomplete="tel">
-    <input id="address" placeholder="العنوان كامل *"  autocomplete="street-address">
+    <input id="name"    placeholder="الاسم الكامل *" autocomplete="name">
+    <input id="phone"   placeholder="رقم الهاتف *"   type="tel" inputmode="numeric" autocomplete="tel">
+    <input id="address" placeholder="العنوان كامل *" autocomplete="street-address">
     <button class="checkoutBtn" onclick="send()">📱 إرسال واتساب</button>
   </div>
 </div>
@@ -446,8 +125,8 @@
 <div id="popup" class="popup" onclick="closePopup()">
   <div class="popup-content" onclick="event.stopPropagation()">
     <button class="popup-close" onclick="closePopup()">✕</button>
-    <h3 id="title"></h3>
-    <p id="text"></p>
+    <h3 id="popup-title"></h3>
+    <p id="popup-text"></p>
   </div>
 </div>
 
@@ -469,19 +148,21 @@
 </footer>
 
 <!-- ===== FLOATING BUTTONS ===== -->
-<div class="floating-cart" onclick="openCart()" title="السلة">🛒 <span id="cartCount">0</span></div>
-<a href="https://wa.me/201223136302" target="_blank" class="floating-wa" title="واتساب">
+<div class="floating-cart" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
+<a href="https://wa.me/201223136302" target="_blank" class="floating-wa">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
 
-<!-- ===== [جديد] STICKY BUY BAR ===== -->
+<!-- ===== STICKY BAR ===== -->
 <div class="sticky-buy-bar" id="sticky-bar">
   <span class="sticky-product-name" id="sticky-name">توليفة الحشم</span>
-  <button class="sticky-buy-btn" id="sticky-btn" onclick="stickyOrder()">🛒 اطلب الآن</button>
+  <button class="sticky-buy-btn" onclick="stickyOrder()">🛒 اطلب الآن</button>
 </div>
 
+<!-- products.js لازم يكون قبل script.js -->
+<script src="products.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
