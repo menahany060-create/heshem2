@@ -5,28 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>بن الحشم</title>
-  <meta name="description" content="🔥 صحصح بمزاج... قهوتك الصح لكل يوم تقيل!">
+  <meta name="description" content="🔥 صحصح بمزاج... قهوتك الصح لكل يوم تقيل! ⚡ كافيين عالي = طاقة أعلى 👌 طعم مظبوط يخليك دايمًا في المود">
   <meta property="og:title" content="☕ بن الحشم">
-  <meta property="og:description" content="⚡ طاقة يومك في كوباية — قهوة تقيلة، مزاج عالي">
-  <meta property="og:image" content="https://your-site.com/logo.png">
+  <meta property="og:description" content="⚡ طاقة يومك في كوباية ☕ 💥 قهوة تقيلة… مزاج عالي 👌 اختار توليفتك بنفسك وابدأ صح">
+  <meta property="og:image" content="logo.png">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="☕ بن الحشم">
+  <meta name="twitter:description" content="🔥 صحصح بمزاج... قهوتك الصح لكل يوم تقيل!">
+  <meta name="twitter:image" content="https://your-site.com/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <meta name="google-site-verification" content="sr6RY9zvGGLdL4Wow_LOH1myslViVHqgm2a6BkpMhRQ" />
 </head>
+
 <body>
 
 <!-- ===== HEADER ===== -->
 <div class="header">
   <img class="logo" src="logo.png" onerror="this.style.display='none'">
   <div class="logoText">بن الحشم ☕</div>
+
   <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="القائمة">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </button>
+
   <div class="nav-menu" id="navMenu">
-    <a href="#hero"             onclick="closeMenu()">🏠 الرئيسية</a>
+    <a href="#hero" onclick="closeMenu()">🏠 الرئيسية</a>
     <a href="#products-section" onclick="closeMenu()">☕ المنتجات</a>
-    <a href="#offers-section"   onclick="closeMenu()">🔥 العروض</a>
-    <a href="#"                 onclick="openCheckout(); closeMenu()">🛒 اطلب الآن</a>
+    <a href="#offers-section" onclick="closeMenu()">🔥 العروض</a>
+    <a href="#" onclick="openCheckout(); closeMenu()">🛒 اطلب الآن</a>
     <a href="https://wa.me/201223136302" target="_blank" onclick="closeMenu()">📞 تواصل معنا</a>
   </div>
 </div>
@@ -39,34 +49,53 @@
     <p class="hero-eyebrow">☕ توليفات مختارة بعناية</p>
     <h1 class="hero-title">بن الحشم</h1>
     <p class="hero-tagline">صحصح بمزاج 🔥</p>
-    <p class="hero-desc">قهوة تقيلة بطاقة عالية — اختار توليفتك وابدأ يومك صح</p>
-    <div class="hero-value-props">
-      <div class="vp-item"><span>🚀</span><span>توصيل 24h</span></div>
-      <div class="vp-item"><span>✅</span><span>ضمان استرداد</span></div>
-      <div class="vp-item"><span>🌿</span><span>محمّص طازج</span></div>
-    </div>
+    <p class="hero-desc">قهوة تقيلة و طعم مظبوط — اختار توليفتك وابدأ يومك صح</p>
     <div class="hero-actions">
       <a href="#products-section" class="hero-btn-primary">اكتشف التوليفات ←</a>
-      <a href="#offers-section"   class="hero-btn-outline">شوف العروض 🔥</a>
+      <a href="#offers-section" class="hero-btn-outline">شوف العروض 🔥</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">5+</span><span class="stat-label">توليفات</span></div>
       <div class="stat"><span class="stat-num">95%</span><span class="stat-label">أعلى كافيين</span></div>
-      <div class="stat"><span class="stat-num">24h</span><span class="stat-label">توصيل</span></div>
+      <div class="stat"><span class="stat-num">24h</span><span class="stat-label">توصيل سريع</span></div>
     </div>
   </div>
-  <div class="hero-scroll-hint" onclick="document.getElementById('bestsellers-section').scrollIntoView({behavior:'smooth'})">↓</div>
+  <div class="hero-scroll-hint" onclick="document.getElementById('bestsellers-section').scrollIntoView({behavior:'smooth'})">
+    <span>↓</span>
+  </div>
 </section>
 
 <!-- ===== BESTSELLERS ===== -->
 <section id="bestsellers-section">
   <h3 class="section-title">🏆 الأكثر مبيعاً</h3>
-  <div class="bestsellers" id="bestsellers-wrap"></div>
+  <div class="bestsellers">
+    <div class="bs-card" onclick="scrollToProduct('الحشم')">
+      <span class="badge">🔥</span>
+      <img src="hashm.png" onerror="this.src=''; this.alt='☕'">
+      <p>الحشم</p>
+    </div>
+    <div class="bs-card" onclick="scrollToProduct('أيوب')">
+      <span class="badge">⭐</span>
+      <img src="ayoub.png" onerror="this.src=''; this.alt='☕'">
+      <p>أيوب</p>
+    </div>
+    <div class="bs-card" onclick="scrollToProduct('السكة')">
+      <span class="badge">🚗</span>
+      <img src="sikka.png" onerror="this.src=''; this.alt='☕'">
+      <p>ع السكة</p>
+    </div>
+    <div class="bs-card" onclick="scrollToProduct('الجدع')">
+      <span class="badge">💪</span>
+      <img src="gad3.png" onerror="this.src=''; this.alt='☕'">
+      <p>الجدع</p>
+    </div>
+  </div>
 </section>
 
 <!-- ===== OFFERS ===== -->
 <section id="offers-section">
   <h3 class="section-title">🔥 العروض والخصومات</h3>
+
   <div class="offer-timer-bar">
     <span class="timer-label">⏰ العرض ينتهي بعد:</span>
     <div class="timer-blocks">
@@ -77,23 +106,379 @@
       <div class="timer-block"><span id="timer-s">00</span><small>ثانية</small></div>
     </div>
   </div>
-  <div class="offers" id="offers-wrap"></div>
+
+  <p class="flip-hint">👆 اضغط على "اقلب الكارد" علشان تشوف التفاصيل</p>
+
+  <div class="offers">
+
+    <!-- ===== عرض السكة ===== -->
+    <div class="offer-card-wrapper" data-index="1">
+      <div class="offer-card-inner">
+
+        <!-- FRONT -->
+        <div class="offer-card-face offer-card-front">
+          <div class="offer-card-bg-blur" style="background-image:url('sikka.png')"></div>
+          <span class="offer-badge">-20%</span>
+          <img src="sikka.png" onerror="this.innerHTML='☕'; this.style.fontSize='3rem'">
+          <div class="offer-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="80" data-max="180">--</span> يتفرج دلوقتي</div>
+          <h3>ع السكة (500 جرام)</h3>
+          <p class="old-price">350 جنيه</p>
+          <p class="new-price">280 جنيه</p>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'ع السكة 500g عرض', 280)">🛒 إضافة للسلة</button>
+          <button class="share-btn" onclick="shareProduct('ع السكة', 280)">مشاركة ↗</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <!-- BACK -->
+        <div class="offer-card-face offer-card-back">
+          <div class="offer-card-bg-blur" style="background-image:url('sikka.png')"></div>
+          <img class="back-img" src="sikka.png" onerror="this.style.display='none'">
+          <div class="offer-back-name">ع السكة (500 جرام) 🚗</div>
+          <div class="offer-back-badge">-20% خصم</div>
+          <p class="offer-back-desc">استمتع بالرحله... السكه طويله — توليفة ع السكه عشان تساعدك تركز لوقت اطول في رحلتك ☕</p>
+          <div class="offer-back-price-row">
+            <span class="offer-back-old">350 جنيه</span>
+            <span class="offer-back-new">280 جنيه</span>
+          </div>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'ع السكة 500g عرض', 280)">🛒 إضافة للسلة</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ ارجع للوش</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== عرض الجدع ===== -->
+    <div class="offer-card-wrapper" data-index="2">
+      <div class="offer-card-inner">
+
+        <div class="offer-card-face offer-card-front">
+          <div class="offer-card-bg-blur" style="background-image:url('gad3.png')"></div>
+          <span class="offer-badge">-50%</span>
+          <img src="gad3.png" onerror="this.innerHTML='☕'">
+          <div class="offer-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="60" data-max="150">--</span> يتفرج دلوقتي</div>
+          <h3>الجدع (500 جرام)</h3>
+          <p class="old-price">300 جنيه</p>
+          <p class="new-price">150 جنيه</p>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'الجدع 500g عرض', 150)">🛒 إضافة للسلة</button>
+          <button class="share-btn" onclick="shareProduct('الجدع', 150)">مشاركة ↗</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="offer-card-face offer-card-back">
+          <div class="offer-card-bg-blur" style="background-image:url('gad3.png')"></div>
+          <img class="back-img" src="gad3.png" onerror="this.style.display='none'">
+          <div class="offer-back-name">الجدع (500 جرام) 💪</div>
+          <div class="offer-back-badge">-50% خصم</div>
+          <p class="offer-back-desc">توليفة الجدعان — مش لأي حد. اشرب وافتكر إن الجدع مش بيشرب أي قهوة 😉</p>
+          <div class="offer-back-price-row">
+            <span class="offer-back-old">300 جنيه</span>
+            <span class="offer-back-new">150 جنيه</span>
+          </div>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'الجدع 500g عرض', 150)">🛒 إضافة للسلة</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ ارجع للوش</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== عرض الحشم ===== -->
+    <div class="offer-card-wrapper" data-index="3">
+      <div class="offer-card-inner">
+
+        <div class="offer-card-face offer-card-front">
+          <div class="offer-card-bg-blur" style="background-image:url('offer1.png')"></div>
+          <span class="offer-badge">-23%</span>
+          <img src="offer1.png" onerror="this.innerHTML='☕'">
+          <div class="offer-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="100" data-max="220">--</span> يتفرج دلوقتي</div>
+          <h3>الحشم (500g) + مج حراري + 3 كوب</h3>
+          <p class="old-price">850 جنيه</p>
+          <p class="new-price">625 جنيه</p>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'عرض الحشم + مج حراري', 625)">🛒 إضافة للسلة</button>
+          <button class="share-btn" onclick="shareProduct('عرض الحشم + مج', 625)">مشاركة ↗</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="offer-card-face offer-card-back">
+          <div class="offer-card-bg-blur" style="background-image:url('offer1.png')"></div>
+          <img class="back-img" src="mug.jpg" onerror="this.style.display='none'">
+          <div class="offer-back-name">الحشم + مج حراري + 3 كوب 🔥</div>
+          <div class="offer-back-badge">-23% خصم</div>
+          <p class="offer-back-desc">أجود توليفة + مج حراري 500 مل + 3 كوب قهوة — كل حاجه في باكدج واحد 💪🏻 أعلى كافيين ممكن 🔥</p>
+          <div class="offer-back-price-row">
+            <span class="offer-back-old">850 جنيه</span>
+            <span class="offer-back-new">625 جنيه</span>
+          </div>
+          <button class="offer-buy-btn" onclick="addOffer(this, 'عرض الحشم + مج حراري', 625)">🛒 إضافة للسلة</button>
+          <button class="offer-flip-btn" onclick="flipOfferCard(this)">↩ ارجع للوش</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- ===== PRODUCTS ===== -->
 <section id="products-section">
   <h3 class="section-title">☕ كل التوليفات</h3>
-  <p class="section-hint">اقلب الكارد لتشوف التفاصيل 👆</p>
-  <div class="products" id="products-wrap"></div>
+  <p class="flip-hint">👆 اضغط على "اقلب الكارد"  علشان تشوف التفاصيل</p>
+
+  <div class="products">
+
+    <!-- ===================== الحشم ===================== -->
+    <div class="card-wrapper" id="product-الحشم" data-status="available" data-index="1">
+      <div class="card-inner">
+
+        <!-- FRONT -->
+        <div class="card-face card-front">
+          <div class="card-bg-blur" style="background-image:url('hashm.png')"></div>
+          <span class="prod-badge badge-fire">🔥 الأقوى</span>
+          <img src="hashm.png" onerror="this.src=''; this.parentElement.querySelector('.img-fallback').style.display='flex'">
+          <div class="img-fallback">☕</div>
+          <div class="product-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="90" data-max="250">--</span> يتفرج دلوقتي</div>
+          <div class="star-rating" data-rating="4.8">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.8</span>
+          </div>
+          <h3>توليفة الحشم</h3>
+          <div class="bar"><div class="fill" data-caffeine="90"><span class="percent">0%</span></div></div>
+          <small>كافيين 90%</small>
+          <select onchange="updatePrice(this)">
+            <option value="125-150">125 جرام — 150 جنيه</option>
+            <option value="250-270">250 جرام — 270 جنيه</option>
+            <option value="500-550">500 جرام — 550 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'الحشم')">🛒 إضافة للسلة</button>
+          <button class="flip-btn" onclick="flipCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-face card-back">
+          <div class="card-bg-blur" style="background-image:url('hashm.png')"></div>
+          <img class="back-img" src="hashm.png" onerror="this.style.display='none'">
+          <div class="back-product-name">توليفة الحشم ☕</div>
+          <select onchange="updatePrice(this)">
+            <option value="125-150">125 جرام — 150 جنيه</option>
+            <option value="250-270">250 جرام — 270 جنيه</option>
+            <option value="500-550">500 جرام — 550 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'الحشم')">🛒 إضافة للسلة</button>
+          <div class="back-btns">
+            <button class="neonBtn back-story-btn" onclick="openStory('No Pain... No Gain 💪','مفيش حاجه هتجيلك لحد عندك، اسعى واجتهد وربنا هيديك على قد تعبك، واوعي تيأس لأن مفيش حلاوه من غير نار. عايزك تتأكد دايما ان ربنا هيديك على قد تعبك — واحنا عملنالك التوليفه الى هتخليك تكمل مشوارك باقصى طاقه ممكنه 💪🏻 واعلى كافيين ممكن🔥')">❓ ليه تشرب توليفة الحشم؟</button>
+            <button class="neonBtn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
+            <button class="share-btn" onclick="shareProduct('توليفة الحشم', 150)">↗ مشاركة</button>
+            <button class="flip-btn" onclick="flipCard(this)">↩ ارجع للوش</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================== أيوب ===================== -->
+    <div class="card-wrapper" id="product-أيوب" data-status="available" data-index="2">
+      <div class="card-inner">
+
+        <div class="card-face card-front">
+          <div class="card-bg-blur" style="background-image:url('ayoub.png')"></div>
+          <span class="prod-badge badge-classic">🏅 الكلاسيك</span>
+          <img src="ayoub.png" onerror="this.src=''; this.parentElement.querySelector('.img-fallback').style.display='flex'">
+          <div class="img-fallback">☕</div>
+          <div class="product-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="95" data-max="230">--</span> يتفرج دلوقتي</div>
+          <div class="star-rating" data-rating="4.6">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.6</span>
+          </div>
+          <h3>توليفة أيوب</h3>
+          <div class="bar"><div class="fill" data-caffeine="65"><span class="percent">0%</span></div></div>
+          <small>كافيين 65%</small>
+          <select onchange="updatePrice(this)">
+            <option value="125-110">125 جرام — 110 جنيه</option>
+            <option value="250-200">250 جرام — 200 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'أيوب')">🛒 إضافة للسلة</button>
+          <button class="flip-btn" onclick="flipCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="card-face card-back">
+          <div class="card-bg-blur" style="background-image:url('ayoub.png')"></div>
+          <img class="back-img" src="ayoub.png" onerror="this.style.display='none'">
+          <div class="back-product-name">توليفة أيوب ☕</div>
+          <select onchange="updatePrice(this)">
+            <option value="125-110">125 جرام — 110 جنيه</option>
+            <option value="250-200">250 جرام — 200 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'أيوب')">🛒 إضافة للسلة</button>
+          
+          <div class="back-btns">
+            <button class="neonBtn back-story-btn" onclick="openStory('اشرب الصبر واستمتع بالفرج ❤️','سيدنا ايوب كان غني وعندو اولاد وصحه وفلوس مبتخلصش، وربنا ابتلاه بخسارة فلوسه وموت اولاده ومرض استمر معاه 18 سنه، بس سيدنا ايوب صبر وقال الحمدلله لحد ما ربنا فرجها عليه وعوضه اضعاف. واحنا عملنالك توليفة ايوب عشان تساعدك على الصبر في حياتك، وافتكر دايما ان الصبر هو مفتاح الفرج ❤️')">❓ ليه تشرب توليفة أيوب؟</button>
+            <button class="neonBtn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
+            <button class="share-btn" onclick="shareProduct('توليفة أيوب', 110)">↗ مشاركة</button>
+            <button class="flip-btn" onclick="flipCard(this)">↩ ارجع للوش</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================== السكة ===================== -->
+    <div class="card-wrapper" id="product-السكة" data-status="available" data-index="3">
+      <div class="card-inner">
+
+        <div class="card-face card-front">
+          <div class="card-bg-blur" style="background-image:url('sikka.png')"></div>
+          <span class="prod-badge badge-road">🚗 للطريق</span>
+          <img src="sikka.png" onerror="this.src=''; this.parentElement.querySelector('.img-fallback').style.display='flex'">
+          <div class="img-fallback">☕</div>
+          <div class="product-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="90" data-max="200">--</span> يتفرج دلوقتي</div>
+          <div class="star-rating" data-rating="4.7">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.7</span>
+          </div>
+          <h3>توليفة ع السكة</h3>
+          <div class="bar"><div class="fill" data-caffeine="80"><span class="percent">0%</span></div></div>
+          <small>كافيين 80%</small>
+          <select onchange="updatePrice(this)">
+            <option value="125-90">125 جرام — 90 جنيه</option>
+            <option value="250-200">250 جرام — 200 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'السكة')">🛒 إضافة للسلة</button>
+          <button class="flip-btn" onclick="flipCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="card-face card-back">
+          <div class="card-bg-blur" style="background-image:url('sikka.png')"></div>
+          <img class="back-img" src="sikka.png" onerror="this.style.display='none'">
+          <div class="back-product-name">توليفة ع السكة ☕</div>
+           <select onchange="updatePrice(this)">
+            <option value="125-90">125 جرام — 90 جنيه</option>
+            <option value="250-200">250 جرام — 200 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'السكة')">🛒 إضافة للسلة</button>
+         
+          <div class="back-btns">
+            <button class="neonBtn back-story-btn" onclick="openStory('استمتع بالرحله... السكه طويله 🚗','مسافر وسكتك طويله؟ مفيش حاجه هتفوقك غير كباية القهوه الزياده. واحنا عملنالك توليفة ع السكه عشان تساعدك تركز لوقت اطول في رحلتك، اشرب وصحصح لطريقك، توصل بالسلامه يا صديقي ❤️')">❓ ليه تشرب توليفة ع السكة؟</button>
+            <button class="neonBtn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
+            <button class="share-btn" onclick="shareProduct('توليفة ع السكة', 90)">↗ مشاركة</button>
+            <button class="flip-btn" onclick="flipCard(this)">↩ ارجع للوش</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================== الجدع ===================== -->
+    <div class="card-wrapper" id="product-الجدع" data-status="available" data-index="4">
+      <div class="card-inner">
+
+        <div class="card-face card-front">
+          <div class="card-bg-blur" style="background-image:url('gad3.png')"></div>
+          <span class="prod-badge badge-strong">💪 للجدعان</span>
+          <img src="gad3.png" onerror="this.src=''; this.parentElement.querySelector('.img-fallback').style.display='flex'">
+          <div class="img-fallback">☕</div>
+          <div class="product-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="80" data-max="190">--</span> يتفرج دلوقتي</div>
+          <div class="star-rating" data-rating="4.5">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.5</span>
+          </div>
+          <h3>توليفة الجدع</h3>
+          <div class="bar"><div class="fill" data-caffeine="50"><span class="percent">0%</span></div></div>
+          <small>كافيين 50%</small>
+          <select onchange="updatePrice(this)">
+            <option value="125-85">125 جرام — 85 جنيه</option>
+            <option value="250-180">250 جرام — 180 جنيه</option>
+            <option value="500-300">500 جرام — 300 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'الجدع')">🛒 إضافة للسلة</button>
+          <button class="flip-btn" onclick="flipCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="card-face card-back">
+          <div class="card-bg-blur" style="background-image:url('gad3.png')"></div>
+          <img class="back-img" src="gad3.png" onerror="this.style.display='none'">
+          <div class="back-product-name">توليفة الجدع ☕</div>
+          <select onchange="updatePrice(this)">
+            <option value="125-85">125 جرام — 85 جنيه</option>
+            <option value="250-180">250 جرام — 180 جنيه</option>
+            <option value="500-300">500 جرام — 300 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'الجدع')">🛒 إضافة للسلة</button>
+          
+          <div class="back-btns">
+            <button class="neonBtn back-story-btn" onclick="openStory('توليفة الجدع... لكل راجل جدع 😉','مفيش راجل جدع مش بيشرب قهوه، وقهوته مش بتبقى اى قهوه. واحنا عملنالك التوليفه بتاعة الجدعان، اشرب وافتكر ان توليفة الجدع مش لأي حد 😉')">❓ ليه تشرب توليفة الجدع؟</button>
+            <button class="neonBtn specs-btn" onclick="openSpecs('وسط','أنواع البن: برازيلي + كولومبي')">📋 المواصفات</button>
+            <button class="share-btn" onclick="shareProduct('توليفة الجدع', 85)">↗ مشاركة</button>
+            <button class="flip-btn" onclick="flipCard(this)">↩ ارجع للوش</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================== ESPRESSO — sold-out ===================== -->
+    <div class="card-wrapper" id="product-ESPRESSO" data-status="available" data-index="5">
+      <div class="card-inner">
+
+        <div class="card-face card-front">
+          <div class="card-bg-blur" style="background-image:url('espresso.png')"></div>
+          <span class="prod-badge badge-coming">⚡ شوت يفوقك</span>
+          <img src="espresso.png" onerror="this.src=''; this.parentElement.querySelector('.img-fallback').style.display='flex'">
+          <div class="img-fallback">☕</div>
+          <div class="product-viewers"><span class="eye-icon">👁</span><span class="viewers-count" data-min="110" data-max="250">--</span> يتفرج دلوقتي</div>
+          <div class="star-rating" data-rating="4.9">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.9</span>
+          </div>
+          <h3>ESPRESSO</h3>
+          <div class="bar"><div class="fill" data-caffeine="95"><span class="percent">0%</span></div></div>
+          <small>كافيين 95%</small>
+          <select onchange="updatePrice(this)">
+            <option value="125-150">125 جرام — 150 جنيه</option>
+            <option value="250-250">250 جرام — 250 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'ESPRESSO')">🛒 إضافة للسلة</button>
+          <button class="flip-btn" onclick="flipCard(this)">↩ اقلب الكارد</button>
+        </div>
+
+        <div class="card-face card-back">
+          <div class="card-bg-blur" style="background-image:url('espresso.png')"></div>
+          <img class="back-img" src="espresso.png" onerror="this.style.display='none'">
+          <div class="back-product-name">ESPRESSO ☕</div>
+          <select onchange="updatePrice(this)">
+            <option value="125-150">125 جرام — 150 جنيه</option>
+            <option value="250-250">250 جرام — 250 جنيه</option>
+            <option value="500-350">500 جرام — 350 جنيه</option>
+          </select>
+          <button class="neonBtn add-btn buy-main-btn" onclick="addProduct(this,'ESPRESSO')">🛒 إضافة للسلة</button>
+          
+          <div class="back-btns">
+            <button class="neonBtn back-story-btn" onclick="openStory('ESPRESSO 🔥','جرعة كافيين مركزة تعيشك فايق على الآخر!')">❓ ليه تشرب ESPRESSO؟</button>
+            <button class="neonBtn specs-btn" onclick="openSpecs('ESPRESSO','تحميص داكن + نكهة قوية مركزة')">📋 المواصفات</button>
+            <button class="share-btn" onclick="shareProduct('ESPRESSO', 150)">↗ مشاركة</button>
+           <!-- <div class="back-notify-row">
+              <p class="back-notify-text">📣 ابعتلنا على واتساب وهنعلمك لما يرجع!</p>
+              <a href="https://wa.me/201223136302?text=عايز%20أعرف%20لما%20ESPRESSO%20يرجع" target="_blank" class="neonBtn notify-btn">🔔 أبلغني</a>
+            </div>-->
+            <button class="flip-btn" onclick="flipCard(this)">↩ ارجع للوش</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- ===== CART ===== -->
 <section id="cart-section">
   <div class="cart">
     <h3>🛒 سلة التسوق</h3>
-    <div id="cart-items"></div>
-    <div id="empty-cart-msg" class="empty-cart">سلتك فارغة — اقلب كارد وابدأ ☕</div>
-    <div class="upsell-bar" id="upsell-bar"></div>
+    <div id="box"></div>
+    <div id="empty-cart-msg" class="empty-cart">سلتك فارغة — ابدأ بإضافة توليفتك ☕</div>
     <div class="promo-row">
       <input id="promoCode" placeholder="كود الخصم (اختياري)" autocomplete="off">
       <button class="promoBtn" onclick="applyPromo()">تطبيق</button>
@@ -114,19 +499,19 @@
     <button class="popup-close" onclick="closePopup()">✕</button>
     <h3>📦 تأكيد الطلب</h3>
     <p class="popup-subtitle">هنبعتلك ملخص طلبك على واتساب</p>
-    <input id="name"    placeholder="الاسم الكامل *" autocomplete="name">
-    <input id="phone"   placeholder="رقم الهاتف *"   type="tel" inputmode="numeric" autocomplete="tel">
+    <input id="name" placeholder="الاسم الكامل *" autocomplete="name">
+    <input id="phone" placeholder="رقم الهاتف *" type="tel" inputmode="numeric" autocomplete="tel">
     <input id="address" placeholder="العنوان كامل *" autocomplete="street-address">
     <button class="checkoutBtn" onclick="send()">📱 إرسال واتساب</button>
   </div>
 </div>
 
-<!-- ===== STORY / SPECS POPUP ===== -->
+<!-- ===== STORY/SPECS POPUP ===== -->
 <div id="popup" class="popup" onclick="closePopup()">
   <div class="popup-content" onclick="event.stopPropagation()">
     <button class="popup-close" onclick="closePopup()">✕</button>
-    <h3 id="popup-title"></h3>
-    <p id="popup-text"></p>
+    <h3 id="title"></h3>
+    <p id="text"></p>
   </div>
 </div>
 
@@ -134,9 +519,11 @@
 <footer class="footer">
   <div class="footer-content">
     <h3>☕ بن الحشم</h3>
-    <p class="footer-note">بنستخدم أجود أنواع البن في العالم — كل توليفة بنسب مختلفة</p>
+    <p class="footer-note">بنستخدم أجود أنواع البن الموجودة في العالم — كل توليفة بنسب مختلفة</p>
     <p>شركة (بن الحشم) التابعة لشركة (سميركو للاستيراد والتصدير) — أردنية الأصل تأسست عام 1983</p>
-    <p>📍 الأردن — السلط — شارع اليرموك &nbsp;|&nbsp; 📞 <a href="tel:00962799198420" style="color:inherit">00962799198420</a></p>
+    <p>📍 الأردن — السلط — شارع اليرموك</p>
+    <p>📞 <a href="tel:00962799198420" style="color:inherit">00962799198420</a></p>
+    <p>📞 <a href="tel:01067968244" style="color:inherit">01067968244</a></p>
     <div class="footer-links">
       <a href="#hero">الرئيسية</a>
       <a href="#products-section">المنتجات</a>
@@ -148,21 +535,45 @@
 </footer>
 
 <!-- ===== FLOATING BUTTONS ===== -->
-<div class="floating-cart" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
-<a href="https://wa.me/201223136302" target="_blank" class="floating-wa">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-</a>
-
-<!-- ===== STICKY BAR ===== -->
-<div class="sticky-buy-bar" id="sticky-bar">
-  <span class="sticky-product-name" id="sticky-name">توليفة الحشم</span>
-  <button class="sticky-buy-btn" onclick="stickyOrder()">🛒 اطلب الآن</button>
+<div class="floating-cart" onclick="openCart()" title="السلة">
+  🛒 <span id="cartCount">0</span>
 </div>
 
-<!-- products.js لازم يكون قبل script.js -->
-<script src="products.js"></script>
+
+
+<!-- ===== FLOATING SHARE HUB ===== -->
+<div class="floating-share-hub" id="floatingShareHub">
+  <button class="floating-share-main" onclick="toggleShareHub()" title="مشاركة">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M15.75 5.125a3.125 3.125 0 1 1 .754 2.035l-8.397 3.9a3.124 3.124 0 0 1 0 1.88l8.397 3.9a3.125 3.125 0 1 1-.61 1.095l-8.397-3.9a3.125 3.125 0 1 1 0-4.07l8.397-3.9a3.125 3.125 0 0 1-.144-.94Z"/>
+    </svg>
+  </button>
+
+  <a class="floating-share-opt opt-wa" href="https://wa.me/201223136302" target="_blank" title="واتساب">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.001 4.908A9.817 9.817 0 0 0 11.992 2C6.534 2 2.085 6.448 2.08 11.908c0 1.748.458 3.45 1.321 4.956L2 22l5.255-1.377a9.916 9.916 0 0 0 4.737 1.206h.005c5.46 0 9.908-4.448 9.913-9.913A9.872 9.872 0 0 0 19 4.908h.001ZM11.992 20.15A8.216 8.216 0 0 1 7.797 19l-.3-.18-3.117.818.833-3.041-.196-.314a8.2 8.2 0 0 1-1.258-4.381c0-4.533 3.696-8.23 8.239-8.23a8.2 8.2 0 0 1 5.825 2.413 8.196 8.196 0 0 1 2.41 5.825c-.006 4.55-3.702 8.24-8.24 8.24Zm4.52-6.167c-.247-.124-1.463-.723-1.692-.808-.228-.08-.394-.123-.556.124-.166.246-.641.808-.784.969-.143.166-.29.185-.537.062-.247-.125-1.045-.385-1.99-1.23-.738-.657-1.232-1.47-1.38-1.716-.142-.247-.013-.38.11-.504.11-.11.247-.29.37-.432.126-.143.167-.248.248-.413.082-.167.043-.31-.018-.433-.063-.124-.557-1.345-.765-1.838-.2-.486-.404-.419-.557-.425-.142-.009-.309-.009-.475-.009a.911.911 0 0 0-.661.31c-.228.247-.864.845-.864 2.067 0 1.22.888 2.395 1.013 2.56.122.167 1.742 2.666 4.229 3.74.587.257 1.05.408 1.41.523.595.19 1.13.162 1.558.1.475-.072 1.464-.6 1.673-1.178.205-.58.205-1.075.142-1.18-.061-.104-.227-.165-.475-.29Z"/>
+    </svg>
+  </a>
+
+  <a class="floating-share-opt opt-fb" href="https://www.facebook.com/share/18hgRa1vCx/" target="_blank" title="فيسبوك">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073Z"/>
+    </svg>
+  </a>
+
+  <a class="floating-share-opt opt-ig" href="https://instagram.com" target="_blank" title="انستاجرام">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2c-2.714 0-3.055.013-4.121.06-1.066.05-1.793.217-2.429.465a4.896 4.896 0 0 0-1.771 1.154A4.909 4.909 0 0 0 2.525 5.45c-.248.635-.416 1.362-.465 2.425C2.013 8.944 2 9.284 2 12.001c0 2.715.013 3.055.06 4.121.05 1.066.217 1.792.465 2.428a4.91 4.91 0 0 0 1.154 1.771 4.88 4.88 0 0 0 1.77 1.154c.637.247 1.362.416 2.427.465 1.068.047 1.408.06 4.124.06 2.716 0 3.055-.012 4.122-.06 1.064-.05 1.793-.218 2.43-.465a4.893 4.893 0 0 0 1.77-1.154 4.91 4.91 0 0 0 1.153-1.771c.246-.636.415-1.363.465-2.428.047-1.066.06-1.406.06-4.122s-.012-3.056-.06-4.124c-.05-1.064-.219-1.791-.465-2.426a4.907 4.907 0 0 0-1.154-1.771 4.888 4.888 0 0 0-1.771-1.154c-.637-.248-1.365-.416-2.429-.465-1.067-.047-1.406-.06-4.123-.06H12Zm-.896 1.803H12c2.67 0 2.987.008 4.04.057.975.044 1.505.208 1.858.344.466.181.8.399 1.15.748.35.35.566.683.747 1.15.138.352.3.882.344 1.857.049 1.053.059 1.37.059 4.039 0 2.668-.01 2.986-.059 4.04-.044.974-.207 1.503-.344 1.856a3.09 3.09 0 0 1-.748 1.149 3.09 3.09 0 0 1-1.15.747c-.35.137-.88.3-1.857.345-1.053.047-1.37.059-4.04.059s-2.987-.011-4.041-.059c-.975-.045-1.504-.208-1.856-.345a3.097 3.097 0 0 1-1.15-.747 3.1 3.1 0 0 1-.75-1.15c-.136-.352-.3-.882-.344-1.857-.047-1.054-.057-1.37-.057-4.041 0-2.67.01-2.985.057-4.039.045-.975.208-1.505.345-1.857.181-.466.399-.8.749-1.15a3.09 3.09 0 0 1 1.15-.748c.352-.137.881-.3 1.856-.345.923-.042 1.28-.055 3.144-.056v.003Zm6.235 1.66a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 6.865a5.136 5.136 0 1 0-.16 10.272A5.136 5.136 0 0 0 12 6.865Zm0 1.801a3.334 3.334 0 1 1 0 6.668 3.334 3.334 0 0 1 0-6.668Z"/>
+    </svg>
+  </a>
+
+  <a class="floating-share-opt opt-tt" href="https://www.tiktok.com" target="_blank" title="تيك توك">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06Z"/>
+    </svg>
+  </a>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
