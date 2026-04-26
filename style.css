@@ -499,7 +499,7 @@ body::before {
   perspective: 1000px;
   animation: fadeUp 0.6s ease forwards;
   opacity: 0;
-  min-height: 480px;
+  min-height: 380px;
 }
 
 .offer-card-wrapper:nth-child(1) { animation-delay: 0.1s; }
@@ -510,7 +510,7 @@ body::before {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 480px;
+  min-height: 380px;
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
@@ -784,7 +784,7 @@ body::before {
   perspective: 1000px;
   animation: fadeUp 0.6s ease forwards;
   opacity: 0;
-  min-height: 510px;
+  min-height: 420px;
 }
 
 .card-wrapper:nth-child(1) { animation-delay: 0.1s; }
@@ -797,7 +797,7 @@ body::before {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 510px;
+  min-height: 420px;
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
@@ -1497,7 +1497,7 @@ input::placeholder { color: rgba(245,230,200,0.35); }
   }
 
   .card-wrapper,
-  .card-inner   { min-height: 490px; }
+  .card-inner   { min-height: 380px; }
 
   .card-face    { padding: 10px 8px; }
   .card-front img, .img-fallback { height: 100px; }
@@ -1519,7 +1519,7 @@ input::placeholder { color: rgba(245,230,200,0.35); }
   }
 
   .offer-card-wrapper,
-  .offer-card-inner { min-height: 460px; }
+  .offer-card-inner { min-height: 360px; }
 
   .offer-card-face { padding: 10px 8px; gap: 4px; }
   .offer-card-front img { height: 90px; }
@@ -1541,12 +1541,12 @@ input::placeholder { color: rgba(245,230,200,0.35); }
 
 @media (max-width: 360px) {
   .products { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .card-wrapper, .card-inner { min-height: 510px; }
+  .card-wrapper, .card-inner { min-height: 400px; }
   .card-front img, .img-fallback { height: 85px; }
   .neonBtn { font-size: 10px; min-height: 36px; }
   .bestsellers { grid-template-columns: repeat(2, 1fr); }
   .offers { grid-template-columns: 1fr; }
-  .offer-card-wrapper, .offer-card-inner { min-height: 440px; }
+  .offer-card-wrapper, .offer-card-inner { min-height: 360px; }
 }
 
 @media (max-width: 900px) and (orientation: landscape) {
