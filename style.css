@@ -1483,7 +1483,7 @@ input::placeholder { color: rgba(245,230,200,0.35); }
   .hero-stats { gap: 1.5rem; }
 
   .bestsellers {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 6px;
     padding: 8px;
   }
@@ -1499,18 +1499,20 @@ input::placeholder { color: rgba(245,230,200,0.35); }
   .card-wrapper,
   .card-inner   { min-height: 380px; }
 
-  .card-face    { padding: 10px 8px; }
-  .card-front img, .img-fallback { height: 100px; }
-  .back-img      { height: 100px; }
-  .card-front h3 { font-size: 12px; }
-  .back-product-name { font-size: 12px; padding: 5px 0; }
-  .neonBtn       { font-size: 11px; padding: 8px 6px; min-height: 40px; margin: 2px 0; }
-  .buy-main-btn  { font-size: 12px !important; }
-  select         { font-size: 11px; padding: 8px 6px; min-height: 38px; }
-  .bar           { height: 16px; }
-  .flip-btn      { font-size: 10px; min-height: 36px; padding: 7px; }
-  .star-rating .stars { font-size: 11px; }
-  .product-viewers, .offer-viewers { font-size: 10px; }
+  .card-face    { padding: 8px 7px; gap: 3px; }
+  .card-front img, .img-fallback { height: 85px; }
+  .back-img      { height: 85px; }
+  .card-front h3 { font-size: 11px; margin: 1px 0; }
+  .back-product-name { font-size: 11px; padding: 4px 0; }
+  .neonBtn       { font-size: 11px; padding: 7px 6px; min-height: 38px; margin: 1px 0; }
+  .buy-main-btn  { font-size: 11px !important; }
+  select         { font-size: 11px; padding: 7px 6px; min-height: 36px; margin: 1px 0; }
+  .bar           { height: 14px; margin: 1px 0; }
+  .flip-btn      { font-size: 10px; min-height: 34px; padding: 6px; }
+  .star-rating .stars { font-size: 10px; }
+  .star-rating .rating-num { font-size: 10px; }
+  .product-viewers, .offer-viewers { font-size: 9px; padding: 2px 8px; }
+  small          { font-size: 10px; }
 
   .offers {
     grid-template-columns: repeat(2, 1fr);
@@ -1521,14 +1523,17 @@ input::placeholder { color: rgba(245,230,200,0.35); }
   .offer-card-wrapper,
   .offer-card-inner { min-height: 360px; }
 
-  .offer-card-face { padding: 10px 8px; gap: 4px; }
-  .offer-card-front img { height: 90px; }
-  .offer-card-front h3  { font-size: 11px; }
-  .offer-buy-btn { font-size: 12px; min-height: 40px; padding: 8px; }
-  .offer-wa-btn  { font-size: 11px; padding: 7px; min-height: 36px; }
-  .offer-flip-btn { font-size: 10px; min-height: 34px; }
-  .offer-back-new { font-size: 15px; }
-  .offer-back-desc { font-size: 11px; }
+  .offer-card-face { padding: 8px 7px; gap: 3px; }
+  .offer-card-front img { height: 75px; }
+  .offer-card-front h3  { font-size: 10px; margin: 2px 0; }
+  .offer-buy-btn { font-size: 11px; min-height: 38px; padding: 7px; }
+  .offer-flip-btn { font-size: 10px; min-height: 32px; padding: 5px; }
+  .offer-back-new { font-size: 14px; }
+  .offer-back-desc { font-size: 10px; line-height: 1.5; }
+  .offer-back-name { font-size: 12px; }
+  .offer-back-badge { font-size: 10px; padding: 2px 8px; margin-bottom: 4px; }
+  .old-price { font-size: 10px; }
+  .new-price { font-size: 13px; }
 
   .offer-timer-bar { padding: 0.6rem 1rem; gap: 0.6rem; }
   .timer-block     { min-width: 44px; padding: 3px 7px; }
