@@ -292,7 +292,7 @@ app.get("/api/admin/promo", authAdmin, async (req, res) => {
 });
 
 // --- Seed initial products (run once) ---
-app.post("/api/admin/seed", authAdmin, async (req, res) => {
+app.post("/api/admin/seed", async (req, res) => {
   try {
     await Product.deleteMany({});
     await Product.insertMany([
