@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static(__dirname)); // هنحط ملفات الموقع هنا
 
 // ===== MONGODB CONNECTION =====
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI || "mongodb+srv://admin:menadrds060@cluster0.sowaunm.mongodb.net/benelhesham?appName=Cluster0")
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error("❌ MongoDB error:", err));
 
