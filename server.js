@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // ===== MIDDLEWARE =====
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // هنحط ملفات الموقع هنا
+app.use(express.static(__dirname)); // هنحط ملفات الموقع هنا
 
 // ===== MONGODB CONNECTION =====
 mongoose.connect(process.env.MONGO_URI)
