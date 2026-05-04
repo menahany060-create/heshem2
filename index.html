@@ -495,8 +495,56 @@
   </div>
 </section>
 
-<!-- ===== CHECKOUT POPUP ===== -->
+  <!-- ===== CHECKOUT POPUP ===== -->
 <div id="checkout" class="popup" onclick="closePopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <h3>📦 تأكيد الطلب</h3>
+    <p class="popup-subtitle">ادخل بياناتك وهنتواصل معاك</p>
+    <input id="name" placeholder="الاسم الكامل *" autocomplete="name">
+    <input id="phone" placeholder="رقم الهاتف *" type="tel" inputmode="numeric" autocomplete="tel">
+
+    <select id="governorate" onchange="updateCities()" style="margin:6px 0">
+      <option value="">اختار المحافظة *</option>
+      <option>القاهرة</option>
+      <option>الجيزة</option>
+      <option>الإسكندرية</option>
+      <option>الدقهلية</option>
+      <option>البحر الأحمر</option>
+      <option>البحيرة</option>
+      <option>الفيوم</option>
+      <option>الغربية</option>
+      <option>الإسماعيلية</option>
+      <option>المنوفية</option>
+      <option>المنيا</option>
+      <option>القليوبية</option>
+      <option>الوادي الجديد</option>
+      <option>السويس</option>
+      <option>اسوان</option>
+      <option>اسيوط</option>
+      <option>بني سويف</option>
+      <option>بورسعيد</option>
+      <option>دمياط</option>
+      <option>جنوب سيناء</option>
+      <option>شمال سيناء</option>
+      <option>سوهاج</option>
+      <option>قنا</option>
+      <option>كفر الشيخ</option>
+      <option>مطروح</option>
+      <option>الأقصر</option>
+      <option>الشرقية</option>
+    </select>
+
+    <select id="city" style="margin:6px 0">
+      <option value="">اختار المدينة / المركز *</option>
+    </select>
+
+    <input id="address" placeholder="العنوان بالتفصيل — شارع / عمارة / دور *" autocomplete="street-address">
+    <button class="checkoutBtn" onclick="send()">✅ تأكيد الطلب</button>
+  </div>
+</div>
+<!-- ===== CHECKOUT POPUP ===== -->
+<!--<div id="checkout" class="popup" onclick="closePopup()">
   <div class="popup-content" onclick="event.stopPropagation()">
     <button class="popup-close" onclick="closePopup()">✕</button>
     <h3>📦 تأكيد الطلب</h3>
@@ -506,7 +554,7 @@
     <input id="address" placeholder="العنوان كامل *" autocomplete="street-address">
     <button class="checkoutBtn" onclick="send()">📱 إرسال واتساب</button>
   </div>
-</div>
+</div>-->
 
 <!-- ===== STORY/SPECS POPUP ===== -->
 <div id="popup" class="popup" onclick="closePopup()">
