@@ -4,35 +4,19 @@ const mongoose = require("mongoose");
 const cors     = require("cors");
 const bcrypt   = require("bcryptjs");
 const jwt      = require("jsonwebtoken");
-const path     = require("path");
 
 const app  = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // ===== MIDDLEWARE =====
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static("public")); // هنحط ملفات الموقع هنا
 
 // ===== MONGODB CONNECTION =====
-const MONGO_URI = "mongodb+srv://admin:menadrds060@cluster0.sowaunm.mongodb.net/benelhesham?appName=Cluster0";
-
-function connectDB() {
-  mongoose.connect(MONGO_URI, {
-    serverSelectionTimeoutMS: 10000,
-    socketTimeoutMS: 45000,
-  }).then(() => {
-    console.log("✅ MongoDB connected");
-  }).catch(err => {
-    console.error("❌ MongoDB error:", err.message);
-  });
-}
-
-connectDB();
-mongoose.connection.on("disconnected", () => {
-  console.log("⚠️ MongoDB disconnected, retrying in 5s...");
-  setTimeout(connectDB, 5000);
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.error("❌ MongoDB error:", err));
 
 // ===================================================
 //                     SCHEMAS
