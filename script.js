@@ -1,6 +1,6 @@
 // ===== CONFIG =====
 // غير الرابط ده لما ترفع السيرفر على الانترنت
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://heshem2-production.up.railway.app/api";
 
 // ===== CART =====
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
