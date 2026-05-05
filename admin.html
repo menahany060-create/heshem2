@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,7 +8,6 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Tajawal',sans-serif;background:#0f0700;color:#F5E6C8;min-height:100vh;direction:rtl;}
-
     #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(90,45,5,0.4) 0%,transparent 70%),#0f0700;}
     .login-box{background:rgba(20,8,0,0.95);border:1px solid rgba(201,150,42,0.3);border-radius:16px;padding:40px 32px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
     .login-box h2{color:#C9962A;font-size:1.5rem;margin-bottom:8px;}
@@ -19,113 +17,98 @@
     .login-box button{width:100%;padding:14px;margin-top:12px;background:#C9962A;color:#1C0A00;font-weight:800;border:none;border-radius:10px;font-size:15px;font-family:'Tajawal',sans-serif;cursor:pointer;}
     .login-box button:hover{background:#E8B84B;}
     .login-error{color:#E8855A;font-size:13px;margin-top:10px;min-height:20px;}
-
     #dashboard{display:none;}
-
     .top-bar{background:rgba(15,6,0,0.9);border-bottom:1px solid rgba(201,150,42,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
     .top-bar h1{color:#C9962A;font-size:1.1rem;font-weight:800;}
+    .top-bar .last-update{font-size:11px;color:rgba(245,230,200,0.35);}
     .logout-btn{background:transparent;border:1px solid rgba(217,64,32,0.4);color:#E8855A;padding:7px 18px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;}
     .logout-btn:hover{background:rgba(217,64,32,0.15);}
-
     .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:20px 20px 0;}
-    .stat-card{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:18px 16px;text-align:center;transition:border-color 0.3s;}
-    .stat-card:hover{border-color:rgba(201,150,42,0.5);}
+    .stat-card{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:18px 16px;text-align:center;}
     .stat-card .num{font-size:2rem;font-weight:800;color:#C9962A;}
     .stat-card .lbl{font-size:12px;color:rgba(245,230,200,0.5);margin-top:4px;}
-    .stat-card .live-dot{display:inline-block;width:8px;height:8px;background:#7BC67E;border-radius:50%;margin-right:4px;animation:pulse 2s infinite;}
+    .live-dot{display:inline-block;width:7px;height:7px;background:#7BC67E;border-radius:50%;margin-left:4px;animation:pulse 2s infinite;}
     @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-
     .tabs{display:flex;gap:8px;padding:20px 20px 0;border-bottom:1px solid rgba(201,150,42,0.15);}
     .tab-btn{padding:10px 20px;border-radius:8px 8px 0 0;border:1px solid rgba(201,150,42,0.2);border-bottom:none;background:transparent;color:rgba(245,230,200,0.5);font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;}
     .tab-btn.active{background:rgba(201,150,42,0.12);color:#C9962A;border-color:#C9962A;}
-
     .tab-content{display:none;padding:20px;}
     .tab-content.active{display:block;}
-
     .filter-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
-    .filter-row select,.filter-row input{padding:9px 14px;border-radius:8px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;outline:none;}
-    .filter-row input{min-width:200px;}
+    .filter-row select,.filter-row input[type="text"]{padding:9px 14px;border-radius:8px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;}
+    .filter-row input[type="text"]{min-width:220px;}
     .filter-row input::placeholder{color:rgba(245,230,200,0.35);}
-    .filter-row button{padding:9px 18px;border-radius:8px;background:#C9962A;color:#1C0A00;font-weight:800;border:none;font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;}
-    .filter-row button:hover{background:#E8B84B;}
-    .filter-row .delete-selected-btn{background:rgba(217,64,32,0.15);color:#E8855A;border:1px solid rgba(217,64,32,0.4);}
-    .filter-row .delete-selected-btn:hover{background:#D94020;color:#fff;}
-
+    .btn{padding:9px 18px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;}
+    .btn-gold{background:#C9962A;color:#1C0A00;}
+    .btn-gold:hover{background:#E8B84B;}
+    .btn-red{background:rgba(217,64,32,0.15);color:#E8855A;border:1px solid rgba(217,64,32,0.4)!important;}
+    .btn-red:hover{background:#D94020;color:#fff;}
     table{width:100%;border-collapse:collapse;font-size:13px;}
     th{background:rgba(201,150,42,0.1);color:#C9962A;padding:10px 12px;text-align:right;font-weight:800;border-bottom:1px solid rgba(201,150,42,0.2);}
     td{padding:10px 12px;border-bottom:1px solid rgba(201,150,42,0.08);color:rgba(245,230,200,0.8);vertical-align:top;}
     tr:hover td{background:rgba(201,150,42,0.04);}
-
     .status-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;}
     .s-new    {background:rgba(217,64,32,0.2);color:#E8855A;border:1px solid rgba(217,64,32,0.4);}
     .s-prep   {background:rgba(201,150,42,0.2);color:#C9962A;border:1px solid rgba(201,150,42,0.4);}
     .s-shipped{background:rgba(40,85,160,0.2);color:#7899D4;border:1px solid rgba(40,85,160,0.4);}
     .s-done   {background:rgba(58,122,58,0.2);color:#7BC67E;border:1px solid rgba(58,122,58,0.4);}
     .s-cancel {background:rgba(100,100,100,0.2);color:#888;border:1px solid rgba(100,100,100,0.4);}
-
     .action-select{padding:5px 8px;border-radius:6px;font-size:12px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;cursor:pointer;}
-
-    .delete-btn{background:transparent;border:1px solid rgba(217,64,32,0.3);color:#E8855A;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Tajawal',sans-serif;transition:all 0.2s;}
-    .delete-btn:hover{background:#D94020;color:#fff;border-color:#D94020;}
-
-    .checkbox-col input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#C9962A;}
-
-    .form-box{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:20px;max-width:500px;margin-bottom:24px;}
-    .form-box h3{color:#C9962A;margin-bottom:14px;font-size:1rem;}
-    .form-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;}
-    .form-box input{flex:1;padding:10px 12px;border-radius:8px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;min-width:120px;}
-    .form-box input:focus{border-color:#C9962A;}
-    .form-box label{font-size:12px;color:rgba(245,230,200,0.5);display:block;margin-bottom:4px;}
-    .submit-btn{padding:10px 20px;background:#C9962A;color:#1C0A00;border:none;border-radius:8px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap;}
-    .submit-btn:hover{background:#E8B84B;}
-    .form-msg{font-size:13px;margin-top:10px;min-height:18px;}
-
+    .del-btn{background:transparent;border:1px solid rgba(217,64,32,0.3);color:#E8855A;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Tajawal',sans-serif;transition:all 0.2s;}
+    .del-btn:hover{background:#D94020;color:#fff;}
     .loading{text-align:center;padding:40px;color:rgba(245,230,200,0.4);font-size:14px;}
-
-    .confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(4px);}
-    .confirm-overlay.active{display:flex;}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(4px);}
+    .overlay.active{display:flex;}
     .confirm-box{background:rgba(20,8,0,0.97);border:1px solid rgba(217,64,32,0.4);border-radius:16px;padding:28px 24px;max-width:360px;width:90%;text-align:center;}
-    .confirm-box h3{color:#E8855A;margin-bottom:10px;}
-    .confirm-box p{color:rgba(245,230,200,0.65);font-size:14px;margin-bottom:20px;}
+    .confirm-box h3{color:#E8855A;margin-bottom:10px;font-size:1.1rem;}
+    .confirm-box p{color:rgba(245,230,200,0.65);font-size:14px;margin-bottom:20px;line-height:1.6;}
     .confirm-btns{display:flex;gap:10px;justify-content:center;}
     .confirm-btns button{padding:10px 24px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;font-size:14px;border:none;}
-    .confirm-yes{background:#D94020;color:#fff;}
-    .confirm-yes:hover{background:#E8855A;}
-    .confirm-no{background:rgba(201,150,42,0.15);color:#C9962A;border:1px solid rgba(201,150,42,0.3)!important;}
-    .confirm-no:hover{background:rgba(201,150,42,0.25);}
-
+    .c-yes{background:#D94020;color:#fff;}
+    .c-yes:hover{background:#E8855A;}
+    .c-no{background:rgba(201,150,42,0.15);color:#C9962A;border:1px solid rgba(201,150,42,0.3)!important;}
+    .c-no:hover{background:rgba(201,150,42,0.25);}
+    .form-box{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:20px;max-width:540px;margin-bottom:24px;}
+    .form-box h3{color:#C9962A;margin-bottom:14px;}
+    .form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+    .form-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px;}
+    .form-field label{font-size:12px;color:rgba(245,230,200,0.5);}
+    .form-field input{padding:10px 12px;border-radius:8px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;}
+    .form-field input:focus{border-color:#C9962A;}
+    .form-msg{font-size:13px;margin-top:10px;min-height:18px;}
+    input[type="checkbox"]{width:15px;height:15px;cursor:pointer;accent-color:#C9962A;}
     @media(max-width:700px){
-      .stats-grid{grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 12px 0;}
+      .stats-grid{gap:8px;padding:12px 12px 0;}
       .stat-card .num{font-size:1.4rem;}
-      .tab-content{padding:12px;}
+      .tab-content{padding:10px;}
       table{font-size:11px;}
-      th,td{padding:8px 6px;}
+      th,td{padding:7px 5px;}
+      .filter-row input[type="text"]{min-width:160px;}
     }
   </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <h2>☕ بن الحشم</h2>
     <p>لوحة تحكم الأدمن</p>
-    <input type="text" id="adminUser" placeholder="اسم المستخدم">
+    <input type="text"     id="adminUser" placeholder="اسم المستخدم">
     <input type="password" id="adminPass" placeholder="كلمة المرور">
     <button onclick="adminLogin()">دخول 🔐</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboard">
-
   <div class="top-bar">
     <h1>☕ لوحة تحكم — بن الحشم</h1>
-    <button class="logout-btn" onclick="logout()">خروج ↩</button>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="last-update" id="lastUpdate"></span>
+      <button class="logout-btn" onclick="logout()">خروج ↩</button>
+    </div>
   </div>
 
-  <!-- Stats -->
   <div class="stats-grid">
     <div class="stat-card">
       <div class="num" id="statTotal">-</div>
@@ -141,17 +124,15 @@
     </div>
   </div>
 
-  <!-- Tabs -->
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('orders')">📦 الطلبات</button>
-    <button class="tab-btn" onclick="switchTab('promo')">🎟️ أكواد الخصم</button>
+    <button class="tab-btn"       onclick="switchTab('promo')">🎟️ أكواد الخصم</button>
   </div>
 
-  <!-- ORDERS TAB -->
   <div class="tab-content active" id="tab-orders">
     <div class="filter-row">
-      <input id="searchInput" placeholder="🔍 بحث برقم الطلب أو اسم العميل..." oninput="searchOrders()">
-      <select id="statusFilter" onchange="loadOrders()">
+      <input type="text" id="searchInput" placeholder="🔍 بحث برقم الطلب أو الاسم أو التليفون..." oninput="filterOrders()">
+      <select id="statusFilter" onchange="filterOrders()">
         <option value="">كل الطلبات</option>
         <option value="جديد">جديد</option>
         <option value="قيد التجهيز">قيد التجهيز</option>
@@ -159,250 +140,260 @@
         <option value="تم التسليم">تم التسليم</option>
         <option value="ملغي">ملغي</option>
       </select>
-      <button onclick="loadOrders()">🔄 تحديث</button>
-      <button class="delete-selected-btn" onclick="deleteSelected()">🗑️ حذف المحدد</button>
+      <button class="btn btn-gold" onclick="loadOrders()">🔄 تحديث</button>
+      <button class="btn btn-red"  onclick="deleteSelected()">🗑️ حذف المحدد</button>
     </div>
-    <div id="ordersTableContainer" class="loading">⏳ جاري التحميل...</div>
+    <div id="ordersContainer" class="loading">⏳ جاري التحميل...</div>
   </div>
 
-  <!-- PROMO TAB -->
   <div class="tab-content" id="tab-promo">
     <div class="form-box">
       <h3>➕ إضافة كود خصم جديد</h3>
       <div class="form-row">
-        <div><label>الكود</label><input type="text" id="newPromoCode" placeholder="مثال: SUMMER20"></div>
-        <div><label>نسبة الخصم %</label><input type="number" id="newPromoDiscount" placeholder="10" min="1" max="100"></div>
-        <div><label>أقصى استخدام</label><input type="number" id="newPromoMax" placeholder="100" min="1"></div>
-        <button class="submit-btn" onclick="addPromo()">إضافة</button>
+        <div class="form-field"><label>الكود</label><input type="text" id="newPromoCode" placeholder="SUMMER20"></div>
+        <div class="form-field"><label>الخصم %</label><input type="number" id="newPromoDiscount" placeholder="10" min="1" max="100"></div>
+        <div class="form-field"><label>أقصى استخدام</label><input type="number" id="newPromoMax" placeholder="100" min="1"></div>
+        <button class="btn btn-gold" style="align-self:flex-end" onclick="addPromo()">إضافة</button>
       </div>
       <div class="form-msg" id="promoFormMsg"></div>
     </div>
-    <div id="promoTableContainer" class="loading">⏳ جاري التحميل...</div>
+    <div id="promoContainer" class="loading">⏳ جاري التحميل...</div>
   </div>
-
 </div>
 
 <!-- CONFIRM DIALOG -->
-<div class="confirm-overlay" id="confirmOverlay">
+<div class="overlay" id="overlay">
   <div class="confirm-box">
     <h3>🗑️ تأكيد الحذف</h3>
-    <p id="confirmMsg">هل أنت متأكد من الحذف؟</p>
+    <p id="confirmMsg">هل أنت متأكد؟</p>
     <div class="confirm-btns">
-      <button class="confirm-yes" onclick="confirmAction()">نعم، احذف</button>
-      <button class="confirm-no" onclick="closeConfirm()">إلغاء</button>
+      <button class="c-yes" onclick="doDelete()">نعم، احذف</button>
+      <button class="c-no"  onclick="closeOverlay()">إلغاء</button>
     </div>
   </div>
 </div>
 
 <script>
-  const API = "https://heshem2-production.up.railway.app/api";
-  let token = localStorage.getItem("adminToken");
-  let allOrders = [];
-  let pendingDeleteId = null;
-  let pendingDeleteMultiple = false;
-  let autoRefreshInterval = null;
+const API = "https://heshem2-production.up.railway.app/api";
+let token = localStorage.getItem("adminToken");
+let allOrders = [];
+let toDelete  = null; // string id OR array of ids
 
-  // ===== LOGIN =====
-  async function adminLogin() {
-    const username = document.getElementById("adminUser").value.trim();
-    const password = document.getElementById("adminPass").value.trim();
-    const errEl    = document.getElementById("loginError");
+// ===== LOGIN =====
+async function adminLogin() {
+  const u = document.getElementById("adminUser").value.trim();
+  const p = document.getElementById("adminPass").value.trim();
+  const e = document.getElementById("loginError");
+  e.innerText = "";
+  try {
+    const res  = await fetch(API + "/admin/login", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({username:u,password:p}) });
+    const data = await res.json();
+    if (data.success) { token = data.token; localStorage.setItem("adminToken", token); showDash(); }
+    else e.innerText = "❌ " + data.error;
+  } catch { e.innerText = "❌ السيرفر مش شغال"; }
+}
+
+function logout() {
+  localStorage.removeItem("adminToken"); token = null;
+  clearInterval(window._autoRefresh);
+  document.getElementById("loginScreen").style.display = "flex";
+  document.getElementById("dashboard").style.display   = "none";
+}
+
+function showDash() {
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("dashboard").style.display   = "block";
+  loadStats(); loadOrders();
+  window._autoRefresh = setInterval(() => { loadStats(); loadOrders(); }, 30000);
+}
+
+if (token) showDash();
+
+// ===== TABS =====
+function switchTab(name) {
+  document.querySelectorAll(".tab-btn").forEach((b,i) => b.classList.toggle("active", ["orders","promo"][i] === name));
+  document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
+  if (name === "promo") loadPromos();
+}
+
+// ===== STATS =====
+async function loadStats() {
+  try {
+    const res  = await fetch(API + "/admin/stats", { headers:{ Authorization:"Bearer "+token } });
+    const data = await res.json();
+    if (!data.success) return;
+    document.getElementById("statTotal").innerText   = data.totalOrders  || 0;
+    document.getElementById("statNew").innerText     = data.newOrders    || 0;
+    document.getElementById("statRevenue").innerText = (data.totalRevenue || 0).toLocaleString("ar-EG");
+    document.getElementById("lastUpdate").innerText  = "آخر تحديث: " + new Date().toLocaleTimeString("ar-EG");
+  } catch {}
+}
+
+// ===== ORDERS =====
+async function loadOrders() {
+  try {
+    const res  = await fetch(API + "/admin/orders?limit=200", { headers:{ Authorization:"Bearer "+token } });
+    const data = await res.json();
+    allOrders  = data.success ? data.data : [];
+    filterOrders();
+  } catch { document.getElementById("ordersContainer").innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
+}
+
+function filterOrders() {
+  const q      = document.getElementById("searchInput").value.trim().toLowerCase();
+  const status = document.getElementById("statusFilter").value;
+  let filtered = allOrders;
+  if (status) filtered = filtered.filter(o => o.status === status);
+  if (q) filtered = filtered.filter(o =>
+    o._id.toString().slice(-6).toLowerCase().includes(q) ||
+    o.customerName.toLowerCase().includes(q) ||
+    o.customerPhone.includes(q)
+  );
+  renderOrders(filtered);
+}
+
+function renderOrders(orders) {
+  const c = document.getElementById("ordersContainer");
+  if (!orders.length) { c.innerHTML = '<div class="loading">لا يوجد طلبات</div>'; return; }
+
+  const sc = { "جديد":"s-new","قيد التجهيز":"s-prep","تم الشحن":"s-shipped","تم التسليم":"s-done","ملغي":"s-cancel" };
+
+  let html = `<table><thead><tr>
+    <th><input type="checkbox" id="selAll" onclick="toggleAll(this)"></th>
+    <th>رقم الطلب</th><th>الاسم والعنوان</th><th>التليفون</th>
+    <th>المنتجات</th><th>الإجمالي</th><th>الحالة</th><th>تغيير</th><th>حذف</th><th>التاريخ</th>
+  </tr></thead><tbody>`;
+
+  orders.forEach(o => {
+    const id      = o._id.toString().slice(-6).toUpperCase();
+    const items   = o.items.map(i => i.name + " ×" + i.qty).join("، ");
+    const date    = new Date(o.createdAt).toLocaleDateString("ar-EG",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+    const cls     = sc[o.status] || "s-new";
+    html += `<tr id="row-${o._id}">
+      <td><input type="checkbox" class="chk" value="${o._id}"></td>
+      <td><b style="color:#C9962A">#${id}</b></td>
+      <td><b>${o.customerName}</b><br><span style="color:rgba(245,230,200,0.45);font-size:11px">${o.customerAddress}</span></td>
+      <td><a href="tel:${o.customerPhone}" style="color:#C9962A;text-decoration:none">${o.customerPhone}</a></td>
+      <td style="font-size:12px;line-height:1.6">${items}</td>
+      <td style="color:#C9962A;font-weight:800">${o.totalAfter} ج</td>
+      <td><span class="status-badge ${cls}">${o.status}</span></td>
+      <td>
+        <select class="action-select" onchange="updateStatus('${o._id}',this.value)">
+          <option value="">-- تغيير --</option>
+          <option>جديد</option><option>قيد التجهيز</option>
+          <option>تم الشحن</option><option>تم التسليم</option><option>ملغي</option>
+        </select>
+      </td>
+      <td><button class="del-btn" onclick="askDelete('${o._id}','#${id}')">🗑️</button></td>
+      <td style="font-size:11px;color:rgba(245,230,200,0.4)">${date}</td>
+    </tr>`;
+  });
+
+  html += "</tbody></table>";
+  c.innerHTML = html;
+}
+
+function toggleAll(cb) { document.querySelectorAll(".chk").forEach(c => c.checked = cb.checked); }
+
+// ===== UPDATE STATUS =====
+async function updateStatus(id, status) {
+  if (!status) return;
+  try {
+    await fetch(API + "/admin/orders/" + id, { method:"PATCH", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({status}) });
+    // تحديث الصف مباشرة بدون reload كامل
+    const sc = { "جديد":"s-new","قيد التجهيز":"s-prep","تم الشحن":"s-shipped","تم التسليم":"s-done","ملغي":"s-cancel" };
+    const row = document.getElementById("row-" + id);
+    if (row) {
+      const badge = row.querySelector(".status-badge");
+      if (badge) { badge.className = "status-badge " + (sc[status]||"s-new"); badge.innerText = status; }
+    }
+    // تحديث الطلب في allOrders
+    const order = allOrders.find(o => o._id === id);
+    if (order) order.status = status;
+    loadStats();
+  } catch {}
+}
+
+// ===== DELETE SINGLE =====
+function askDelete(id, label) {
+  toDelete = id;
+  document.getElementById("confirmMsg").innerText = "هتحذف الطلب " + label + " وهيتخسم من الإيراد — مش هترجع تاني!";
+  document.getElementById("overlay").classList.add("active");
+}
+
+// ===== DELETE MULTIPLE =====
+function deleteSelected() {
+  const checked = [...document.querySelectorAll(".chk:checked")].map(c => c.value);
+  if (!checked.length) { alert("اختار طلبات الأول!"); return; }
+  toDelete = checked;
+  document.getElementById("confirmMsg").innerText = "هتحذف " + checked.length + " طلب وهيتخسموا من الإيراد — مش هترجع تاني!";
+  document.getElementById("overlay").classList.add("active");
+}
+
+async function doDelete() {
+  closeOverlay();
+  const ids = Array.isArray(toDelete) ? toDelete : [toDelete];
+  for (const id of ids) {
     try {
-      const res  = await fetch(API + "/admin/login", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({username,password}) });
-      const data = await res.json();
-      if (data.success) { token = data.token; localStorage.setItem("adminToken", token); showDashboard(); }
-      else errEl.innerText = "❌ " + data.error;
-    } catch { errEl.innerText = "❌ السيرفر مش شغال"; }
-  }
-
-  function logout() {
-    localStorage.removeItem("adminToken"); token = null;
-    clearInterval(autoRefreshInterval);
-    document.getElementById("loginScreen").style.display = "flex";
-    document.getElementById("dashboard").style.display   = "none";
-  }
-
-  function showDashboard() {
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("dashboard").style.display   = "block";
-    loadStats(); loadOrders();
-    // تحديث أوتوماتيك كل 30 ثانية
-    autoRefreshInterval = setInterval(() => { loadStats(); loadOrders(); }, 30000);
-  }
-
-  if (token) showDashboard();
-
-  // ===== TABS =====
-  function switchTab(name) {
-    document.querySelectorAll(".tab-btn").forEach((b,i) => b.classList.toggle("active", ["orders","promo"][i] === name));
-    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
-    document.getElementById("tab-" + name).classList.add("active");
-    if (name === "promo") loadPromos();
-  }
-
-  // ===== STATS (تحديث تلقائي) =====
-  async function loadStats() {
-    try {
-      const res  = await fetch(API + "/admin/stats", { headers:{ Authorization:"Bearer "+token } });
-      const data = await res.json();
-      document.getElementById("statTotal").innerText   = data.totalOrders  || 0;
-      document.getElementById("statNew").innerText     = data.newOrders    || 0;
-      document.getElementById("statRevenue").innerText = (data.totalRevenue||0).toLocaleString("ar-EG");
+      const res = await fetch(API + "/admin/orders/" + id, { method:"DELETE", headers:{ Authorization:"Bearer "+token } });
+      if (res.ok) {
+        document.getElementById("row-" + id)?.remove();
+        allOrders = allOrders.filter(o => o._id !== id);
+      }
     } catch {}
   }
+  loadStats(); // تحديث الإيراد والأرقام بعد الحذف
+}
 
-  // ===== ORDERS =====
-  async function loadOrders() {
-    const status    = document.getElementById("statusFilter").value;
-    const container = document.getElementById("ordersTableContainer");
-    try {
-      const res  = await fetch(API + "/admin/orders?status=" + encodeURIComponent(status) + "&limit=100", { headers:{ Authorization:"Bearer "+token } });
-      const data = await res.json();
-      allOrders  = data.data || [];
-      renderOrdersTable(allOrders);
-    } catch { container.innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
-  }
+function closeOverlay() { document.getElementById("overlay").classList.remove("active"); }
 
-  function renderOrdersTable(orders) {
-    const container = document.getElementById("ordersTableContainer");
-    if (!orders || orders.length === 0) { container.innerHTML = '<div class="loading">لا يوجد طلبات</div>'; return; }
-
-    const statusClass = { "جديد":"s-new","قيد التجهيز":"s-prep","تم الشحن":"s-shipped","تم التسليم":"s-done","ملغي":"s-cancel" };
-
-    let html = `<table>
-      <thead><tr>
-        <th class="checkbox-col"><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
-        <th>رقم الطلب</th><th>الاسم</th><th>الهاتف</th>
-        <th>المنتجات</th><th>الإجمالي</th><th>الحالة</th>
-        <th>تعديل</th><th>حذف</th><th>التاريخ</th>
-      </tr></thead><tbody>`;
-
-    orders.forEach(o => {
-      const items   = o.items.map(it => it.name + " ×" + it.qty).join("، ");
-      const dateStr = new Date(o.createdAt).toLocaleDateString("ar-EG", { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" });
-      const sClass  = statusClass[o.status] || "s-new";
-      const shortId = o._id.toString().slice(-6).toUpperCase();
-
-      html += `<tr id="row-${o._id}">
-        <td class="checkbox-col"><input type="checkbox" class="order-checkbox" value="${o._id}"></td>
-        <td><strong style="color:#C9962A;font-size:12px">#${shortId}</strong></td>
-        <td><strong>${o.customerName}</strong><br><span style="color:rgba(245,230,200,0.45);font-size:11px">${o.customerAddress}</span></td>
-        <td><a href="tel:${o.customerPhone}" style="color:#C9962A;text-decoration:none">${o.customerPhone}</a></td>
-        <td style="max-width:160px;line-height:1.6;font-size:12px">${items}</td>
-        <td style="color:#C9962A;font-weight:800">${o.totalAfter} ج</td>
-        <td><span class="status-badge ${sClass}">${o.status}</span></td>
-        <td>
-          <select class="action-select" onchange="updateOrderStatus('${o._id}', this.value)">
-            <option value="">-- تغيير --</option>
-            <option value="جديد">جديد</option>
-            <option value="قيد التجهيز">قيد التجهيز</option>
-            <option value="تم الشحن">تم الشحن</option>
-            <option value="تم التسليم">تم التسليم</option>
-            <option value="ملغي">ملغي</option>
-          </select>
-        </td>
-        <td><button class="delete-btn" onclick="confirmDelete('${o._id}', '#${shortId}')">🗑️ حذف</button></td>
-        <td style="font-size:11px;color:rgba(245,230,200,0.45)">${dateStr}</td>
+// ===== PROMO =====
+async function loadPromos() {
+  const c = document.getElementById("promoContainer");
+  c.innerHTML = '<div class="loading">⏳ جاري التحميل...</div>';
+  try {
+    const res  = await fetch(API + "/admin/promo", { headers:{ Authorization:"Bearer "+token } });
+    const data = await res.json();
+    if (!data.success || !data.data.length) { c.innerHTML = '<div class="loading">لا يوجد أكواد</div>'; return; }
+    let html = `<table><thead><tr><th>الكود</th><th>الخصم %</th><th>تم الاستخدام</th><th>الحد الأقصى</th><th>الحالة</th></tr></thead><tbody>`;
+    data.data.forEach(p => {
+      html += `<tr>
+        <td><b style="color:#C9962A">${p.code}</b></td>
+        <td>${p.discount}%</td>
+        <td>${p.usedCount}</td>
+        <td>${p.maxUses}</td>
+        <td>${p.active ? '<span style="color:#7BC67E">✅ فعال</span>' : '<span style="color:#E8855A">❌ معطل</span>'}</td>
       </tr>`;
     });
-
     html += "</tbody></table>";
-    container.innerHTML = html;
-  }
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
+}
 
-  // ===== SEARCH =====
-  function searchOrders() {
-    const q = document.getElementById("searchInput").value.trim().toLowerCase();
-    if (!q) { renderOrdersTable(allOrders); return; }
-    const filtered = allOrders.filter(o =>
-      o._id.toString().slice(-6).toLowerCase().includes(q) ||
-      o.customerName.toLowerCase().includes(q) ||
-      o.customerPhone.includes(q)
-    );
-    renderOrdersTable(filtered);
-  }
+async function addPromo() {
+  const code     = document.getElementById("newPromoCode").value.trim().toUpperCase();
+  const discount = Number(document.getElementById("newPromoDiscount").value);
+  const maxUses  = Number(document.getElementById("newPromoMax").value) || 100;
+  const msgEl    = document.getElementById("promoFormMsg");
+  if (!code || !discount) { msgEl.style.color = "#E8855A"; msgEl.innerText = "⚠️ ادخل الكود والخصم"; return; }
+  try {
+    const res  = await fetch(API + "/admin/promo", { method:"POST", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({code,discount,maxUses}) });
+    const data = await res.json();
+    if (data.success) {
+      msgEl.style.color = "#7BC67E"; msgEl.innerText = "✅ تم إضافة الكود!";
+      document.getElementById("newPromoCode").value = "";
+      document.getElementById("newPromoDiscount").value = "";
+      document.getElementById("newPromoMax").value = "";
+      loadPromos();
+    } else { msgEl.style.color = "#E8855A"; msgEl.innerText = "❌ " + data.error; }
+  } catch { msgEl.style.color = "#E8855A"; msgEl.innerText = "❌ خطأ في الاتصال"; }
+}
 
-  // ===== UPDATE STATUS =====
-  async function updateOrderStatus(id, status) {
-    if (!status) return;
-    try {
-      await fetch(API + "/admin/orders/" + id, { method:"PATCH", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({status}) });
-      loadOrders(); loadStats();
-    } catch {}
-  }
-
-  // ===== DELETE SINGLE =====
-  function confirmDelete(id, label) {
-    pendingDeleteId       = id;
-    pendingDeleteMultiple = false;
-    document.getElementById("confirmMsg").innerText = "هتحذف الطلب " + label + " — مش هترجع تاني!";
-    document.getElementById("confirmOverlay").classList.add("active");
-  }
-
-  // ===== DELETE MULTIPLE =====
-  function deleteSelected() {
-    const checked = document.querySelectorAll(".order-checkbox:checked");
-    if (checked.length === 0) { alert("اختار طلبات الأول!"); return; }
-    pendingDeleteMultiple = true;
-    pendingDeleteId       = Array.from(checked).map(c => c.value);
-    document.getElementById("confirmMsg").innerText = "هتحذف " + checked.length + " طلب — مش هترجع تاني!";
-    document.getElementById("confirmOverlay").classList.add("active");
-  }
-
-  async function confirmAction() {
-    closeConfirm();
-    if (pendingDeleteMultiple) {
-      for (const id of pendingDeleteId) {
-        await fetch(API + "/admin/orders/" + id, { method:"DELETE", headers:{ Authorization:"Bearer "+token } });
-        document.getElementById("row-" + id)?.remove();
-      }
-    } else {
-      await fetch(API + "/admin/orders/" + pendingDeleteId, { method:"DELETE", headers:{ Authorization:"Bearer "+token } });
-      document.getElementById("row-" + pendingDeleteId)?.remove();
-    }
-    loadStats();
-  }
-
-  function closeConfirm() { document.getElementById("confirmOverlay").classList.remove("active"); }
-
-  // ===== SELECT ALL =====
-  function toggleSelectAll(cb) {
-    document.querySelectorAll(".order-checkbox").forEach(c => c.checked = cb.checked);
-  }
-
-  // ===== PROMO =====
-  async function loadPromos() {
-    const container = document.getElementById("promoTableContainer");
-    container.innerHTML = '<div class="loading">⏳ جاري التحميل...</div>';
-    try {
-      const res  = await fetch(API + "/admin/promo", { headers:{ Authorization:"Bearer "+token } });
-      const data = await res.json();
-      if (!data.success || !data.data.length) { container.innerHTML = '<div class="loading">لا يوجد أكواد</div>'; return; }
-      let html = `<table><thead><tr><th>الكود</th><th>الخصم %</th><th>الاستخدام</th><th>الأقصى</th><th>الحالة</th></tr></thead><tbody>`;
-      data.data.forEach(p => {
-        html += `<tr><td><strong style="color:#C9962A">${p.code}</strong></td><td>${p.discount}%</td><td>${p.usedCount}</td><td>${p.maxUses}</td><td>${p.active?'<span style="color:#7BC67E">✅ فعال</span>':'<span style="color:#E8855A">❌ معطل</span>'}</td></tr>`;
-      });
-      html += "</tbody></table>";
-      container.innerHTML = html;
-    } catch { container.innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
-  }
-
-  async function addPromo() {
-    const code     = document.getElementById("newPromoCode").value.trim().toUpperCase();
-    const discount = Number(document.getElementById("newPromoDiscount").value);
-    const maxUses  = Number(document.getElementById("newPromoMax").value) || 100;
-    const msgEl    = document.getElementById("promoFormMsg");
-    if (!code || !discount) { msgEl.style.color="#E8855A"; msgEl.innerText="⚠️ ادخل الكود والخصم"; return; }
-    try {
-      const res  = await fetch(API + "/admin/promo", { method:"POST", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({code,discount,maxUses}) });
-      const data = await res.json();
-      if (data.success) { msgEl.style.color="#7BC67E"; msgEl.innerText="✅ تم إضافة الكود!"; document.getElementById("newPromoCode").value=""; document.getElementById("newPromoDiscount").value=""; document.getElementById("newPromoMax").value=""; loadPromos(); }
-      else { msgEl.style.color="#E8855A"; msgEl.innerText="❌ "+data.error; }
-    } catch { msgEl.style.color="#E8855A"; msgEl.innerText="❌ خطأ في الاتصال"; }
-  }
-
-  document.addEventListener("keydown", e => { if (e.key==="Enter" && document.getElementById("loginScreen").style.display!=="none") adminLogin(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter" && document.getElementById("loginScreen").style.display !== "none") adminLogin();
+  if (e.key === "Escape") closeOverlay();
+});
 </script>
 </body>
 </html>
-
