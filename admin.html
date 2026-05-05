@@ -85,7 +85,18 @@
       th,td{padding:7px 5px;}
       .filter-row input[type="text"]{min-width:160px;}
     }
+    table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.light-mode {
+  background:#f5f5f5;
+  color:#222;
+}
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -106,6 +117,7 @@
     <div style="display:flex;align-items:center;gap:16px;">
       <span class="last-update" id="lastUpdate"></span>
       <button class="logout-btn" onclick="logout()">خروج ↩</button>
+      <button class="logout-btn" onclick="toggleMode()">🌗</button>
     </div>
   </div>
 
@@ -113,6 +125,9 @@
     <div class="stat-card">
       <div class="num" id="statTotal">-</div>
       <div class="lbl"><span class="live-dot"></span>إجمالي الطلبات</div>
+    </div>
+    <div style="padding:20px">
+  <canvas id="revenueChart"></canvas>
     </div>
     <div class="stat-card">
       <div class="num" id="statNew">-</div>
@@ -174,6 +189,64 @@
 </div>
 
 <script>
+  function toggleMode(){
+  document.body.classList.toggle("light-mode");
+  }
+  let lastOrdersCount = 0;
+
+async function checkNewOrders(){
+  try{
+    const res = await fetch(API + "/admin/orders?limit=5", {
+      headers:{ Authorization:"Bearer "+token }
+    });
+    const data = await res.json();
+
+    if(data.success){
+      if(lastOrdersCount && data.data.length > lastOrdersCount){
+        document.getElementById("notifSound").play();
+        showToast("طلب جديد 🔥");
+      }
+      lastOrdersCount = data.data.length;
+    }
+  }catch(err){
+    console.error(err);
+  }
+}
+  let chart;
+
+function renderChart(allorders){
+  const days = {};
+
+  orders.forEach(o=>{
+    const d = new Date(o.createdAt).toLocaleDateString("ar-EG");
+    days[d] = (days[d] || 0) + o.totalAfter;
+  });
+
+  if(chart) chart.destroy();
+
+  chart = new Chart(document.getElementById("revenueChart"), {
+    type: "line",
+    data: {
+      labels: Object.keys(days),
+      datasets: [{
+        label: "الإيرادات",
+        data: Object.values(days)
+      }]
+    }
+  });
+}
+  function showToast(msg, type="success") {
+  const t = document.createElement("div");
+  t.innerText = msg;
+  t.style.cssText = `
+    position:fixed;bottom:20px;right:20px;
+    background:${type==="error"?"#D94020":"#2ecc71"};
+    color:#fff;padding:12px 18px;border-radius:8px;
+    font-size:14px;z-index:9999;
+  `;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+  }
 const API = "https://heshem2-production.up.railway.app/api";
 let token = localStorage.getItem("adminToken");
 let allOrders = [];
@@ -205,6 +278,7 @@ function showDash() {
   document.getElementById("dashboard").style.display   = "block";
   loadStats(); loadOrders();
   window._autoRefresh = setInterval(() => { loadStats(); loadOrders(); }, 30000);
+  setInterval(checkNewOrders, 10000);
 }
 
 if (token) showDash();
@@ -395,5 +469,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeOverlay();
 });
 </script>
+  <audio id="notifSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 </body>
 </html>
