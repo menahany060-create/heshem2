@@ -2,217 +2,225 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>لوحة تحكم — بن الحشم</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
     body{font-family:'Tajawal',sans-serif;background:#0f0700;color:#F5E6C8;min-height:100vh;direction:rtl;}
-    #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(90,45,5,0.4) 0%,transparent 70%),#0f0700;}
-    .login-box{background:rgba(20,8,0,0.95);border:1px solid rgba(201,150,42,0.3);border-radius:16px;padding:40px 32px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
-    .login-box h2{color:#C9962A;font-size:1.5rem;margin-bottom:8px;}
+
+    /* ===== LOGIN ===== */
+    #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(90,45,5,0.4) 0%,transparent 70%),#0f0700;}
+    .login-box{background:rgba(20,8,0,0.95);border:1px solid rgba(201,150,42,0.3);border-radius:16px;padding:40px 28px;width:100%;max-width:380px;text-align:center;}
+    .login-box h2{color:#C9962A;font-size:1.6rem;margin-bottom:6px;}
     .login-box p{color:rgba(245,230,200,0.5);font-size:13px;margin-bottom:24px;}
-    .login-box input{width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:14px;outline:none;}
+    .login-box input{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;min-height:50px;}
     .login-box input:focus{border-color:#C9962A;}
-    .login-box button{width:100%;padding:14px;margin-top:12px;background:#C9962A;color:#1C0A00;font-weight:800;border:none;border-radius:10px;font-size:15px;font-family:'Tajawal',sans-serif;cursor:pointer;}
-    .login-box button:hover{background:#E8B84B;}
+    .login-box button{width:100%;padding:15px;margin-top:14px;background:#C9962A;color:#1C0A00;font-weight:800;border:none;border-radius:10px;font-size:16px;font-family:'Tajawal',sans-serif;cursor:pointer;min-height:52px;}
     .login-error{color:#E8855A;font-size:13px;margin-top:10px;min-height:20px;}
+
+    /* ===== DASHBOARD ===== */
     #dashboard{display:none;}
-    .top-bar{background:rgba(15,6,0,0.9);border-bottom:1px solid rgba(201,150,42,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
-    .top-bar h1{color:#C9962A;font-size:1.1rem;font-weight:800;}
-    .top-bar .last-update{font-size:11px;color:rgba(245,230,200,0.35);}
-    .logout-btn{background:transparent;border:1px solid rgba(217,64,32,0.4);color:#E8855A;padding:7px 18px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;}
-    .logout-btn:hover{background:rgba(217,64,32,0.15);}
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:20px 20px 0;}
-    .stat-card{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:18px 16px;text-align:center;}
-    .stat-card .num{font-size:2rem;font-weight:800;color:#C9962A;}
-    .stat-card .lbl{font-size:12px;color:rgba(245,230,200,0.5);margin-top:4px;}
-    .live-dot{display:inline-block;width:7px;height:7px;background:#7BC67E;border-radius:50%;margin-left:4px;animation:pulse 2s infinite;}
+
+    /* ===== TOP BAR ===== */
+    .top-bar{background:rgba(10,4,0,0.95);border-bottom:1px solid rgba(201,150,42,0.2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);}
+    .top-bar h1{color:#C9962A;font-size:1rem;font-weight:800;}
+    .top-bar .meta{font-size:10px;color:rgba(245,230,200,0.3);margin-top:2px;}
+    .logout-btn{background:transparent;border:1px solid rgba(217,64,32,0.4);color:#E8855A;padding:8px 14px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;min-height:40px;white-space:nowrap;}
+
+    /* ===== STATS ===== */
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 12px 0;}
+    .stat-card{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:14px 10px;text-align:center;}
+    .stat-card .num{font-size:1.6rem;font-weight:800;color:#C9962A;line-height:1.1;}
+    .stat-card .lbl{font-size:10px;color:rgba(245,230,200,0.45);margin-top:5px;line-height:1.4;}
+    .live-dot{display:inline-block;width:6px;height:6px;background:#7BC67E;border-radius:50%;margin-left:3px;animation:pulse 2s infinite;vertical-align:middle;}
     @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-    .tabs{display:flex;gap:8px;padding:20px 20px 0;border-bottom:1px solid rgba(201,150,42,0.15);}
-    .tab-btn{padding:10px 20px;border-radius:8px 8px 0 0;border:1px solid rgba(201,150,42,0.2);border-bottom:none;background:transparent;color:rgba(245,230,200,0.5);font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+
+    /* ===== TABS ===== */
+    .tabs{display:flex;gap:0;padding:14px 12px 0;border-bottom:1px solid rgba(201,150,42,0.15);}
+    .tab-btn{flex:1;padding:10px 8px;border-radius:8px 8px 0 0;border:1px solid rgba(201,150,42,0.2);border-bottom:none;background:transparent;color:rgba(245,230,200,0.45);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;min-height:44px;}
     .tab-btn.active{background:rgba(201,150,42,0.12);color:#C9962A;border-color:#C9962A;}
-    .tab-content{display:none;padding:20px;}
+
+    /* ===== CONTENT ===== */
+    .tab-content{display:none;padding:14px 12px;}
     .tab-content.active{display:block;}
-    .filter-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
-    .filter-row select,.filter-row input[type="text"]{padding:9px 14px;border-radius:8px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;}
-    .filter-row input[type="text"]{min-width:220px;}
-    .filter-row input::placeholder{color:rgba(245,230,200,0.35);}
-    .btn{padding:9px 18px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;}
+
+    /* ===== FILTERS ===== */
+    .filter-col{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+    .search-input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:14px;outline:none;min-height:48px;}
+    .search-input::placeholder{color:rgba(245,230,200,0.3);}
+    .filter-row2{display:flex;gap:8px;}
+    .status-select{flex:1;padding:11px 10px;border-radius:10px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;min-height:46px;outline:none;}
+    .btn{padding:11px 16px;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;border:none;min-height:46px;white-space:nowrap;transition:all 0.2s;}
     .btn-gold{background:#C9962A;color:#1C0A00;}
     .btn-gold:hover{background:#E8B84B;}
     .btn-red{background:rgba(217,64,32,0.15);color:#E8855A;border:1px solid rgba(217,64,32,0.4)!important;}
     .btn-red:hover{background:#D94020;color:#fff;}
-    table{width:100%;border-collapse:collapse;font-size:13px;}
-    th{background:rgba(201,150,42,0.1);color:#C9962A;padding:10px 12px;text-align:right;font-weight:800;border-bottom:1px solid rgba(201,150,42,0.2);}
-    td{padding:10px 12px;border-bottom:1px solid rgba(201,150,42,0.08);color:rgba(245,230,200,0.8);vertical-align:top;}
-    tr:hover td{background:rgba(201,150,42,0.04);}
-    .status-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;}
+
+    /* ===== ORDER CARDS ===== */
+    .orders-list{display:flex;flex-direction:column;gap:12px;}
+
+    .order-card{background:rgba(20,8,0,0.88);border:1px solid rgba(201,150,42,0.18);border-radius:14px;overflow:hidden;transition:border-color 0.2s;}
+    .order-card:hover{border-color:rgba(201,150,42,0.4);}
+
+    .card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(201,150,42,0.1);}
+    .card-id{font-size:13px;font-weight:800;color:#C9962A;}
+    .card-date{font-size:11px;color:rgba(245,230,200,0.35);}
+    .card-chk{width:18px;height:18px;cursor:pointer;accent-color:#C9962A;}
+
+    .card-body{padding:12px 14px;}
+    .card-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
+    .card-row:last-child{margin-bottom:0;}
+    .card-label{font-size:11px;color:rgba(245,230,200,0.4);min-width:55px;padding-top:1px;}
+    .card-val{font-size:13px;color:#F5E6C8;flex:1;line-height:1.5;}
+    .card-val a{color:#C9962A;text-decoration:none;}
+    .card-price{font-size:16px;font-weight:800;color:#C9962A;}
+
+    .card-footer{display:flex;gap:8px;padding:10px 14px;border-top:1px solid rgba(201,150,42,0.1);flex-wrap:wrap;}
+
+    .status-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800;}
     .s-new    {background:rgba(217,64,32,0.2);color:#E8855A;border:1px solid rgba(217,64,32,0.4);}
     .s-prep   {background:rgba(201,150,42,0.2);color:#C9962A;border:1px solid rgba(201,150,42,0.4);}
     .s-shipped{background:rgba(40,85,160,0.2);color:#7899D4;border:1px solid rgba(40,85,160,0.4);}
     .s-done   {background:rgba(58,122,58,0.2);color:#7BC67E;border:1px solid rgba(58,122,58,0.4);}
     .s-cancel {background:rgba(100,100,100,0.2);color:#888;border:1px solid rgba(100,100,100,0.4);}
-    .action-select{padding:5px 8px;border-radius:6px;font-size:12px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.8);color:#F5E6C8;font-family:'Tajawal',sans-serif;cursor:pointer;}
-    .del-btn{background:transparent;border:1px solid rgba(217,64,32,0.3);color:#E8855A;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Tajawal',sans-serif;transition:all 0.2s;}
+
+    .action-select{flex:1;padding:9px 8px;border-radius:8px;font-size:12px;border:1px solid rgba(201,150,42,0.3);background:rgba(30,12,0,0.9);color:#F5E6C8;font-family:'Tajawal',sans-serif;cursor:pointer;min-height:42px;outline:none;}
+    .del-btn{padding:9px 14px;background:rgba(217,64,32,0.12);border:1px solid rgba(217,64,32,0.3);color:#E8855A;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Tajawal',sans-serif;min-height:42px;white-space:nowrap;transition:all 0.2s;}
     .del-btn:hover{background:#D94020;color:#fff;}
-    .loading{text-align:center;padding:40px;color:rgba(245,230,200,0.4);font-size:14px;}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(4px);}
+
+    /* ===== SELECT ALL BAR ===== */
+    .select-all-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(201,150,42,0.06);border-radius:10px;margin-bottom:10px;border:1px solid rgba(201,150,42,0.15);}
+    .select-all-bar label{font-size:13px;color:rgba(245,230,200,0.65);cursor:pointer;}
+
+    /* ===== LOADING ===== */
+    .loading{text-align:center;padding:40px;color:rgba(245,230,200,0.35);font-size:14px;}
+
+    /* ===== CONFIRM OVERLAY ===== */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);display:none;align-items:flex-end;justify-content:center;z-index:9999;backdrop-filter:blur(4px);}
     .overlay.active{display:flex;}
-    .confirm-box{background:rgba(20,8,0,0.97);border:1px solid rgba(217,64,32,0.4);border-radius:16px;padding:28px 24px;max-width:360px;width:90%;text-align:center;}
+    .confirm-box{background:rgba(15,6,0,0.98);border:1px solid rgba(217,64,32,0.4);border-radius:20px 20px 0 0;padding:28px 22px 36px;width:100%;max-width:500px;text-align:center;}
     .confirm-box h3{color:#E8855A;margin-bottom:10px;font-size:1.1rem;}
-    .confirm-box p{color:rgba(245,230,200,0.65);font-size:14px;margin-bottom:20px;line-height:1.6;}
-    .confirm-btns{display:flex;gap:10px;justify-content:center;}
-    .confirm-btns button{padding:10px 24px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;font-size:14px;border:none;}
+    .confirm-box p{color:rgba(245,230,200,0.6);font-size:14px;margin-bottom:22px;line-height:1.7;}
+    .confirm-btns{display:flex;gap:10px;}
+    .confirm-btns button{flex:1;padding:14px;border-radius:10px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;font-size:15px;border:none;min-height:52px;}
     .c-yes{background:#D94020;color:#fff;}
-    .c-yes:hover{background:#E8855A;}
     .c-no{background:rgba(201,150,42,0.15);color:#C9962A;border:1px solid rgba(201,150,42,0.3)!important;}
-    .c-no:hover{background:rgba(201,150,42,0.25);}
-    .form-box{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:12px;padding:20px;max-width:540px;margin-bottom:24px;}
-    .form-box h3{color:#C9962A;margin-bottom:14px;}
-    .form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
-    .form-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px;}
-    .form-field label{font-size:12px;color:rgba(245,230,200,0.5);}
-    .form-field input{padding:10px 12px;border-radius:8px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;}
+
+    /* ===== PROMO FORM ===== */
+    .form-box{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.2);border-radius:14px;padding:18px;margin-bottom:20px;}
+    .form-box h3{color:#C9962A;margin-bottom:14px;font-size:1rem;}
+    .form-fields{display:flex;flex-direction:column;gap:10px;}
+    .form-field label{font-size:12px;color:rgba(245,230,200,0.45);display:block;margin-bottom:4px;}
+    .form-field input{width:100%;padding:12px;border-radius:9px;border:1px solid rgba(201,150,42,0.25);background:rgba(30,12,0,0.7);color:#F5E6C8;font-family:'Tajawal',sans-serif;font-size:14px;outline:none;min-height:48px;}
     .form-field input:focus{border-color:#C9962A;}
     .form-msg{font-size:13px;margin-top:10px;min-height:18px;}
-    input[type="checkbox"]{width:15px;height:15px;cursor:pointer;accent-color:#C9962A;}
-    @media(max-width:700px){
-      .stats-grid{gap:8px;padding:12px 12px 0;}
-      .stat-card .num{font-size:1.4rem;}
-      .tab-content{padding:10px;}
-      table{font-size:11px;}
-      th,td{padding:7px 5px;}
-      .filter-row input[type="text"]{min-width:160px;}
-    }
-    table {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-}
 
-.light-mode {
-  background:#f5f5f5;
-  color:#222;
-}
-    .order-card{
-  background:rgba(20,8,0,0.85);
-  border:1px solid rgba(201,150,42,0.2);
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:10px;
-}
-
-.order-card h3{
-  color:#C9962A;
-  margin-bottom:6px;
-  font-size:14px;
-}
-
-.order-card p{
-  font-size:12px;
-  margin:3px 0;
-  color:rgba(245,230,200,0.7);
-}
-
-.order-actions{
-  display:flex;
-  justify-content:space-between;
-  margin-top:8px;
-}
-    @media(min-width: 768px){
-  .order-card { display:none; }
-}
-
-@media(max-width: 768px){
-  table { display:none; }
-}
+    /* ===== PROMO TABLE ===== */
+    .promo-list{display:flex;flex-direction:column;gap:10px;}
+    .promo-card{background:rgba(20,8,0,0.85);border:1px solid rgba(201,150,42,0.18);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .promo-code{font-size:16px;font-weight:800;color:#C9962A;}
+    .promo-info{font-size:12px;color:rgba(245,230,200,0.5);}
+    .promo-status{font-size:12px;font-weight:800;}
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <h2>☕ بن الحشم</h2>
     <p>لوحة تحكم الأدمن</p>
-    <input type="text"     id="adminUser" placeholder="اسم المستخدم">
-    <input type="password" id="adminPass" placeholder="كلمة المرور">
+    <input type="text"     id="adminUser" placeholder="اسم المستخدم" autocomplete="username">
+    <input type="password" id="adminPass" placeholder="كلمة المرور" autocomplete="current-password">
     <button onclick="adminLogin()">دخول 🔐</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dashboard">
+
+  <!-- TOP BAR -->
   <div class="top-bar">
-    <h1>☕ لوحة تحكم — بن الحشم</h1>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <span class="last-update" id="lastUpdate"></span>
-      <button class="logout-btn" onclick="logout()">خروج ↩</button>
-      <button class="logout-btn" onclick="toggleMode()">🌗</button>
+    <div>
+      <h1>☕ بن الحشم — الأدمن</h1>
+      <div class="meta" id="lastUpdate">جاري التحميل...</div>
     </div>
+    <button class="logout-btn" onclick="logout()">خروج ↩</button>
   </div>
 
+  <!-- STATS -->
   <div class="stats-grid">
     <div class="stat-card">
       <div class="num" id="statTotal">-</div>
-      <div class="lbl"><span class="live-dot"></span>إجمالي الطلبات</div>
-    </div>
-    <div style="padding:20px">
-  <canvas id="revenueChart"></canvas>
+      <div class="lbl"><span class="live-dot"></span>الطلبات</div>
     </div>
     <div class="stat-card">
       <div class="num" id="statNew">-</div>
-      <div class="lbl"><span class="live-dot"></span>طلبات جديدة 🔴</div>
+      <div class="lbl"><span class="live-dot"></span>جديدة 🔴</div>
     </div>
     <div class="stat-card">
       <div class="num" id="statRevenue">-</div>
-      <div class="lbl"><span class="live-dot"></span>الإيراد الكلي (جنيه)</div>
+      <div class="lbl"><span class="live-dot"></span>الإيراد ج</div>
     </div>
   </div>
 
+  <!-- TABS -->
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('orders')">📦 الطلبات</button>
-    <button class="tab-btn"       onclick="switchTab('promo')">🎟️ أكواد الخصم</button>
+    <button class="tab-btn"       onclick="switchTab('promo')">🎟️ الأكواد</button>
   </div>
 
+  <!-- ORDERS -->
   <div class="tab-content active" id="tab-orders">
-    <div class="filter-row">
-      <input type="text" id="searchInput" placeholder="🔍 بحث برقم الطلب أو الاسم أو التليفون..." oninput="filterOrders()">
-      <select id="statusFilter" onchange="filterOrders()">
-        <option value="">كل الطلبات</option>
-        <option value="جديد">جديد</option>
-        <option value="قيد التجهيز">قيد التجهيز</option>
-        <option value="تم الشحن">تم الشحن</option>
-        <option value="تم التسليم">تم التسليم</option>
-        <option value="ملغي">ملغي</option>
-      </select>
-      <button class="btn btn-gold" onclick="loadOrders()">🔄 تحديث</button>
-      <button class="btn btn-red"  onclick="deleteSelected()">🗑️ حذف المحدد</button>
+    <div class="filter-col">
+      <input class="search-input" id="searchInput" placeholder="🔍 بحث بالاسم أو رقم الطلب أو التليفون..." oninput="filterOrders()">
+      <div class="filter-row2">
+        <select class="status-select" id="statusFilter" onchange="filterOrders()">
+          <option value="">كل الطلبات</option>
+          <option>جديد</option>
+          <option>قيد التجهيز</option>
+          <option>تم الشحن</option>
+          <option>تم التسليم</option>
+          <option>ملغي</option>
+        </select>
+        <button class="btn btn-gold" onclick="loadOrders()">🔄</button>
+        <button class="btn btn-red"  onclick="deleteSelected()">🗑️ حذف</button>
+      </div>
     </div>
+
+    <div class="select-all-bar">
+      <input type="checkbox" id="selAll" onclick="toggleAll(this)">
+      <label for="selAll">تحديد الكل</label>
+      <span id="selectedCount" style="font-size:12px;color:rgba(245,230,200,0.4);margin-right:auto;"></span>
+    </div>
+
     <div id="ordersContainer" class="loading">⏳ جاري التحميل...</div>
   </div>
 
+  <!-- PROMO -->
   <div class="tab-content" id="tab-promo">
     <div class="form-box">
       <h3>➕ إضافة كود خصم جديد</h3>
-      <div class="form-row">
-        <div class="form-field"><label>الكود</label><input type="text" id="newPromoCode" placeholder="SUMMER20"></div>
-        <div class="form-field"><label>الخصم %</label><input type="number" id="newPromoDiscount" placeholder="10" min="1" max="100"></div>
-        <div class="form-field"><label>أقصى استخدام</label><input type="number" id="newPromoMax" placeholder="100" min="1"></div>
-        <button class="btn btn-gold" style="align-self:flex-end" onclick="addPromo()">إضافة</button>
+      <div class="form-fields">
+        <div class="form-field"><label>الكود</label><input type="text" id="newPromoCode" placeholder="مثال: SUMMER20"></div>
+        <div class="form-field"><label>نسبة الخصم %</label><input type="number" id="newPromoDiscount" placeholder="10" min="1" max="100"></div>
+        <div class="form-field"><label>أقصى عدد استخدام</label><input type="number" id="newPromoMax" placeholder="100"></div>
+        <button class="btn btn-gold" onclick="addPromo()" style="width:100%">إضافة الكود ✅</button>
       </div>
       <div class="form-msg" id="promoFormMsg"></div>
     </div>
     <div id="promoContainer" class="loading">⏳ جاري التحميل...</div>
   </div>
+
 </div>
 
-<!-- CONFIRM DIALOG -->
-<div class="overlay" id="overlay">
-  <div class="confirm-box">
+<!-- CONFIRM -->
+<div class="overlay" id="overlay" onclick="closeOverlay()">
+  <div class="confirm-box" onclick="event.stopPropagation()">
     <h3>🗑️ تأكيد الحذف</h3>
-    <p id="confirmMsg">هل أنت متأكد؟</p>
+    <p id="confirmMsg"></p>
     <div class="confirm-btns">
       <button class="c-yes" onclick="doDelete()">نعم، احذف</button>
       <button class="c-no"  onclick="closeOverlay()">إلغاء</button>
@@ -221,68 +229,12 @@
 </div>
 
 <script>
-  function toggleMode(){
-  document.body.classList.toggle("light-mode");
-  }
-  let lastOrdersCount = 0;
-
-async function checkNewOrders(){
-  try{
-    const res = await fetch(API + "/admin/orders?limit=5", {
-      headers:{ Authorization:"Bearer "+token }
-    });
-    const data = await res.json();
-
-    if(data.success){
-      if(lastOrdersCount && data.data.length > lastOrdersCount){
-        document.getElementById("notifSound").play();
-        showToast("طلب جديد 🔥");
-      }
-      lastOrdersCount = data.data.length;
-    }
-  }catch(err){
-    console.error(err);
-  }
-}
-  let chart;
-
-function renderChart(allorders){
-  const days = {};
-
-  orders.forEach(o=>{
-    const d = new Date(o.createdAt).toLocaleDateString("ar-EG");
-    days[d] = (days[d] || 0) + o.totalAfter;
-  });
-
-  if(chart) chart.destroy();
-
-  chart = new Chart(document.getElementById("revenueChart"), {
-    type: "line",
-    data: {
-      labels: Object.keys(days),
-      datasets: [{
-        label: "الإيرادات",
-        data: Object.values(days)
-      }]
-    }
-  });
-}
-  function showToast(msg, type="success") {
-  const t = document.createElement("div");
-  t.innerText = msg;
-  t.style.cssText = `
-    position:fixed;bottom:20px;right:20px;
-    background:${type==="error"?"#D94020":"#2ecc71"};
-    color:#fff;padding:12px 18px;border-radius:8px;
-    font-size:14px;z-index:9999;
-  `;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),3000);
-  }
-const API = "https://heshem2-production.up.railway.app/api";
-let token = localStorage.getItem("adminToken");
+const API   = "https://heshem2-production.up.railway.app/api";
+let token   = localStorage.getItem("adminToken");
 let allOrders = [];
-let toDelete  = null; // string id OR array of ids
+let toDelete  = null;
+
+const SC = {"جديد":"s-new","قيد التجهيز":"s-prep","تم الشحن":"s-shipped","تم التسليم":"s-done","ملغي":"s-cancel"};
 
 // ===== LOGIN =====
 async function adminLogin() {
@@ -291,217 +243,216 @@ async function adminLogin() {
   const e = document.getElementById("loginError");
   e.innerText = "";
   try {
-    const res  = await fetch(API + "/admin/login", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({username:u,password:p}) });
+    const res  = await fetch(API+"/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})});
     const data = await res.json();
-    if (data.success) { token = data.token; localStorage.setItem("adminToken", token); showDash(); }
-    else e.innerText = "❌ " + data.error;
+    if (data.success){token=data.token;localStorage.setItem("adminToken",token);showDash();}
+    else e.innerText = "❌ "+data.error;
   } catch { e.innerText = "❌ السيرفر مش شغال"; }
 }
 
-function logout() {
-  localStorage.removeItem("adminToken"); token = null;
-  clearInterval(window._autoRefresh);
-  document.getElementById("loginScreen").style.display = "flex";
-  document.getElementById("dashboard").style.display   = "none";
+function logout(){
+  localStorage.removeItem("adminToken");token=null;
+  clearInterval(window._ar);
+  document.getElementById("loginScreen").style.display="flex";
+  document.getElementById("dashboard").style.display="none";
 }
 
-function showDash() {
-  document.getElementById("loginScreen").style.display = "none";
-  document.getElementById("dashboard").style.display   = "block";
-  loadStats(); loadOrders();
-  window._autoRefresh = setInterval(() => { loadStats(); loadOrders(); }, 30000);
-  setInterval(checkNewOrders, 10000);
+function showDash(){
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("dashboard").style.display="block";
+  loadStats();loadOrders();
+  window._ar = setInterval(()=>{loadStats();loadOrders();},30000);
 }
 
-if (token) showDash();
+if(token) showDash();
 
 // ===== TABS =====
-function switchTab(name) {
-  document.querySelectorAll(".tab-btn").forEach((b,i) => b.classList.toggle("active", ["orders","promo"][i] === name));
-  document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
-  document.getElementById("tab-" + name).classList.add("active");
-  if (name === "promo") loadPromos();
+function switchTab(n){
+  document.querySelectorAll(".tab-btn").forEach((b,i)=>b.classList.toggle("active",["orders","promo"][i]===n));
+  document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+n).classList.add("active");
+  if(n==="promo") loadPromos();
 }
 
 // ===== STATS =====
-async function loadStats() {
-  try {
-    const res  = await fetch(API + "/admin/stats", { headers:{ Authorization:"Bearer "+token } });
-    const data = await res.json();
-    if (!data.success) return;
-    document.getElementById("statTotal").innerText   = data.totalOrders  || 0;
-    document.getElementById("statNew").innerText     = data.newOrders    || 0;
-    document.getElementById("statRevenue").innerText = (data.totalRevenue || 0).toLocaleString("ar-EG");
-    document.getElementById("lastUpdate").innerText  = "آخر تحديث: " + new Date().toLocaleTimeString("ar-EG");
-  } catch {}
+async function loadStats(){
+  try{
+    const res=await fetch(API+"/admin/stats",{headers:{Authorization:"Bearer "+token}});
+    const d=await res.json();
+    if(!d.success) return;
+    document.getElementById("statTotal").innerText  = d.totalOrders||0;
+    document.getElementById("statNew").innerText    = d.newOrders||0;
+    document.getElementById("statRevenue").innerText= (d.totalRevenue||0).toLocaleString("ar-EG");
+    document.getElementById("lastUpdate").innerText = "آخر تحديث: "+new Date().toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"});
+  }catch{}
 }
 
 // ===== ORDERS =====
-async function loadOrders() {
-  try {
-    const res  = await fetch(API + "/admin/orders?limit=200", { headers:{ Authorization:"Bearer "+token } });
-    const data = await res.json();
-    allOrders  = data.success ? data.data : [];
+async function loadOrders(){
+  try{
+    const res=await fetch(API+"/admin/orders?limit=200",{headers:{Authorization:"Bearer "+token}});
+    const d=await res.json();
+    allOrders=d.success?d.data:[];
     filterOrders();
-  } catch { document.getElementById("ordersContainer").innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
+  }catch{document.getElementById("ordersContainer").innerHTML='<div class="loading">❌ خطأ في التحميل</div>';}
 }
 
-function filterOrders() {
-  const q      = document.getElementById("searchInput").value.trim().toLowerCase();
-  const status = document.getElementById("statusFilter").value;
-  let filtered = allOrders;
-  if (status) filtered = filtered.filter(o => o.status === status);
-  if (q) filtered = filtered.filter(o =>
-    o._id.toString().slice(-6).toLowerCase().includes(q) ||
-    o.customerName.toLowerCase().includes(q) ||
-    o.customerPhone.includes(q)
-  );
-  renderOrders(filtered);
+function filterOrders(){
+  const q=document.getElementById("searchInput").value.trim().toLowerCase();
+  const s=document.getElementById("statusFilter").value;
+  let f=allOrders;
+  if(s) f=f.filter(o=>o.status===s);
+  if(q) f=f.filter(o=>o._id.toString().slice(-6).toLowerCase().includes(q)||o.customerName.toLowerCase().includes(q)||o.customerPhone.includes(q));
+  renderOrders(f);
 }
 
-function renderOrders(orders) {
-  const c = document.getElementById("ordersContainer");
-
-  if (!orders.length) {
-    c.innerHTML = '<div class="loading">لا يوجد طلبات</div>';
-    return;
-  }
-
-  let html = "";
-
-  orders.forEach(o => {
-    const id = o._id.toString().slice(-6).toUpperCase();
-
-    html += `
-    <div class="order-card" id="row-${o._id}">
-      <h3>#${id} - ${o.customerName}</h3>
-
-      <p>📞 ${o.customerPhone}</p>
-      <p>📍 ${o.customerAddress}</p>
-      <p>💰 ${o.totalAfter} جنيه</p>
-
-      <p>📦 ${o.items.map(i => i.name + " x" + i.qty).join(", ")}</p>
-
-      <div class="order-actions">
-        <select onchange="updateStatus('${o._id}',this.value)">
-          <option selected>${o.status}</option>
-          <option>جديد</option>
-          <option>قيد التجهيز</option>
-          <option>تم الشحن</option>
-          <option>تم التسليم</option>
-          <option>ملغي</option>
+function renderOrders(orders){
+  const c=document.getElementById("ordersContainer");
+  if(!orders.length){c.innerHTML='<div class="loading">لا يوجد طلبات</div>';return;}
+  let html='<div class="orders-list">';
+  orders.forEach(o=>{
+    const id=o._id.toString().slice(-6).toUpperCase();
+    const items=o.items.map(i=>i.name+" ×"+i.qty).join("، ");
+    const date=new Date(o.createdAt).toLocaleDateString("ar-EG",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+    const cls=SC[o.status]||"s-new";
+    html+=`
+    <div class="order-card" id="card-${o._id}">
+      <div class="card-header">
+        <div style="display:flex;align-items:center;gap:10px">
+          <input type="checkbox" class="card-chk chk" value="${o._id}" onchange="updateSelectedCount()">
+          <span class="card-id">#${id}</span>
+          <span class="status-badge ${cls}">${o.status}</span>
+        </div>
+        <span class="card-date">${date}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-row"><span class="card-label">الاسم</span><span class="card-val"><b>${o.customerName}</b></span></div>
+        <div class="card-row"><span class="card-label">التليفون</span><span class="card-val"><a href="tel:${o.customerPhone}">${o.customerPhone}</a></span></div>
+        <div class="card-row"><span class="card-label">العنوان</span><span class="card-val" style="font-size:12px;color:rgba(245,230,200,0.6)">${o.customerAddress}</span></div>
+        <div class="card-row"><span class="card-label">المنتجات</span><span class="card-val" style="font-size:12px">${items}</span></div>
+        <div class="card-row"><span class="card-label">الإجمالي</span><span class="card-val card-price">${o.totalAfter} جنيه</span></div>
+      </div>
+      <div class="card-footer">
+        <select class="action-select" onchange="updateStatus('${o._id}',this.value)">
+          <option value="">-- تغيير الحالة --</option>
+          <option>جديد</option><option>قيد التجهيز</option>
+          <option>تم الشحن</option><option>تم التسليم</option><option>ملغي</option>
         </select>
-
         <button class="del-btn" onclick="askDelete('${o._id}','#${id}')">🗑️ حذف</button>
       </div>
-    </div>
-    `;
+    </div>`;
   });
+  html+='</div>';
+  c.innerHTML=html;
+}
 
-  c.innerHTML = html;
-  }
+function updateSelectedCount(){
+  const n=document.querySelectorAll(".chk:checked").length;
+  const el=document.getElementById("selectedCount");
+  el.innerText = n>0 ? "تم تحديد "+n+" طلب" : "";
+}
 
-function toggleAll(cb) { document.querySelectorAll(".chk").forEach(c => c.checked = cb.checked); }
+function toggleAll(cb){
+  document.querySelectorAll(".chk").forEach(c=>c.checked=cb.checked);
+  updateSelectedCount();
+}
 
 // ===== UPDATE STATUS =====
-async function updateStatus(id, status) {
-  if (!status) return;
-  try {
-    await fetch(API + "/admin/orders/" + id, { method:"PATCH", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({status}) });
-    // تحديث الصف مباشرة بدون reload كامل
-    const sc = { "جديد":"s-new","قيد التجهيز":"s-prep","تم الشحن":"s-shipped","تم التسليم":"s-done","ملغي":"s-cancel" };
-    const row = document.getElementById("row-" + id);
-    if (row) {
-      const badge = row.querySelector(".status-badge");
-      if (badge) { badge.className = "status-badge " + (sc[status]||"s-new"); badge.innerText = status; }
+async function updateStatus(id,status){
+  if(!status) return;
+  try{
+    await fetch(API+"/admin/orders/"+id,{method:"PATCH",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({status})});
+    const card=document.getElementById("card-"+id);
+    if(card){
+      const badge=card.querySelector(".status-badge");
+      if(badge){badge.className="status-badge "+(SC[status]||"s-new");badge.innerText=status;}
     }
-    // تحديث الطلب في allOrders
-    const order = allOrders.find(o => o._id === id);
-    if (order) order.status = status;
+    const o=allOrders.find(x=>x._id===id);
+    if(o) o.status=status;
     loadStats();
-  } catch {}
+  }catch{}
 }
 
-// ===== DELETE SINGLE =====
-function askDelete(id, label) {
-  toDelete = id;
-  document.getElementById("confirmMsg").innerText = "هتحذف الطلب " + label + " وهيتخسم من الإيراد — مش هترجع تاني!";
+// ===== DELETE =====
+function askDelete(id,label){
+  toDelete=id;
+  document.getElementById("confirmMsg").innerText="هتحذف الطلب "+label+" وهيتخسم من الإيراد — مش هترجع تاني!";
   document.getElementById("overlay").classList.add("active");
 }
 
-// ===== DELETE MULTIPLE =====
-function deleteSelected() {
-  const checked = [...document.querySelectorAll(".chk:checked")].map(c => c.value);
-  if (!checked.length) { alert("اختار طلبات الأول!"); return; }
-  toDelete = checked;
-  document.getElementById("confirmMsg").innerText = "هتحذف " + checked.length + " طلب وهيتخسموا من الإيراد — مش هترجع تاني!";
+function deleteSelected(){
+  const checked=[...document.querySelectorAll(".chk:checked")].map(c=>c.value);
+  if(!checked.length){alert("اختار طلبات الأول!");return;}
+  toDelete=checked;
+  document.getElementById("confirmMsg").innerText="هتحذف "+checked.length+" طلب وهيتخسموا من الإيراد — مش هترجع تاني!";
   document.getElementById("overlay").classList.add("active");
 }
 
-async function doDelete() {
+async function doDelete(){
   closeOverlay();
-  const ids = Array.isArray(toDelete) ? toDelete : [toDelete];
-  for (const id of ids) {
-    try {
-      const res = await fetch(API + "/admin/orders/" + id, { method:"DELETE", headers:{ Authorization:"Bearer "+token } });
-      if (res.ok) {
-        document.getElementById("row-" + id)?.remove();
-        allOrders = allOrders.filter(o => o._id !== id);
+  const ids=Array.isArray(toDelete)?toDelete:[toDelete];
+  for(const id of ids){
+    try{
+      const res=await fetch(API+"/admin/orders/"+id,{method:"DELETE",headers:{Authorization:"Bearer "+token}});
+      if(res.ok){
+        document.getElementById("card-"+id)?.remove();
+        allOrders=allOrders.filter(o=>o._id!==id);
       }
-    } catch {}
+    }catch{}
   }
-  loadStats(); // تحديث الإيراد والأرقام بعد الحذف
+  document.getElementById("selAll").checked=false;
+  updateSelectedCount();
+  loadStats();
 }
 
-function closeOverlay() { document.getElementById("overlay").classList.remove("active"); }
+function closeOverlay(){document.getElementById("overlay").classList.remove("active");}
 
 // ===== PROMO =====
-async function loadPromos() {
-  const c = document.getElementById("promoContainer");
-  c.innerHTML = '<div class="loading">⏳ جاري التحميل...</div>';
-  try {
-    const res  = await fetch(API + "/admin/promo", { headers:{ Authorization:"Bearer "+token } });
-    const data = await res.json();
-    if (!data.success || !data.data.length) { c.innerHTML = '<div class="loading">لا يوجد أكواد</div>'; return; }
-    let html = `<table><thead><tr><th>الكود</th><th>الخصم %</th><th>تم الاستخدام</th><th>الحد الأقصى</th><th>الحالة</th></tr></thead><tbody>`;
-    data.data.forEach(p => {
-      html += `<tr>
-        <td><b style="color:#C9962A">${p.code}</b></td>
-        <td>${p.discount}%</td>
-        <td>${p.usedCount}</td>
-        <td>${p.maxUses}</td>
-        <td>${p.active ? '<span style="color:#7BC67E">✅ فعال</span>' : '<span style="color:#E8855A">❌ معطل</span>'}</td>
-      </tr>`;
+async function loadPromos(){
+  const c=document.getElementById("promoContainer");
+  c.innerHTML='<div class="loading">⏳ جاري التحميل...</div>';
+  try{
+    const res=await fetch(API+"/admin/promo",{headers:{Authorization:"Bearer "+token}});
+    const d=await res.json();
+    if(!d.success||!d.data.length){c.innerHTML='<div class="loading">لا يوجد أكواد</div>';return;}
+    let html='<div class="promo-list">';
+    d.data.forEach(p=>{
+      html+=`<div class="promo-card">
+        <div>
+          <div class="promo-code">${p.code}</div>
+          <div class="promo-info">خصم ${p.discount}% | استُخدم ${p.usedCount} من ${p.maxUses}</div>
+        </div>
+        <div class="promo-status">${p.active?'<span style="color:#7BC67E">✅ فعال</span>':'<span style="color:#E8855A">❌ معطل</span>'}</div>
+      </div>`;
     });
-    html += "</tbody></table>";
-    c.innerHTML = html;
-  } catch { c.innerHTML = '<div class="loading">❌ خطأ في التحميل</div>'; }
+    html+='</div>';
+    c.innerHTML=html;
+  }catch{c.innerHTML='<div class="loading">❌ خطأ</div>';}
 }
 
-async function addPromo() {
-  const code     = document.getElementById("newPromoCode").value.trim().toUpperCase();
-  const discount = Number(document.getElementById("newPromoDiscount").value);
-  const maxUses  = Number(document.getElementById("newPromoMax").value) || 100;
-  const msgEl    = document.getElementById("promoFormMsg");
-  if (!code || !discount) { msgEl.style.color = "#E8855A"; msgEl.innerText = "⚠️ ادخل الكود والخصم"; return; }
-  try {
-    const res  = await fetch(API + "/admin/promo", { method:"POST", headers:{"Content-Type":"application/json", Authorization:"Bearer "+token}, body:JSON.stringify({code,discount,maxUses}) });
-    const data = await res.json();
-    if (data.success) {
-      msgEl.style.color = "#7BC67E"; msgEl.innerText = "✅ تم إضافة الكود!";
-      document.getElementById("newPromoCode").value = "";
-      document.getElementById("newPromoDiscount").value = "";
-      document.getElementById("newPromoMax").value = "";
+async function addPromo(){
+  const code=document.getElementById("newPromoCode").value.trim().toUpperCase();
+  const discount=Number(document.getElementById("newPromoDiscount").value);
+  const maxUses=Number(document.getElementById("newPromoMax").value)||100;
+  const msgEl=document.getElementById("promoFormMsg");
+  if(!code||!discount){msgEl.style.color="#E8855A";msgEl.innerText="⚠️ ادخل الكود والخصم";return;}
+  try{
+    const res=await fetch(API+"/admin/promo",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({code,discount,maxUses})});
+    const d=await res.json();
+    if(d.success){
+      msgEl.style.color="#7BC67E";msgEl.innerText="✅ تم إضافة الكود!";
+      document.getElementById("newPromoCode").value="";
+      document.getElementById("newPromoDiscount").value="";
+      document.getElementById("newPromoMax").value="";
       loadPromos();
-    } else { msgEl.style.color = "#E8855A"; msgEl.innerText = "❌ " + data.error; }
-  } catch { msgEl.style.color = "#E8855A"; msgEl.innerText = "❌ خطأ في الاتصال"; }
+    }else{msgEl.style.color="#E8855A";msgEl.innerText="❌ "+d.error;}
+  }catch{msgEl.style.color="#E8855A";msgEl.innerText="❌ خطأ في الاتصال";}
 }
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Enter" && document.getElementById("loginScreen").style.display !== "none") adminLogin();
-  if (e.key === "Escape") closeOverlay();
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&document.getElementById("loginScreen").style.display!=="none") adminLogin();
+  if(e.key==="Escape") closeOverlay();
 });
 </script>
-  <audio id="notifSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 </body>
 </html>
